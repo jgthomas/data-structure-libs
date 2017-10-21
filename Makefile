@@ -33,7 +33,7 @@ LDLIBS =
 #--------------FILES--------------#
 
 # The name of the final executable
-TARGET = linked_list_lib_demo
+TARGET = demo
 
 # Get all c files in the dir and their names as
 # objects files
