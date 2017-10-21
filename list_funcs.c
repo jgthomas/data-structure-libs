@@ -165,19 +165,28 @@ bool list_contains(Node *node, void *search, bool (*fptr)(void *, void *))
 }
 
 
+
 /**
  * Search and move the found node to the front of the list
  *
  * */
 void find_and_move(Node **node, void *search, bool (*fptr)(void *, void *))
 {
+        // if item not in list do nothing
+        if (!list_contains((*node), search, fptr))
+        {
+                return;
+        }
+
         // if item found is first already, do nothing
         if ((*fptr)(search, (*node)->data))
         {
                 return;
         }
 
+        // save old head node
         Node *old_head = (*node);
+
         Node *before = NULL;
         Node *after = NULL;
 
