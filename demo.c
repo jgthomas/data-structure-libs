@@ -40,6 +40,11 @@ int main()
         {
             printf("yes\n");
         }
+
+        int find_i_m = 10;
+        find_and_move(&start, &find_i_m, find_int);
+        print_list(start, print_int);
+        
         printf("\n");
         
         delete_list(start);

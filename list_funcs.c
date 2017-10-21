@@ -88,6 +88,8 @@ void append(Node **head, void *new_data, size_t data_size)
 }
 
 
+
+
 /**
  * Return length of list
  * 
@@ -160,6 +162,38 @@ bool list_contains(Node *node, void *search, bool (*fptr)(void *, void *))
         }
         
         return false;
+}
+
+
+/**
+ * Search and move the found node to the front of the list
+ *
+ * */
+void find_and_move(Node **node, void *search, bool (*fptr)(void *, void *))
+{
+        // if item found is first already, do nothing
+        if ((*fptr)(search, (*node)->data))
+        {
+                return;
+        }
+
+        Node *old_head = (*node);
+        Node *before = NULL;
+        Node *after = NULL;
+
+        while ((*node) != NULL)
+        {
+                before = (*node);
+                (*node) = (*node)->next;
+                after = (*node)->next;
+
+                if ((*fptr)(search, (*node)->data))
+                {
+                        before->next = after;
+                        (*node)->next = old_head;
+                        return;
+                }
+        }
 }
 
 
