@@ -172,21 +172,20 @@ void insert(Node **node, void *new_data, size_t data_size, int pos)
         Node *old_head = (*node);
         Node *before = NULL;
 
-        while ((*node) != NULL)
+        while ((*node) != NULL && index != pos)
         {
                 before = (*node);
                 (*node) = (*node)->next;
                 index++;
-
-                if (index == pos)
-                {
-                        before->next = new_node;
-                        new_node->next = (*node);
-                        (*node) = old_head;
-                        return;
-                }
         }
+
         before->next = new_node;
+
+        if (index == pos)
+        {
+                new_node->next = (*node);
+        }
+
         (*node) = old_head;
 }
 
