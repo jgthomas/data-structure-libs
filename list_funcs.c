@@ -272,18 +272,18 @@ void del_val(Node **node, void *val, bool (*fptr)(void *, void *))
                         }
 
                         free_node(temp);
-
-                        if (count > 0)
-                        {
-                                (*node) = old_head;
-                        }
-                        return;
+                        break;
                 }
+
                 before = (*node);
                 (*node) = (*node)->next;
                 count++;
         }
-        (*node) = old_head;
+
+        if (count > 0)
+        {
+                (*node) = old_head;
+        }
 }
 
 
