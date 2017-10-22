@@ -228,6 +228,7 @@ void del_index(Node **node, int index)
         if ((*node) != NULL && count == index)
         {
                 temp = (*node);
+
                 if (index == 0)
                 {
                         (*node) = (*node)->next;
@@ -236,6 +237,7 @@ void del_index(Node **node, int index)
                 {
                         before->next = (*node)->next;
                 }
+
                 free_node(temp);
         }
 
@@ -244,6 +246,46 @@ void del_index(Node **node, int index)
                 (*node) = old_head;
         }
 }
+
+
+
+void del_val(Node **node, void *val, bool (*fptr)(void *, void *))
+{
+        Node *old_head = (*node);
+        Node *before = NULL;
+        Node *temp = NULL;
+        int count = 0;
+
+        while ((*node) != NULL)
+        {
+                if (fptr(val, (*node)->data))
+                {
+                        temp = (*node);
+
+                        if (count == 0)
+                        {
+                                (*node) = (*node)->next;
+                        }
+                        else
+                        {
+                                before->next = (*node)->next;
+                        }
+
+                        free_node(temp);
+
+                        if (count > 0)
+                        {
+                                (*node) = old_head;
+                        }
+                        return;
+                }
+                before = (*node);
+                (*node) = (*node)->next;
+                count++;
+        }
+        (*node) = old_head;
+}
+
 
 
 /**

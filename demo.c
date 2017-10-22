@@ -56,7 +56,12 @@ int main()
 
         int to_del_idx = 2;
         del_index(&start, to_del_idx);
-        printf("deleted index %d\n", to_del_idx);
+        printf("deleted node with index %d\n", to_del_idx);
+        print_list(start, print_int);
+
+        int to_del_val = 100;
+        del_val(&start, &to_del_val, find_int);
+        printf("deleted node with value %d\n", to_del_val);
         print_list(start, print_int);
 
         printf("\n");

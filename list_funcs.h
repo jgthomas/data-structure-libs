@@ -9,3 +9,4 @@ bool list_contains(Node *node, void *search, bool (*fptr)(void *, void *));
 bool find_and_move(Node **node, void *search, bool (*fptr)(void *, void *));
 void insert(Node **node, void *new_data, size_t data_size, int pos);
 void del_index(Node **node, int index);
+void del_val(Node **node, void *val, bool (*fptr)(void *, void *));
