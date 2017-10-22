@@ -229,8 +229,7 @@ void del_index(Node **node, int index)
         {
                 temp = (*node);
                 before->next = (*node)->next;
-                free(temp->data);
-                free(temp);
+                free_node(temp);
         }
 
         (*node) = old_head;

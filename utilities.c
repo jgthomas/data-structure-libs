@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
 #include <stdint.h>
 #include "node.h"
 #include "utilities.h"
@@ -123,4 +124,11 @@ void copy_by_byte(Node **node, void *new_data, size_t data_size)
         {
                 *(uint8_t *)((*node)->data + i) = *(uint8_t *)(new_data + i);
         }
+}
+
+
+void free_node(Node *node)
+{
+        free(node->data);
+        free(node);
 }
