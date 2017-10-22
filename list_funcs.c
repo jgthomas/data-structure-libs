@@ -200,8 +200,6 @@ void find_and_move(Node **node, void *search, bool (*fptr)(void *, void *))
                                 return;
                         }
                 }
-
-
         }
         // if not found, restore list to initial state
         (*node) = old_head;
