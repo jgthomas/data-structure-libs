@@ -225,14 +225,24 @@ void del_index(Node **node, int index)
                 count++;
         }
 
-        if (count == index)
+        if ((*node) != NULL && count == index)
         {
                 temp = (*node);
-                before->next = (*node)->next;
+                if (index == 0)
+                {
+                        (*node) = (*node)->next;
+                }
+                else
+                {
+                        before->next = (*node)->next;
+                }
                 free_node(temp);
         }
 
-        (*node) = old_head;
+        if (index > 0)
+        {
+                (*node) = old_head;
+        }
 }
 
 
