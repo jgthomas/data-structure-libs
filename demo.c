@@ -42,7 +42,10 @@ int main()
         }
 
         int find_i_m = 40;
-        find_and_move(&start, &find_i_m, find_int);
+        if (find_and_move(&start, &find_i_m, find_int))
+        {
+                printf("found '%d' and moved to front of list\n", find_i_m);
+        }
         print_list(start, print_int);
         
 

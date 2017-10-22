@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <stdint.h>
 #include "node.h"
 #include "list_funcs.h"
 #include "utilities.h"
@@ -162,7 +161,7 @@ bool list_contains(Node *node, void *search, bool (*fptr)(void *, void *))
 
 
 /**
- * Insert data at specified index, if index longer than list append
+ * Insert data at specified index, if index longer than list append data
  *
  * */
 void insert(Node **node, void *new_data, size_t data_size, int pos)
@@ -213,12 +212,12 @@ void insert(Node **node, void *new_data, size_t data_size, int pos)
  * Search and move the found node to the front of the list
  *
  * */
-void find_and_move(Node **node, void *search, bool (*fptr)(void *, void *))
+bool find_and_move(Node **node, void *search, bool (*fptr)(void *, void *))
 {
-        // if item found is first already, do nothing
+        // if item found is already in first position, do nothing
         if ((*fptr)(search, (*node)->data))
         {
-                return;
+                return true;
         }
 
         // save old head node
@@ -240,12 +239,13 @@ void find_and_move(Node **node, void *search, bool (*fptr)(void *, void *))
                         {
                                 before->next = after;
                                 (*node)->next = old_head;
-                                return;
+                                return true;
                         }
                 }
         }
         // if not found, restore list to initial state
         (*node) = old_head;
+        return false;
 }
 
 
