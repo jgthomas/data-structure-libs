@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include "node.h"
 #include "list_funcs.h"
+#include "utilities.h"
 
 
 /**
@@ -30,11 +31,8 @@ void push(Node **head, void *new_data, size_t data_size)
         
         new_node->next = (*head);
  
-        // copy each byte of *new_data* into *new_node->data*
-        for (unsigned int i = 0; i < data_size; i++)
-        {
-            *(uint8_t *)(new_node->data + i) = *(uint8_t *)(new_data + i);
-        }
+        // copy data into new_node
+        copy_by_byte(&new_node, new_data, data_size);
  
         // set new node as the new head
         (*head) = new_node;
@@ -65,12 +63,9 @@ void append(Node **head, void *new_data, size_t data_size)
         
         new_node->next = NULL;
         
-        // copy each byte of *new_data* into *new_node->data*
-        for (unsigned int i = 0; i < data_size; i++)
-        {
-            *(uint8_t *)(new_node->data + i) = *(uint8_t *)(new_data + i);
-        }
-        
+        // copy data into new_node
+        copy_by_byte(&new_node, new_data, data_size);
+
         // set a 'cursor' node to head of list
         Node *node_ptr = (*head);
         
@@ -162,6 +157,37 @@ bool list_contains(Node *node, void *search, bool (*fptr)(void *, void *))
         }
         
         return false;
+}
+
+
+
+void insert(Node **node, void *new_data, size_t data_size, int pos)
+{
+        Node *new_node = malloc(sizeof(*new_node));
+        new_node->data = malloc(sizeof(data_size));
+        new_node->next = NULL;
+        copy_by_byte(&new_node, new_data, data_size);
+
+        int index = 0;
+        Node *old_head = (*node);
+        Node *before = NULL;
+
+        while ((*node) != NULL)
+        {
+                before = (*node);
+                (*node) = (*node)->next;
+                index++;
+
+                if (index == pos)
+                {
+                        before->next = new_node;
+                        new_node->next = (*node);
+                        (*node) = old_head;
+                        return;
+                }
+        }
+        before->next = new_node;
+        (*node) = old_head;
 }
 
 

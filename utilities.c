@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdint.h>
+#include "node.h"
 #include "utilities.h"
 
 
@@ -108,4 +110,17 @@ bool find_string(void *search, void *node_data)
         }
         
         return false;
+}
+
+
+/**
+ * Copy each byte of "new_data" into "node->data"
+ *
+ * */
+void copy_by_byte(Node **node, void *new_data, size_t data_size)
+{
+        for (unsigned int i = 0; i < data_size; i++)
+        {
+                *(uint8_t *)((*node)->data + i) = *(uint8_t *)(new_data + i);
+        }
 }

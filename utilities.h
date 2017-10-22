@@ -6,3 +6,4 @@ bool find_int(void *search, void *node_data);
 bool find_float(void *search, void *node_data);
 bool find_char(void *search, void *node_data);
 bool find_string(void *search, void *node_data);
+void copy_by_byte(Node **node, void *new_data, size_t data_size);

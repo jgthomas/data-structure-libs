@@ -7,3 +7,4 @@ void append(Node **head, void *new_data, size_t data_size);
 void reverse(Node **current_node);
 bool list_contains(Node *node, void *search, bool (*fptr)(void *, void *));
 void find_and_move(Node **node, void *search, bool (*fptr)(void *, void *));
+void insert(Node **node, void *new_data, size_t data_size, int pos);

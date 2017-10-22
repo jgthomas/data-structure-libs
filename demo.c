@@ -45,6 +45,12 @@ int main()
         find_and_move(&start, &find_i_m, find_int);
         print_list(start, print_int);
         
+
+        int to_insert = 100;
+        int pos = 3;
+        insert(&start, &to_insert, int_size, pos);
+        print_list(start, print_int);
+
         printf("\n");
         
         delete_list(start);
