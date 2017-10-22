@@ -207,6 +207,35 @@ void insert(Node **node, void *new_data, size_t data_size, int pos)
 }
 
 
+/**
+ * Delete the specified index from the list
+ *
+ * */
+void del_index(Node **node, int index)
+{
+        Node *old_head = (*node);
+        Node *before = NULL;
+        Node *temp = NULL;
+        int count = 0;
+
+        while ((*node) != NULL && count != index)
+        {
+                before = (*node);
+                (*node) = (*node)->next;
+                count++;
+        }
+
+        if (count == index)
+        {
+                temp = (*node);
+                before->next = (*node)->next;
+        }
+
+        (*node) = old_head;
+        free(temp->data);
+        free(temp);
+}
+
 
 /**
  * Search and move the found node to the front of the list

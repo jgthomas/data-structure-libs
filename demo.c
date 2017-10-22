@@ -54,6 +54,11 @@ int main()
         insert(&start, &to_insert, int_size, pos);
         print_list(start, print_int);
 
+        int to_del_idx = 2;
+        del_index(&start, to_del_idx);
+        printf("deleted index %d\n", to_del_idx);
+        print_list(start, print_int);
+
         printf("\n");
         
         delete_list(start);
