@@ -161,10 +161,28 @@ bool list_contains(Node *node, void *search, bool (*fptr)(void *, void *))
 
 
 
+/**
+ * Insert data at specified index, if index longer than list append
+ *
+ * */
 void insert(Node **node, void *new_data, size_t data_size, int pos)
 {
         Node *new_node = malloc(sizeof(*new_node));
+
+        if (new_node == NULL)
+        {
+            printf("Failed to allocate memory\n");
+            exit(1);
+        }
+
         new_node->data = malloc(sizeof(data_size));
+
+        if (new_node->data == NULL)
+        {
+            printf("Failed to allocate memory\n");
+            exit(1);
+        }
+
         new_node->next = NULL;
         copy_by_byte(&new_node, new_data, data_size);
 
