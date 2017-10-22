@@ -41,7 +41,7 @@ int main()
             printf("yes\n");
         }
 
-        int find_i_m = 11;
+        int find_i_m = 40;
         find_and_move(&start, &find_i_m, find_int);
         print_list(start, print_int);
         

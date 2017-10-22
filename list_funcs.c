@@ -172,12 +172,6 @@ bool list_contains(Node *node, void *search, bool (*fptr)(void *, void *))
  * */
 void find_and_move(Node **node, void *search, bool (*fptr)(void *, void *))
 {
-        // if item not in list do nothing
-        if (!list_contains((*node), search, fptr))
-        {
-                return;
-        }
-
         // if item found is first already, do nothing
         if ((*fptr)(search, (*node)->data))
         {
@@ -194,15 +188,23 @@ void find_and_move(Node **node, void *search, bool (*fptr)(void *, void *))
         {
                 before = (*node);
                 (*node) = (*node)->next;
-                after = (*node)->next;
 
-                if ((*fptr)(search, (*node)->data))
+                if ((*node) != NULL)
                 {
-                        before->next = after;
-                        (*node)->next = old_head;
-                        return;
+                        after = (*node)->next;
+
+                        if ((*fptr)(search, (*node)->data))
+                        {
+                                before->next = after;
+                                (*node)->next = old_head;
+                                return;
+                        }
                 }
+
+
         }
+        // if not found, restore list to initial state
+        (*node) = old_head;
 }
 
 
