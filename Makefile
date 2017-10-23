@@ -28,7 +28,7 @@ base_convertor: $(BASE_OBJECTS) $(BASE_HEADERS) Makefile
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # dependencies
-$(OBJECTS): $(HEADERS) Makefile
+$(BASE_OBJECTS): $(BASE_HEADERS) Makefile
 
 clean:
 	$(RM) $(EXECUTABLES) *.o linked-list/*.o
