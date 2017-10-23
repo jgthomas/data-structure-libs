@@ -1,14 +1,4 @@
-#
-# Compile ONE source file into ONE executable
-#
-# EXAMPLE:
-#
-# source: dogs.c
-# command: make dogs
-# output: dogs (an executable)
-
-
-# the compiler: gcc for C program, define as g++ for C++
+# the compiler
 CC = gcc
 
 # compiler flags:
@@ -37,5 +27,12 @@ base_convertor: $(BASE_OBJECTS) $(BASE_HEADERS) Makefile
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
+# dependencies
+$(OBJECTS): $(HEADERS) Makefile
+
 clean:
 	$(RM) $(EXECUTABLES) *.o linked-list/*.o
+
+test:
+	@echo "EXECUTABLES = ${EXECUTABLES}"
+	@echo "OBJECTS = ${BASE_OBJECTS}"
