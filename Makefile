@@ -1,41 +1,48 @@
 # MY LIBRARIES
-# re-useable code
 LLIST = linked-list
 
+
 # HEADER FILES
-# where to search
 INCLUDES = ${PWD}/${LLIST}
+
 
 # COMPILER
 CC = gcc
 
+
 # FLAGS
 CFLAGS = -g -Wall -Wextra -Werror $(foreach dir, $(INCLUDES), -I$(dir))
+
 
 # LIBRARY LINKING
 LDLIBS = 
 
-# TARGETS
-EXECUTABLES = base_convertor
 
+# EXECUTABLES
+BCONV = base_convertor
+BCONV_HEADERS = ${LLIST}/node.h ${LLIST}/utilities.h ${LLIST}/list_funcs.h
+BCONV_SOURCES = base_convertor.c ${LLIST}/utilities.c ${LLIST}/list_funcs.c
+BCONV_OBJECTS := $(BCONV_SOURCES:%.c=%.o)
+
+EXECUTABLES = $(BCONV)
+
+
+# TARGETS
 all: $(EXECUTABLES)
 
-BASE_HEADERS = ${LLIST}/node.h ${LLIST}/utilities.h ${LLIST}/list_funcs.h
-BASE_SOURCES = base_convertor.c ${LLIST}/utilities.c ${LLIST}/list_funcs.c
-BASE_OBJECTS := $(BASE_SOURCES:%.c=%.o)
-
-base_convertor: $(BASE_OBJECTS) $(BASE_HEADERS) Makefile
-	$(CC) $(CFLAGS) $(BASE_OBJECTS) -o base_convertor
+$(BCONV): $(BCONV_OBJECTS) $(BCONV_HEADERS) Makefile
+	$(CC) $(CFLAGS) $(BCONV_OBJECTS) -o $(BCONV)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# dependencies
-$(BASE_OBJECTS): $(BASE_HEADERS) Makefile
-
 clean:
-	$(RM) $(EXECUTABLES) *.o linked-list/*.o
+	$(RM) $(EXECUTABLES) *.o ${LLIST}/*.o
 
 test:
 	@echo "EXECUTABLES = ${EXECUTABLES}"
-	@echo "OBJECTS = ${BASE_OBJECTS}"
+	@echo "OBJECTS = ${BCONV_OBJECTS}"
+
+
+# DEPENDENCIES
+$(BCONV_OBJECTS): $(BCONV_HEADERS) Makefile
