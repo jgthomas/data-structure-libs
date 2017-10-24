@@ -28,6 +28,8 @@ EXECUTABLES = $(BCONV)
 
 
 # TARGETS
+.PHONY: all clean test
+
 all: $(EXECUTABLES)
 
 $(BCONV): $(BCONV_OBJECTS) $(BCONV_HEADERS) Makefile
