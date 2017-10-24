@@ -4,6 +4,10 @@ LLIST = ${PWD}/linked-list
 # HEADER FILES
 INCLUDES = $(LLIST)
 
+# PATHS
+vpath %.h $(INCLUDES)
+vpath %.c $(INCLUDES)
+
 # COMPILER
 CC = gcc
 
@@ -15,8 +19,8 @@ LDLIBS =
 
 # EXECUTABLES
 BCONV = base_convertor
-BCONV_HEADERS = ${LLIST}/node.h ${LLIST}/utilities.h ${LLIST}/list_funcs.h
-BCONV_SOURCES = base_convertor.c ${LLIST}/utilities.c ${LLIST}/list_funcs.c
+BCONV_HEADERS = node.h utilities.h list_funcs.h
+BCONV_SOURCES = base_convertor.c utilities.c list_funcs.c
 BCONV_OBJECTS := $(BCONV_SOURCES:%.c=%.o)
 
 EXECUTABLES = $(BCONV)
