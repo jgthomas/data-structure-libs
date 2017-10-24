@@ -4,9 +4,12 @@ LLIST = ${PWD}/linked-list
 # HEADER FILES
 INCLUDES = $(LLIST)
 
+# SOURCE FILES
+SOURCE = $(LLIST)
+
 # PATHS
 vpath %.h $(INCLUDES)
-vpath %.c $(INCLUDES)
+vpath %.c $(SOURCE)
 
 # COMPILER
 CC = gcc
@@ -28,7 +31,7 @@ ALL_OBJECTS = $(BCONV_OBJECTS)
 ALL_HEADERS = $(BCONV_HEADERS)
 
 # TARGETS
-.PHONY: all clean test
+.PHONY: all clean rebuild test
 
 all: $(EXECUTABLES)
 
