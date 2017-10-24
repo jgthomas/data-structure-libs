@@ -1,22 +1,17 @@
 # MY LIBRARIES
-LLIST = linked-list
-
+LLIST = ${PWD}/linked-list
 
 # HEADER FILES
-INCLUDES = ${PWD}/${LLIST}
-
+INCLUDES = $(LLIST)
 
 # COMPILER
 CC = gcc
 
-
 # FLAGS
 CFLAGS = -g -Wall -Wextra -Werror $(foreach dir, $(INCLUDES), -I$(dir))
 
-
 # LIBRARY LINKING
 LDLIBS = 
-
 
 # EXECUTABLES
 BCONV = base_convertor
@@ -25,7 +20,7 @@ BCONV_SOURCES = base_convertor.c ${LLIST}/utilities.c ${LLIST}/list_funcs.c
 BCONV_OBJECTS := $(BCONV_SOURCES:%.c=%.o)
 
 EXECUTABLES = $(BCONV)
-
+ALL_OBJECTS = $(BCONV_OBJECTS)
 
 # TARGETS
 .PHONY: all clean test
@@ -39,12 +34,8 @@ $(BCONV): $(BCONV_OBJECTS) $(BCONV_HEADERS) Makefile
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RM) $(EXECUTABLES) *.o ${LLIST}/*.o
+	$(RM) $(EXECUTABLES) $(ALL_OBJECTS)
 
 test:
 	@echo "EXECUTABLES = ${EXECUTABLES}"
-	@echo "OBJECTS = ${BCONV_OBJECTS}"
-
-
-# DEPENDENCIES
-$(BCONV_OBJECTS): $(BCONV_HEADERS) Makefile
+	@echo "OBJECTS = ${ALL_OBJECTS}"
