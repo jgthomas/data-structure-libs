@@ -27,8 +27,8 @@ BCONV_SOURCES = base_convertor.c utilities.c list_funcs.c
 BCONV_OBJECTS := $(BCONV_SOURCES:%.c=%.o)
 
 EXECUTABLES = $(BCONV)
-ALL_OBJECTS = $(BCONV_OBJECTS)
-ALL_HEADERS = $(BCONV_HEADERS)
+OBJECTS = $(BCONV_OBJECTS)
+HEADERS = $(BCONV_HEADERS)
 
 # TARGETS
 .PHONY: all clean rebuild test
@@ -42,10 +42,10 @@ $(BCONV): $(BCONV_OBJECTS) $(BCONV_HEADERS) Makefile
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RM) $(EXECUTABLES) $(ALL_OBJECTS)
+	$(RM) $(EXECUTABLES) $(OBJECTS)
 
 rebuild: clean $(EXECUTABLES)
 
 test:
 	@echo "EXECUTABLES = ${EXECUTABLES}"
-	@echo "OBJECTS = ${ALL_OBJECTS}"
+	@echo "OBJECTS = ${OBJECTS}"
