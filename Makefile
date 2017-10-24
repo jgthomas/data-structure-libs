@@ -37,6 +37,8 @@ $(BCONV): $(BCONV_OBJECTS) $(BCONV_HEADERS) Makefile
 clean:
 	$(RM) $(EXECUTABLES) $(ALL_OBJECTS)
 
+rebuild: clean $(EXECUTABLES)
+
 test:
 	@echo "EXECUTABLES = ${EXECUTABLES}"
 	@echo "OBJECTS = ${ALL_OBJECTS}"
