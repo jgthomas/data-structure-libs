@@ -4,6 +4,7 @@
 #include "node.h"
 #include "utilities.h"
 #include "list_funcs.h"
+#include "convertors.h"
 
 
 void convert_to_base(long long decimal, int base);
@@ -35,7 +36,8 @@ int main(int argc, char *argv[])
         // unless other base specified on command line
         if (argc == 3)
         {
-                int base_opt = to_int(argv[2]);
+                //int base_opt = to_int(argv[2]);
+                int base_opt = convert_to_int(&argv[2], string_to_int);
 
                 if (base_opt != 1 && base_opt <= MAX_BASE)
                 {
@@ -43,7 +45,8 @@ int main(int argc, char *argv[])
                 }
         }
 
-        long long decimal = to_int(argv[1]);
+        //long long decimal = to_int(argv[1]);
+        long long decimal = convert_to_int(&argv[1], string_to_longlong);
 
         printf("\ninput number: %lld\n\n", decimal);
 

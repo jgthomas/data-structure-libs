@@ -1,5 +1,6 @@
 int convert_to_int(void *input, int (* fptr)(void *input));
 int string_to_int(void *input);
+long long int string_to_longlong(void *input);
 int char_to_int(void *input);
 int float_to_int(void *input);
 int lower_char_to_index(void *input);

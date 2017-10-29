@@ -22,6 +22,14 @@ int string_to_int(void *input)
     return n;
 }
 
+long long int string_to_longlong(void *input)
+{
+    char *string = *(char **)input;
+    long long int n;
+    sscanf(string, "%lld", &n);
+    return n;
+}
+
 int char_to_int(void *input)
 {
         return (int)*(char *)input;
