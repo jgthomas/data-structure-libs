@@ -1,10 +1,10 @@
 # MY HEADERS - paths to search for includes
-HEADERS_1 = 
+HEADERS_1 = ../tools
 HEADERS_2 = 
 HEADERS_3 = 
 
 # MY SOURCES - paths to search for source files
-SOURCE_1 = 
+SOURCE_1 = ../tools
 SOURCE_2 = 
 SOURCE_3 = 
 
@@ -31,8 +31,10 @@ LDLIBS =
 TARGET = trie_demo
 
 # FILES
-HEADERS = trienode.h trie_funcs.h
-SOURCES = trie_funcs.c
+PWD_HEADERS := $(wildcard *.h)
+PWD_SOURCES := $(wildcard *.c)
+HEADERS = $(PWD_HEADERS) convertors.h
+SOURCES = $(PWD_SOURCES) convertors.c
 OBJECTS := $(SOURCES:%.c=%.o)
 
 # TARGETS
