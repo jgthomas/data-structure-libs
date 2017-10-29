@@ -118,7 +118,7 @@ bool is_empty(Node *node)
 
 
 /**
- * Print list sequence to screen with visualising arrows
+ * Print list
  * 
  * */
 void print_list(Node *node, void (*fptr)(void *), const char *sep)
@@ -151,6 +151,10 @@ void print_values(Node *node, void (*fptr)(void *))
 }
 
 
+/**
+ * Print list with arrow visualiser for singly linked list
+ *
+ * */
 void print_list_visual(Node *node, void(*fptr)(void *))
 {
         const char *sep = " --> ";
