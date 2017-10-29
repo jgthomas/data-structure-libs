@@ -27,14 +27,14 @@ int main()
             push(&start, &arr[i], int_size);
         }
         printf("Integer linked list: \n");
-        print_list(start, print_int);
+        print_list_visual(start, print_int);
         printf("List length: %d\n", list_length(start));
         int newer_i = 22;
         append(&start, &newer_i, int_size);
-        print_list(start, print_int);
+        print_list_visual(start, print_int);
         printf("List length: %d\n", list_length(start));
         reverse(&start);
-        print_list(start, print_int);
+        print_list_visual(start, print_int);
         int find_i = 30;
         if (list_contains(start, &find_i, find_int))
         {
@@ -46,23 +46,23 @@ int main()
         {
                 printf("found '%d' and moved to front of list\n", find_i_m);
         }
-        print_list(start, print_int);
+        print_list_visual(start, print_int);
         
 
         int to_insert = 100;
         int pos = 3;
         insert(&start, &to_insert, int_size, pos);
-        print_list(start, print_int);
+        print_list_visual(start, print_int);
 
         int to_del_idx = 2;
         del_index(&start, to_del_idx);
         printf("deleted node with index %d\n", to_del_idx);
-        print_list(start, print_int);
+        print_list_visual(start, print_int);
 
         int to_del_val = 100;
         del_val(&start, &to_del_val, find_int);
         printf("deleted node with value %d\n", to_del_val);
-        print_list(start, print_int);
+        print_list_visual(start, print_int);
 
         printf("\n");
         
@@ -82,14 +82,14 @@ int main()
            push(&start, &arr2[i], float_size);
         }
         printf("Float linked list: \n");
-        print_list(start, print_float);
+        print_list_visual(start, print_float);
         printf("List length: %d\n", list_length(start));
         float newer_f = 22.22;
         append(&start, &newer_f, float_size);
-        print_list(start, print_float);
+        print_list_visual(start, print_float);
         printf("List length: %d\n", list_length(start));
         reverse(&start);
-        print_list(start, print_float);
+        print_list_visual(start, print_float);
         printf("\n");
         
         delete_list(start);
@@ -108,14 +108,14 @@ int main()
             push(&start, &arr3[i], char_size);
         }
         printf("Char linked list: \n");
-        print_list(start, print_char);
+        print_list_visual(start, print_char);
         printf("List length: %d\n", list_length(start));
         char newer_c = 'W';
         append(&start, &newer_c, char_size);
-        print_list(start, print_char);
+        print_list_visual(start, print_char);
         printf("List length: %d\n", list_length(start));
         reverse(&start);
-        print_list(start, print_char);
+        print_list_visual(start, print_char);
         printf("\n");
         
         delete_list(start);
@@ -135,14 +135,14 @@ int main()
         }
         
         printf("String linked list: \n");
-        print_list(start, print_string);
+        print_list_visual(start, print_string);
         printf("List length: %d\n", list_length(start));
         char *newer_s = "Hippo";
         append(&start, &newer_s, string_size);
-        print_list(start, print_string);
+        print_list_visual(start, print_string);
         printf("List length: %d\n", list_length(start));
         reverse(&start);
-        print_list(start, print_string);
+        print_list_visual(start, print_string);
         char *find_s = "Hippo";
         if (list_contains(start, &find_s, find_string))
         {

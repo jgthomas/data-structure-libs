@@ -121,19 +121,19 @@ bool is_empty(Node *node)
  * Print list sequence to screen with visualising arrows
  * 
  * */
-void print_list(Node *node, void (*fptr)(void *))
+void print_list(Node *node, void (*fptr)(void *), const char *sep)
 {
         while (node != NULL)
         {
-            // pass contents of node data as argument to function pointer
             (*fptr)(node->data);
-            
-            // move to next node
             node = node->next;
             
-            if (node != NULL)
+            if (sep != NULL)
             {
-                printf(" --> ");
+                    if (node != NULL)
+                    {
+                            printf("%s", sep);
+                    }
             }
         }
         printf("\n");
@@ -146,12 +146,15 @@ void print_list(Node *node, void (*fptr)(void *))
  * */
 void print_values(Node *node, void (*fptr)(void *))
 {
-        while (node != NULL)
-        {
-                (*fptr)(node->data);
-                node = node->next;
-        }
-        printf("\n");
+        const char *sep = NULL;
+        print_list(node, fptr, sep);
+}
+
+
+void print_list_visual(Node *node, void(*fptr)(void *))
+{
+        const char *sep = " --> ";
+        print_list(node, fptr, sep);
 }
 
 

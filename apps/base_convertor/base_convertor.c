@@ -1,3 +1,15 @@
+/**
+ * DESCRIPTION:
+ *
+ * Converts decimal numbers to other bases
+ *
+ *
+ * DATA STRUCTURES:
+ *
+ * Uses a STACK data structure implemented with a LINKED LIST
+ *
+ *
+ * */
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
