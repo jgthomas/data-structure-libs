@@ -14,6 +14,11 @@ int convert_to_int(void *input, int (* fptr)(void *input))
         return fptr(input);
 }
 
+int convert_to_longlong(void *input, long long int (* fptr)(void *input))
+{
+        return fptr(input);
+}
+
 int string_to_int(void *input)
 {
     char *string = *(char **)input;

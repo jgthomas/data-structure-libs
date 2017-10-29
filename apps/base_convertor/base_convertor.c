@@ -9,8 +9,6 @@
 
 void convert_to_base(long long decimal, int base);
 void convert(Node **top, long long *decimal, int base);
-long long to_int(char *string);
-void print_conversion(Node *node, void(*fptr)(void *));
 
 
 enum {MIN_BASE = 2, MAX_BASE = 16};
@@ -36,7 +34,6 @@ int main(int argc, char *argv[])
         // unless other base specified on command line
         if (argc == 3)
         {
-                //int base_opt = to_int(argv[2]);
                 int base_opt = convert_to_int(&argv[2], string_to_int);
 
                 if (base_opt != 1 && base_opt <= MAX_BASE)
@@ -45,8 +42,7 @@ int main(int argc, char *argv[])
                 }
         }
 
-        //long long decimal = to_int(argv[1]);
-        long long decimal = convert_to_int(&argv[1], string_to_longlong);
+        long long decimal = convert_to_longlong(&argv[1], string_to_longlong);
 
         printf("\ninput number: %lld\n\n", decimal);
 
@@ -73,7 +69,7 @@ void convert_to_base(long long decimal, int base)
         Node *top = NULL;
         printf("base %d: ", base);
         convert(&top, &decimal, base);
-        print_conversion(top, print_char);
+        print_values(top, print_char);
         delete_list(top);
 }
 
@@ -90,23 +86,4 @@ void convert(Node **top, long long *decimal, int base)
                 push(top, &BASE_MAP[index], char_size);
                 base_10 = base_10 / base;
         }
-}
-
-
-long long to_int(char *string)
-{
-    long long n;
-    sscanf(string, "%lld", &n);
-    return n;
-}
-
-
-void print_conversion(Node *node, void(*fptr)(void *))
-{
-        while (node != NULL)
-        {
-                (*fptr)(node->data);
-                node = node->next;
-        }
-        printf("\n");
 }

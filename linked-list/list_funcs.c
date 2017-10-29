@@ -118,7 +118,7 @@ bool is_empty(Node *node)
 
 
 /**
- * Print list sequence to screen
+ * Print list sequence to screen with visualising arrows
  * 
  * */
 void print_list(Node *node, void (*fptr)(void *))
@@ -135,6 +135,21 @@ void print_list(Node *node, void (*fptr)(void *))
             {
                 printf(" --> ");
             }
+        }
+        printf("\n");
+}
+
+
+/**
+ * Print just list values
+ *
+ * */
+void print_values(Node *node, void (*fptr)(void *))
+{
+        while (node != NULL)
+        {
+                (*fptr)(node->data);
+                node = node->next;
         }
         printf("\n");
 }

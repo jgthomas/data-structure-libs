@@ -1,4 +1,5 @@
 int convert_to_int(void *input, int (* fptr)(void *input));
+int convert_to_longlong(void *input, long long int (* fptr)(void *input));
 int string_to_int(void *input);
 long long int string_to_longlong(void *input);
 int char_to_int(void *input);
