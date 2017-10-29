@@ -1,0 +1,11 @@
+int convert_to_int(void *input, int (* fptr)(void *input));
+int string_to_int(void *input);
+int char_to_int(void *input);
+int float_to_int(void *input);
+int lower_char_to_index(void *input);
+int upper_char_to_index(void *input);
+char convert_to_char(void *input, char (* fptr)(void *input));
+char int_to_char(void *input);
+char float_to_char(void *input);
+char index_to_lower_char(void *input);
+char index_to_upper_char(void *input);
