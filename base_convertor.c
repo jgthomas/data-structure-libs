@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "linked-list/node.h"
-#include "linked-list/utilities.h"
-#include "linked-list/list_funcs.h"
+#include "node.h"
+#include "utilities.h"
+#include "list_funcs.h"
 
 
 void convert(Node **top, long long *decimal, int base);
