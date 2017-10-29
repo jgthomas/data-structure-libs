@@ -6,6 +6,7 @@
 #include "list_funcs.h"
 
 
+void convert_to_base(long long decimal, int base);
 void convert(Node **top, long long *decimal, int base);
 long long to_int(char *string);
 void print_conversion(Node *node, void(*fptr)(void *));
@@ -51,24 +52,26 @@ int main(int argc, char *argv[])
         {
                 for (int i = MIN_BASE; i <= MAX_BASE; i++)
                 {
-                        Node *top = NULL;
-                        printf("base %d: ", i);
-                        convert(&top, &decimal, i);
-                        print_conversion(top, print_char);
-                        delete_list(top);
+                        convert_to_base(decimal, i);
                 }
         }
         // otherwise convert the specified base
         else
         {
-                Node *top = NULL;
-                printf("base %d: ", base);
-                convert(&top, &decimal, base);
-                print_conversion(top, print_char);
-                delete_list(top);
+                convert_to_base(decimal, base);
         }
 
         return 0;
+}
+
+
+void convert_to_base(long long decimal, int base)
+{
+        Node *top = NULL;
+        printf("base %d: ", base);
+        convert(&top, &decimal, base);
+        print_conversion(top, print_char);
+        delete_list(top);
 }
 
 
