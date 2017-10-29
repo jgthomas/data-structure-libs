@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
 {
         if (argc == 1)
         {
-                printf("usage: nbase_ll decimal [base]\n");
+                printf("usage: base_convertor decimal [base]\n");
                 printf("if base not specified, defaults to binary\n");
                 printf("use base 0 to get all conversions\n");
                 exit(1);
