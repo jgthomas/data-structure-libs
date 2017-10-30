@@ -1,9 +1,30 @@
+/**
+ * DESCRIPTION:
+ *
+ * Loads text file and allows query of words in file
+ *
+ * search  :  check whether word present
+ * del     :  delete a word
+ * count   :  return number of words starting with a prefix
+ * print   :  print all words starting with a prefix
+ * quit    :  unload the file from memory
+ *
+ *
+ * DATA STRUCTURES:
+ *
+ * Uses a TRIE
+ *
+ *
+ * */
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
 #include <stdlib.h>
 #include "trienode.h"
 #include "trie_funcs.h"
+
+
+void print_commands(void);
 
 
 int main(int argc, char *argv[])
@@ -15,7 +36,7 @@ int main(int argc, char *argv[])
         }
 
         TrieNode *root = make_node();
-        
+
         char *text = argv[1];
         bool loaded = load(root, text);
 
@@ -26,9 +47,9 @@ int main(int argc, char *argv[])
         }
  
         char command[20];
-        
-        printf("commands: search, del, quit\n\n");
-        
+
+        print_commands();
+
         while (1)
         {
             printf("Enter a command: ");
@@ -81,7 +102,17 @@ int main(int argc, char *argv[])
                 free_trie(root);
                 break;
             }
+            else
+            {
+                    print_commands();
+            }
         }
  
         return 0;
+}
+
+
+void print_commands(void)
+{
+        printf("commands: search, del, count, print, quit\n\n");
 }
