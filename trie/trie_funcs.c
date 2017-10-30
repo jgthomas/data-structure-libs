@@ -4,6 +4,7 @@
 #include <string.h>
 #include "trienode.h"
 #include "trie_funcs.h"
+#include "convertors.h"
 
 
 bool load(TrieNode *root, const char *text)
@@ -279,7 +280,7 @@ void print_helper(TrieNode *node, char cache[MAX_LENGTH+1], int pos)
         {
                 if (node->children[i])
                 {
-                        cache[pos] = to_char(i);
+                        cache[pos] = convert_to_char(&i, index_to_lower_char);
                         print_helper(node->children[i], cache, pos+1);
                 }
         }
