@@ -1,11 +1,11 @@
 # MY HEADERS - paths to search for includes
-HEADERS_1 = ../tools
-HEADERS_2 = 
+HEADERS_1 = ../../tools
+HEADERS_2 = ../../trie
 HEADERS_3 = 
 
 # MY SOURCES - paths to search for source files
-SOURCE_1 = ../tools
-SOURCE_2 = 
+SOURCE_1 = ../../tools
+SOURCE_2 = ../../trie
 SOURCE_3 = 
 
 # HEADER FILES
@@ -28,13 +28,13 @@ CFLAGS = -g -Wall -Wextra -Werror $(foreach dir, $(INCLUDES), -I$(dir))
 LDLIBS = 
 
 # EXECUTABLE
-TARGET = trie_demo
+TARGET = word_query
 
 # FILES
 PWD_HEADERS := $(wildcard *.h)
 PWD_SOURCES := $(wildcard *.c)
-HEADERS = $(PWD_HEADERS) convertors.h
-SOURCES = $(PWD_SOURCES) convertors.c
+HEADERS = $(PWD_HEADERS) convertors.h trienode.h trie_funcs.h
+SOURCES = $(PWD_SOURCES) convertors.c trie_funcs.c
 OBJECTS := $(SOURCES:%.c=%.o)
 
 # TARGETS
@@ -43,7 +43,7 @@ OBJECTS := $(SOURCES:%.c=%.o)
 all: $(TARGET)
 
 $(TARGET): $(OBJECTS) $(HEADERS) Makefile
-	$(CC) $(CFLAGS) $(OBJECTS) -o $(TARGET)
+	$(CC) $(CFLAGS) $(OBJECTS) $(LDLIBS) -o $(TARGET)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@

@@ -7,7 +7,7 @@
 #include "convertors.h"
 
 
-bool load(TrieNode *root, const char *text)
+bool load(TrieNode *root, char *text)
 {
         FILE *fp = fopen(text, "r");
 
@@ -54,7 +54,7 @@ TrieNode *make_node(void)
 }
 
 
-void insert(TrieNode *root, const char *key)
+void insert(TrieNode *root, char *key)
 {
     int length = strlen(key);
  
@@ -75,7 +75,7 @@ void insert(TrieNode *root, const char *key)
 }
 
 
-bool search(TrieNode *root, const char *key)
+bool search(TrieNode *root, char *key)
 {
     int length = strlen(key);
     TrieNode *p_crawl = root;
@@ -122,7 +122,7 @@ bool not_end_of_word(TrieNode *node)
 }
 
 
-void delete_key(TrieNode *root, const char *key)
+void delete_key(TrieNode *root, char *key)
 {
     if (root == NULL || key == NULL)
     {
@@ -147,7 +147,7 @@ void delete_key(TrieNode *root, const char *key)
  *    AND are not the end of a word
  * 
  * */
-bool delete_helper(TrieNode *root, const char *key, int length, int level)
+bool delete_helper(TrieNode *root, char *key, int length, int level)
 {
     TrieNode *p_crawl = root;
     
@@ -219,14 +219,14 @@ void free_trie(TrieNode *root)
  * child of the root's 's' node
  *
  * */
-TrieNode *find_node(TrieNode *root, const char *key)
+TrieNode *find_node(TrieNode *root, char *key)
 {
         int key_len = strlen(key);
         TrieNode *trie_ptr = root;
 
         for (int i = 0; i < key_len; i++)
         {
-                int index = convert_to_int(&key[level], lower_char_to_index);
+                int index = convert_to_int(&key[i], lower_char_to_index);
 
                 if (trie_ptr->children[index])
                 {
@@ -243,7 +243,7 @@ TrieNode *find_node(TrieNode *root, const char *key)
 }
 
 
-void print_key(TrieNode *root, const char *key)
+void print_key(TrieNode *root, char *key)
 {
         char cache[MAX_LENGTH+1];
         int key_len = strlen(key);
@@ -291,7 +291,7 @@ void print_helper(TrieNode *node, char cache[MAX_LENGTH+1], int pos)
  * Return number of words that start with the supplied key
  *
  * */
-int count(TrieNode *root, const char *key)
+int count(TrieNode *root, char *key)
 {
         int total = 0;
         TrieNode *trie_ptr = find_node(root, key);
