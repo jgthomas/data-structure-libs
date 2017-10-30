@@ -1,3 +1,6 @@
+#ifndef TRIENODE_H
+#define TRIENODE_H
+
 enum {ALPHABET_SIZE = 26, MAX_LENGTH = 45, CHAR_BASE = 97};
 
 typedef struct TNode {
@@ -5,3 +8,5 @@ typedef struct TNode {
     bool end_of_word;
 }
 TrieNode;
+
+#endif

@@ -62,7 +62,7 @@ void insert(TrieNode *root, const char *key)
  
     for (int level = 0; level < length; level++)
     {
-        int index = char_to_index(key[level]);
+        int index = convert_to_int(&key[level], lower_char_to_index);
 
         if (p_crawl->children[index] == NULL)
         {
@@ -82,7 +82,7 @@ bool search(TrieNode *root, const char *key)
  
     for (int level = 0; level < length; level++)
     {
-        int index = char_to_index(key[level]);
+        int index = convert_to_int(&key[level], lower_char_to_index);
  
         if (p_crawl->children[index] == NULL)
         {
@@ -171,7 +171,7 @@ bool delete_helper(TrieNode *root, const char *key, int length, int level)
     // recursive case
     else
     {
-        int index = char_to_index(key[level]);
+        int index = convert_to_int(&key[level], lower_char_to_index);
         p_crawl = p_crawl->children[index];
         bool delete_child = delete_helper(p_crawl, key, length, level+1);
         
@@ -226,7 +226,7 @@ TrieNode *find_node(TrieNode *root, const char *key)
 
         for (int i = 0; i < key_len; i++)
         {
-                int index = char_to_index(key[i]);
+                int index = convert_to_int(&key[level], lower_char_to_index);
 
                 if (trie_ptr->children[index])
                 {
