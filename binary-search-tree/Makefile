@@ -33,8 +33,8 @@ TARGET = bintree_demo
 # FILES
 PWD_HEADERS := $(wildcard *.h)
 PWD_SOURCES := $(wildcard *.c)
-HEADERS = $(PWD_HEADERS) comparison.h printing.h
-SOURCES = $(PWD_SOURCES) comparison.c printing.c
+HEADERS = $(PWD_HEADERS) comparison.h printing.h get_input.h
+SOURCES = $(PWD_SOURCES) comparison.c printing.c get_input.c
 OBJECTS := $(SOURCES:%.c=%.o)
 
 # TARGETS

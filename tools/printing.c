@@ -1,3 +1,8 @@
+/**
+ * Functions to print various types, useful for passing as
+ * function pointers to create some basic polymorphism.
+ *
+ * */
 #include <stdio.h>
 
 

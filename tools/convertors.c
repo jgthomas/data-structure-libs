@@ -1,3 +1,8 @@
+/**
+ * Functions to convert between types, useful for passing as
+ * function pointers to create some basic polymorphism.
+ *
+ * */
 #include <stdio.h>
 #include "convertors.h"
 

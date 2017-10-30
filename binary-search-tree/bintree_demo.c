@@ -6,6 +6,7 @@
 #include "bintree_funcs.h"
 #include "comparison.h"
 #include "printing.h"
+#include "get_input.h"
 
 
 int get_int(char *message);
@@ -59,15 +60,4 @@ int main()
                         break;
                 }
         }
-}
-
-
-int get_int(char *message)
-{
-        int n;
-        char input[100];
-        printf("%s", message);
-        fgets(input, sizeof(input), stdin);
-        sscanf(input, "%d", &n);
-        return n;
 }

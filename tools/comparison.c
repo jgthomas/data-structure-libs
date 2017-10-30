@@ -1,3 +1,10 @@
+/**
+ * Functions to compare various types, useful for passing as
+ * function pointers to create some basic polymorphism.
+ *
+ * 'less_than' functions can be inverted '!' greater than
+ *
+ * */
 #include <string.h>
 #include <stdbool.h>
 
