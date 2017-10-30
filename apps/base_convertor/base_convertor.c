@@ -6,7 +6,7 @@
  *
  * DATA STRUCTURES:
  *
- * Uses a STACK data structure implemented with a LINKED LIST
+ * Uses a STACK implemented with a LINKED LIST
  *
  *
  * */
