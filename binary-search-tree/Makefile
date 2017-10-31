@@ -18,6 +18,9 @@ SOURCE = $(SOURCE_1) $(SOURCE_2) $(SOURCE_3)
 vpath %.h $(INCLUDES)
 vpath %.c $(SOURCE)
 
+# DIRECTORIES
+BUILD_DIR = ./build
+
 # COMPILER
 CC = gcc
 
@@ -28,14 +31,17 @@ CFLAGS = -g -Wall -Wextra -Werror $(foreach dir, $(INCLUDES), -I$(dir))
 LDLIBS = 
 
 # EXECUTABLE
-TARGET = bintree_demo
+BIN = bintree_demo
+
+TARGET = $(BUILD_DIR)/$(BIN)
 
 # FILES
 PWD_HEADERS := $(wildcard *.h)
 PWD_SOURCES := $(wildcard *.c)
 HEADERS = $(PWD_HEADERS) comparison.h printing.h get_input.h
 SOURCES = $(PWD_SOURCES) comparison.c printing.c get_input.c
-OBJECTS := $(SOURCES:%.c=%.o)
+OBJECTS := $(SOURCES:%.c=$(BUILD_DIR)/%.o)
+DEPENDS = $(OBJECTS:%.o=%.d)
 
 # TARGETS
 .PHONY: all clean rebuild test
@@ -43,10 +49,14 @@ OBJECTS := $(SOURCES:%.c=%.o)
 all: $(TARGET)
 
 $(TARGET): $(OBJECTS) $(HEADERS) Makefile
+	mkdir -p $(@D)
 	$(CC) $(CFLAGS) $(OBJECTS) $(LDLIBS) -o $(TARGET)
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+-include $(DEPENDS)
+
+$(BUILD_DIR)/%.o: %.c
+	mkdir -p $(@D)
+	$(CC) $(CFLAGS) -MMD -MP -c $< -o $@
 
 clean:
 	$(RM) $(TARGET) $(OBJECTS)
