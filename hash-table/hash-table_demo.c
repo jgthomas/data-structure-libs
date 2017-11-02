@@ -8,6 +8,7 @@
 
 // pull hash function from library
 unsigned int (*hash_func_int)(unsigned int n) = dumb_hash;
+
 // wrapper for type
 unsigned int hash_int(void *data)
 {
