@@ -97,13 +97,13 @@ void print_hash_table(Record **hashtable,
 }
 
 
-void print_int(Record *r)
+void print_int_kv(Record *r)
 {
     printf("key: %d, value: %d\n", *(int *)r->key, *(int *)r->value);
 }
 
 
-void print_string(Record *r)
+void print_string_kv(Record *r)
 {
     printf("key: %s, value: %s\n", *(char **)r->key, *(char **)r->value);
 }

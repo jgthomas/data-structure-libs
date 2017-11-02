@@ -9,5 +9,5 @@ void insert(Record **hashtable, Record *r, int hashtable_size, unsigned int (*ha
 Record *search(Record **hashtable, int hashtable_size, void *key, bool (*cmp_ptr)(void *, void *), unsigned int (*hash_ptr)(void *));
 void delete_table(Record **hashtable, int hashtable_size);
 void print_hash_table(Record **hashtable, int hashtable_size, void (*print_fptr)(Record *r));
-void print_int(Record *r);
-void print_string(Record *r);
+void print_int_kv(Record *r);
+void print_string_kv(Record *r);
