@@ -7,33 +7,47 @@
 
 
 /**
+ * Create new node
+ *
+ * allocate memory for node
+ * allocate memory for data field based on size
+ * copy each byte of new_data into data member
+ *
+ * */
+Node *create_node(void *new_data, size_t data_size)
+{
+        Node *new_node = malloc(sizeof(*new_node));
+
+        if (new_node == NULL)
+        {
+            fprintf(stderr, "Failed to allocate memory for node\n");
+            exit(1);
+        }
+ 
+        new_node->data = malloc(data_size);
+
+        if (new_node->data == NULL)
+        {
+            fprintf(stderr, "Failed to allocate memory for node->data\n");
+            exit(2);
+        }
+
+        copy_by_byte(&new_node, new_data, data_size);
+
+        return new_node;
+}
+
+
+/**
  * Add node to front of list
  * 
  * */
 void push(Node **head, void *new_data, size_t data_size)
 {
-        Node *new_node = malloc(sizeof(*new_node));
-        
-        if (new_node == NULL)
-        {
-            printf("Failed to allocate memory\n");
-            exit(1);
-        }
- 
-        new_node->data = malloc(data_size);
-        
-        if (new_node->data == NULL)
-        {
-            printf("Failed to allocate memory\n");
-            exit(1);
-        }
-        
+        Node *new_node = create_node(new_data, data_size);
+
         new_node->next = (*head);
  
-        // copy data into new_node
-        copy_by_byte(&new_node, new_data, data_size);
- 
-        // set new node as the new head
         (*head) = new_node;
 }
 
@@ -44,36 +58,19 @@ void push(Node **head, void *new_data, size_t data_size)
  * */
 void append(Node **head, void *new_data, size_t data_size)
 {
-        Node *new_node = malloc(sizeof(*new_node));
-        
-        if (new_node == NULL)
-        {
-            printf("Failed to allocate memory\n");
-            exit(1);
-        }
-        
-        new_node->data  = malloc(data_size);
-        
-        if (new_node->data == NULL)
-        {
-            printf("Failed to allocate memory\n");
-            exit(1);
-        }
-        
+        Node *new_node = create_node(new_data, data_size);
+
         new_node->next = NULL;
-        
-        // copy data into new_node
-        copy_by_byte(&new_node, new_data, data_size);
 
         // set a 'cursor' node to head of list
         Node *node_ptr = (*head);
-        
+
         // advance to end of list
         while (node_ptr->next != NULL)
         {
             node_ptr = node_ptr->next;
         }
-        
+
         // if previous end node, point it's next to new_node
         if (node_ptr != NULL)
         {
@@ -91,13 +88,13 @@ void append(Node **head, void *new_data, size_t data_size)
 unsigned int list_length(Node *node)
 {
         unsigned int count = 0;
-        
+
         while (node != NULL)
         {
             node = node->next;
             count++;
         }
-        
+
         return count;
 }
 
