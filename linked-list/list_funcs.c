@@ -1,9 +1,30 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <stdint.h>
 #include "node.h"
 #include "list_funcs.h"
 #include "utilities.h"
+
+
+/**
+ * Copy each byte of "new_data" into "node->data"
+ *
+ * */
+void copy_by_byte(Node **node, void *new_data, size_t data_size)
+{
+        for (unsigned int i = 0; i < data_size; i++)
+        {
+                *(uint8_t *)((*node)->data + i) = *(uint8_t *)(new_data + i);
+        }
+}
+
+
+void free_node(Node *node)
+{
+        free(node->data);
+        free(node);
+}
 
 
 /**
