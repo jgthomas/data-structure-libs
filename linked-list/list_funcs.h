@@ -1,3 +1,6 @@
+#ifndef LIST_FUNCS_H
+#define LIST_FUNCS_H
+
 void push(Node **head_ref, void *new_data, size_t data_size);
 unsigned int list_length(Node *node);
 bool is_empty(Node *node);
@@ -14,3 +17,5 @@ void del_index(Node **node, int index);
 void del_val(Node **node, void *val, bool (*fptr)(void *, void *));
 void copy_by_byte(Node **node, void *new_data, size_t data_size);
 void free_node(Node *node);
+
+#endif
