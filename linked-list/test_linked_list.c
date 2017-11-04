@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "node.h"
-#include "utilities.h"
-#include "list_funcs.h"
+#include "linked_list.h"
+#include "comparison.h"
+#include "printing.h"
 
 
 int main()
@@ -36,13 +36,13 @@ int main()
         reverse(&start);
         print_list_visual(start, print_int);
         int find_i = 30;
-        if (list_contains(start, &find_i, find_int))
+        if (list_contains(start, &find_i, equal_int))
         {
             printf("yes\n");
         }
 
         int find_i_m = 40;
-        if (find_and_move(&start, &find_i_m, find_int))
+        if (find_and_move(&start, &find_i_m, equal_int))
         {
                 printf("found '%d' and moved to front of list\n", find_i_m);
         }
@@ -60,7 +60,7 @@ int main()
         print_list_visual(start, print_int);
 
         int to_del_val = 100;
-        del_val(&start, &to_del_val, find_int);
+        del_val(&start, &to_del_val, equal_int);
         printf("deleted node with value %d\n", to_del_val);
         print_list_visual(start, print_int);
 
@@ -144,7 +144,7 @@ int main()
         reverse(&start);
         print_list_visual(start, print_string);
         char *find_s = "Hippo";
-        if (list_contains(start, &find_s, find_string))
+        if (list_contains(start, &find_s, equal_string))
         {
             printf("yes\n");
         }

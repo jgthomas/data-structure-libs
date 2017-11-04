@@ -1,6 +1,19 @@
 #ifndef LIST_FUNCS_H
 #define LIST_FUNCS_H
 
+typedef struct new_node {
+    void *data;
+    struct new_node *next;
+}
+Node;
+
+
+typedef struct List {
+    struct Node *next;
+}
+List;
+
+
 void push(Node **head_ref, void *new_data, size_t data_size);
 unsigned int list_length(Node *node);
 bool is_empty(Node *node);

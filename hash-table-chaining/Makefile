@@ -26,8 +26,8 @@ TARGET = $(BUILD_DIR)/$(BIN)
 # FILES
 PWD_HEADERS := $(wildcard *.h)
 PWD_SOURCES := $(wildcard *.c)
-HEADERS = $(PWD_HEADERS) hash_functions.h list_funcs.h node.h printing.h comparison.h
-SOURCES = $(PWD_SOURCES) hash_functions.c list_funcs.c printing.c comparison.c
+HEADERS = $(PWD_HEADERS) hash_functions.h linked_list.h printing.h comparison.h
+SOURCES = $(PWD_SOURCES) hash_functions.c linked_list.c printing.c comparison.c
 OBJECTS := $(SOURCES:%.c=$(BUILD_DIR)/%.o)
 DEPENDS = $(OBJECTS:%.o=%.d)
 

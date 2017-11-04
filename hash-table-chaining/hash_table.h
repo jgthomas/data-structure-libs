@@ -2,7 +2,7 @@
 #define HASH_TABLE_H
 
 #include <stdbool.h>
-#include "node.h"
+#include "linked_list.h"
 
 typedef struct HashTable {
         Node **buckets;

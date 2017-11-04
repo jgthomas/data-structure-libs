@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
-#include "node.h"
-#include "list_funcs.h"
+#include "linked_list.h"
 #include "hash_table.h"
 
 

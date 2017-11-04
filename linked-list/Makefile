@@ -1,87 +1,56 @@
-#
-# Compile ALL source files in the directory 
-# into ONE executable via creating object files 
-# for each of those source files.
-#
-# Only those source files that have been changed 
-# are re-compiled, as the object files for other
-# source files already exist.
-#
-# EXAMPLE:
-#
-# sources: one.c, two.c, three.c
-# command: make
-# output: one.o, two.o, three.o, executable
-#
+# PATHS - to search for the headers and source files
+HEADERS_1 = ../tools
+HEADERS_2 =
+HEADERS_3 =
 
-#--------------COMPILER--------------#
+SOURCE_1 = ../tools
+SOURCE_2 =
+SOURCE_3 =
 
-# The compiler to use
+INCLUDES = $(HEADERS_1) $(HEADERS_2) $(HEADERS_3)
+SOURCE = $(SOURCE_1) $(SOURCE_2) $(SOURCE_3)
+
+vpath %.h $(INCLUDES)
+vpath %.c $(SOURCE)
+
+# COMPILER - with flags and libraries to link
 CC = gcc
-
-# Compiler flags:
-#  -g    adds debugging information to the executable file
-#  -Wall turns on most, but not all, compiler warnings
-#  -Wextra  'extra' warnings
-#  -Werror   treat errors as warnings, and refuse to compile
-CFLAGS  = -g -Wall -Wextra -Werror
-
-# Library linking
+CFLAGS = -g -Wall -Wextra -Werror $(foreach dir, $(INCLUDES), -I$(dir))
 LDLIBS = 
 
+# EXECUTABLE - the final binary file
+BUILD_DIR = ./build
+BIN = test_linked_list
+TARGET = $(BUILD_DIR)/$(BIN)
 
-#--------------FILES--------------#
+# FILES
+PWD_HEADERS := $(wildcard *.h)
+PWD_SOURCES := $(wildcard *.c)
+HEADERS = $(PWD_HEADERS) printing.h comparison.h
+SOURCES = $(PWD_SOURCES) printing.c comparison.c
+OBJECTS := $(SOURCES:%.c=$(BUILD_DIR)/%.o)
+DEPENDS = $(OBJECTS:%.o=%.d)
 
-# The name of the final executable
-TARGET = demo
+# TARGETS
+.PHONY: all clean rebuild test
 
-# Get all c files in the dir and their names as
-# objects files
-HEADERS := $(wildcard *.h)
-SOURCES := $(wildcard *.c)
-OBJECTS := $(SOURCES:%.c=%.o)
-
-
-#--------------TARGETS--------------#
-
-# Phony are targets that are not associated with filenames.
-#
-# Normally, make only runs if the file targets have 
-# changed. Phony targets are always out-of-date and
-# so always run when called. Often 'all' would also be
-# a phony target, but this makefile is designed to combine 
-# all files, so we don't want it to run if no changes have 
-# occurred.
-.PHONY: clean test
-
-# make
-#
-# 1. Build all the individual object files from source
-# 2. Combine those object files into the final executable
 all: $(TARGET)
 
 $(TARGET): $(OBJECTS) $(HEADERS) Makefile
+	mkdir -p $(@D)
 	$(CC) $(CFLAGS) $(OBJECTS) $(LDLIBS) -o $(TARGET)
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+-include $(DEPENDS)
 
-# dependencies
-#
-# Files on which the object files depend: typically header
-# files and makefiles. This ensures that object files are
-# re-compiled when any of these dependencies are changed.
-$(OBJECTS): $(HEADERS) Makefile
+$(BUILD_DIR)/%.o: %.c
+	mkdir -p $(@D)
+	$(CC) $(CFLAGS) -MMD -MP -c $< -o $@
 
-# make clean
-#
-# delete all object files and executables
 clean:
 	$(RM) $(TARGET) $(OBJECTS)
 
-# make test
-#
-# list all source and object files
+rebuild: clean $(TARGET)
+
 test:
-	@echo "SOURCES = ${SOURCES}"
+	@echo "EXECUTABLES = ${TARGET}"
 	@echo "OBJECTS = ${OBJECTS}"

@@ -13,10 +13,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "node.h"
-#include "utilities.h"
-#include "list_funcs.h"
+#include "linked_list.h"
 #include "convertors.h"
+#include "printing.h"
 
 
 void convert_to_base(long long decimal, int base);

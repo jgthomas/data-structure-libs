@@ -23,8 +23,8 @@ LDLIBS =
 
 # EXECUTABLES
 BCONV = base_convertor
-BCONV_HEADERS = node.h utilities.h list_funcs.h convertors.h
-BCONV_SOURCES = base_convertor.c utilities.c list_funcs.c convertors.c
+BCONV_HEADERS = linked_list.h convertors.h printing.h
+BCONV_SOURCES = base_convertor.c linked_list.c convertors.c printing.c
 BCONV_OBJECTS := $(BCONV_SOURCES:%.c=%.o)
 
 EXECUTABLES = $(BCONV)

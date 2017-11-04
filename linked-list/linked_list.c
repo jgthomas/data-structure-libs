@@ -2,9 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <stdint.h>
-#include "node.h"
-#include "list_funcs.h"
-#include "utilities.h"
+#include "linked_list.h"
 
 
 /**
