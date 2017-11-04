@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include "linked_list.h"
@@ -22,8 +23,28 @@ TypeData Integer = { .hash = hash_int,
 HashTable *create_hashtable(int hashtable_size)
 {
         HashTable *hashtable = malloc(sizeof(*hashtable));
+
+        if (hashtable == NULL)
+        {
+                fprintf(stderr, "Failed to allocate memory for hashtable\n");
+                exit(EXIT_FAILURE);
+        }
+
         hashtable->buckets = malloc(sizeof(Node *) * hashtable_size);
+
+        if (hashtable->buckets == NULL)
+        {
+                fprintf(stderr, "Failed to allocate memory for buckets\n");
+                exit(EXIT_FAILURE);
+        }
+
+        for (int bucket = 0; bucket < hashtable_size; bucket++)
+        {
+                hashtable->buckets[bucket] = NULL;
+        }
+
         hashtable->hashtable_size = hashtable_size;
+
         return hashtable;
 }
 
@@ -45,4 +66,15 @@ bool search(HashTable *hashtable, void *key, TypeData *data_type)
         }
 
         return false;
+}
+
+
+void delete_hashtable(HashTable *hashtable)
+{
+        for (int bucket = 0; bucket < hashtable->hashtable_size; bucket++)
+        {
+                delete_list(hashtable->buckets[bucket]);
+        }
+        free(hashtable->buckets);
+        free(hashtable);
 }

@@ -33,5 +33,7 @@ int main()
                 printf("yes\n");
         }
 
+        delete_hashtable(hashtable);
+
         return 0;
 }

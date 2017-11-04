@@ -27,5 +27,6 @@ extern TypeData Integer;
 HashTable *create_hashtable(int hashtable_size);
 void insert_record(HashTable *hashtable, void *new_data, TypeData *data);
 bool search(HashTable *hashtable, void *key, TypeData *data_type);
+void delete_hashtable(HashTable *hashtable);
 
 #endif
