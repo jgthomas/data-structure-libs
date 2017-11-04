@@ -3,7 +3,7 @@
 #include "node.h"
 #include "list_funcs.h"
 #include "hash_table.h"
-#include "hash_types.h"
+//#include "hash_types.h"
 
 
 int main()

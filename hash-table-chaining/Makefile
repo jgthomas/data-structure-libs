@@ -20,7 +20,7 @@ LDLIBS =
 
 # EXECUTABLE - the final binary file
 BUILD_DIR = ./build
-BIN = chain_demo
+BIN = test_hash_table
 TARGET = $(BUILD_DIR)/$(BIN)
 
 # FILES
