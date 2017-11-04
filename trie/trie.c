@@ -2,8 +2,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
-#include "trienode.h"
-#include "trie_funcs.h"
+#include "trie.h"
 #include "convertors.h"
 
 
