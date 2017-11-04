@@ -20,8 +20,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <stdlib.h>
-#include "trienode.h"
-#include "trie_funcs.h"
+#include "trie.h"
 
 
 void print_commands(void);

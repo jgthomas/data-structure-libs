@@ -33,8 +33,8 @@ TARGET = word_query
 # FILES
 PWD_HEADERS := $(wildcard *.h)
 PWD_SOURCES := $(wildcard *.c)
-HEADERS = $(PWD_HEADERS) convertors.h trienode.h trie_funcs.h
-SOURCES = $(PWD_SOURCES) convertors.c trie_funcs.c
+HEADERS = $(PWD_HEADERS) convertors.h trie.h
+SOURCES = $(PWD_SOURCES) convertors.c trie.c
 OBJECTS := $(SOURCES:%.c=%.o)
 
 # TARGETS
