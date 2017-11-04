@@ -1,29 +1,35 @@
-Node **create_hashtable(int hashtable_size)
+#include <stdlib.h>
+#include <stdbool.h>
+#include "node.h"
+#include "list_funcs.h"
+#include "hash_table.h"
+#include "hash_types.h"
+
+
+HashTable *create_hashtable(int hashtable_size)
 {
+        HashTable *hashtable = malloc(sizeof(*hashtable));
+        hashtable->buckets = malloc(sizeof(Node *) * hashtable_size);
+        hashtable->hashtable_size = hashtable_size;
+        return hashtable;
 }
 
 
-unsigned int find_hash(Node **hashtable,
-                       int hashtable_size,
-                       void *key,
-                       unsigned int (*hash_ptr)(void *))
+void insert_record(HashTable *hashtable, void *key, TypeData *data_type)
 {
+        unsigned int bucket = data_type->hash(key) % hashtable->hashtable_size;
+        push(&hashtable->buckets[bucket], key, data_type->size);
 }
 
 
-void insert(Node **hashtable,
-            int hashtable_size,
-            void *new_data,
-            size_t data_size,
-            unsigned int (*hash_ptr)(void *))
+bool search(HashTable *hashtable, void *key, TypeData *data_type)
 {
-}
+        unsigned int bucket = data_type->hash(key) % hashtable->hashtable_size;
 
+        if (list_contains(hashtable->buckets[bucket], key, data_type->compare))
+        {
+                return true;
+        }
 
-bool search(Node **hashtable,
-            int hashtable_size,
-            void *key,
-            bool (*cmp_ptr)(void *, void *),
-            unsigned int (*hash_ptr)(void *))
-{
+        return false;
 }
