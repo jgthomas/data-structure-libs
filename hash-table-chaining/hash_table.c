@@ -76,6 +76,19 @@ bool hashtable_search(HashTable *hashtable, void *key, TypeData *data_type)
 }
 
 
+bool hashtable_search_promote(HashTable *hashtable, void *key, TypeData *data_type)
+{
+        unsigned int bucket = data_type->hash(key) % hashtable->hashtable_size;
+
+        if (list_find_and_move(&hashtable->buckets[bucket], key, data_type->compare))
+        {
+                return true;
+        }
+
+        return false;
+}
+
+
 void hashtable_delete(HashTable *hashtable)
 {
         for (int bucket = 0; bucket < hashtable->hashtable_size; bucket++)
