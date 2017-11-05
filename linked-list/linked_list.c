@@ -98,8 +98,6 @@ void list_append(Node **head, void *new_data, size_t data_size)
 }
 
 
-
-
 /**
  * Return length of list
  * 
@@ -118,10 +116,6 @@ unsigned int list_length(Node *node)
 }
 
 
-/**
- * Check if list is empty
- * 
- * */
 bool list_is_empty(Node *node)
 {
         if (node == NULL)
@@ -133,10 +127,6 @@ bool list_is_empty(Node *node)
 }
 
 
-/**
- * Print list
- * 
- * */
 static void print_list(Node *node, void (*fptr)(void *), const char *sep)
 {
         while (node != NULL)
@@ -168,7 +158,7 @@ void list_print_values(Node *node, void (*fptr)(void *))
 
 
 /**
- * Print list with arrow visualiser for singly linked list
+ * Print list with arrows visualising the connections
  *
  * */
 void list_print_visual(Node *node, void(*fptr)(void *))
@@ -195,7 +185,6 @@ bool list_contains(Node *node, void *search, bool (*fptr)(void *, void *))
         
         return false;
 }
-
 
 
 /**
@@ -325,7 +314,6 @@ void list_delete_value(Node **node, void *val, bool (*fptr)(void *, void *))
 }
 
 
-
 /**
  * Search and move the found node to the front of the list
  *
@@ -389,7 +377,6 @@ void list_delete(Node *node)
  * */
 void list_reverse(Node **current_node)
 {
-        // declare two temporary variables
         Node *next_node = NULL;
         Node *previous_node = NULL;
         
