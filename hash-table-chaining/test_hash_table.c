@@ -8,7 +8,7 @@ int main()
 {
         int hashtable_size = 65536;
 
-        HashTable *hashtable = create_hashtable(hashtable_size);
+        HashTable *hashtable = hashtable_create(hashtable_size);
 
         printf("hash table size: %d\n", hashtable_size);
         printf("hash table location %p\n", (void *)hashtable);
@@ -23,17 +23,17 @@ int main()
 
         for (int i = 0; i < arr_len; i++)
         {
-                insert_record(hashtable, &arr[i], &String);
+                hashtable_insert(hashtable, &arr[i], &String);
         }
 
         char *to_find = "house";
 
-        if (search(hashtable, &to_find, &String))
+        if (hashtable_search(hashtable, &to_find, &String))
         {
                 printf("yes\n");
         }
 
-        delete_hashtable(hashtable);
+        hashtable_delete(hashtable);
 
         return 0;
 }
