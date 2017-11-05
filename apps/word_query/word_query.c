@@ -21,6 +21,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include "trie.h"
+#include "get_input.h"
 
 
 void print_commands(void);
@@ -57,9 +58,11 @@ int main(int argc, char *argv[])
             if (strncmp(command, "search", 5) == 0)
             {
                 char word[MAX_LENGTH + 1];
-                printf("Word to find: ");
+                char *msg = "Word to find";
+                get_string(msg, word, MAX_LENGTH);
+                /*printf("Word to find: ");
                 fgets(word, sizeof(word), stdin);
-                word[strcspn(word, "\n")] = '\0';
+                word[strcspn(word, "\n")] = '\0';*/
                 
                 if (search(root, word))
                 {
@@ -73,26 +76,32 @@ int main(int argc, char *argv[])
             else if (strncmp(command, "del", 3) == 0)
             {
                 char word[MAX_LENGTH + 1];
-                printf("Word to delete: ");
+                char *msg = "Word to delete";
+                get_string(msg, word, MAX_LENGTH);
+                /*printf("Word to delete: ");
                 fgets(word, sizeof(word), stdin);
-                word[strcspn(word, "\n")] = '\0';
+                word[strcspn(word, "\n")] = '\0';*/
                 delete_key(root, word);
             }
             else if (strncmp(command, "count", 5) == 0)
             {
                 char prefix[MAX_LENGTH + 1];
-                printf("Prefix to count: ");
+                char *msg = "Prefix to count";
+                get_string(msg, prefix, MAX_LENGTH);
+                /*printf("Prefix to count: ");
                 fgets(prefix, sizeof(prefix), stdin);
-                prefix[strcspn(prefix, "\n")] = '\0';
+                prefix[strcspn(prefix, "\n")] = '\0';*/
                 printf("%d\n", count(root, prefix));
 
             }
             else if (strncmp(command, "print", 5) == 0)
             {
                 char prefix[MAX_LENGTH + 1];
-                printf("Prefix to print: ");
+                char *msg = "Prefix to print";
+                get_string(msg, prefix, MAX_LENGTH);
+                /*printf("Prefix to print: ");
                 fgets(prefix, sizeof(prefix), stdin);
-                prefix[strcspn(prefix, "\n")] = '\0';
+                prefix[strcspn(prefix, "\n")] = '\0';*/
                 print_key(root, prefix);
 
             }
