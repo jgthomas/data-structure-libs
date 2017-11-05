@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include "trie.h"
-#include "convertors.h"
 
 
 bool load(TrieNode *root, char *text)
@@ -61,7 +60,7 @@ void insert(TrieNode *root, char *key)
  
     for (int level = 0; level < length; level++)
     {
-        int index = convert_to_int(&key[level], lower_char_to_index);
+        int index = key[level] - CHAR_BASE;
 
         if (p_crawl->children[index] == NULL)
         {
@@ -81,7 +80,7 @@ bool search(TrieNode *root, char *key)
  
     for (int level = 0; level < length; level++)
     {
-        int index = convert_to_int(&key[level], lower_char_to_index);
+        int index = key[level] - CHAR_BASE;
  
         if (p_crawl->children[index] == NULL)
         {
@@ -170,7 +169,7 @@ bool delete_helper(TrieNode *root, char *key, int length, int level)
     // recursive case
     else
     {
-        int index = convert_to_int(&key[level], lower_char_to_index);
+        int index = key[level] - CHAR_BASE;
         p_crawl = p_crawl->children[index];
         bool delete_child = delete_helper(p_crawl, key, length, level+1);
         
@@ -225,7 +224,7 @@ TrieNode *find_node(TrieNode *root, char *key)
 
         for (int i = 0; i < key_len; i++)
         {
-                int index = convert_to_int(&key[i], lower_char_to_index);
+                int index = key[i] - CHAR_BASE;
 
                 if (trie_ptr->children[index])
                 {
@@ -280,7 +279,7 @@ void print_helper(TrieNode *node, char cache[MAX_LENGTH+1], int pos)
         {
                 if (node->children[i])
                 {
-                        cache[pos] = convert_to_char(&i, index_to_lower_char);
+                        cache[pos] = (char)(i + CHAR_BASE);
                         print_helper(node->children[i], cache, pos+1);
                 }
         }
