@@ -85,3 +85,14 @@ void hashtable_delete(HashTable *hashtable)
         free(hashtable->buckets);
         free(hashtable);
 }
+
+
+void hashtable_print_chain(HashTable *hashtable, void *key, TypeData *data_type)
+{
+        unsigned int bucket = data_type->hash(key) % hashtable->hashtable_size;
+
+        if (!list_is_empty(hashtable->buckets[bucket]))
+        {
+                list_print_visual(hashtable->buckets[bucket], data_type->print);
+        }
+}

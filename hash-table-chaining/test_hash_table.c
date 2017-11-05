@@ -28,6 +28,8 @@ int main()
 
         char *to_find = "house";
 
+        hashtable_print_chain(hashtable, &to_find, &String);
+
         if (hashtable_search(hashtable, &to_find, &String))
         {
                 printf("yes %s is found\n", to_find);
@@ -48,6 +50,7 @@ int main()
         {
                 printf("%s not found\n", to_find);
         }
+
 
         hashtable_delete(hashtable);
 
