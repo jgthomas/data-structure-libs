@@ -1,52 +1,56 @@
-# MY LIBRARIES
-LLIST = ../../linked-list
-TOOLS = ../../tools
+# PATHS - to search for the headers and source files
+HEADERS_1 = ../../linked-list
+HEADERS_2 = ../../tools
+HEADERS_3 = 
 
-# HEADER FILES
-INCLUDES = $(LLIST) $(TOOLS)
+SOURCE_1 = ../../linked-list
+SOURCE_2 = ../../tools
+SOURCE_3 = 
 
-# SOURCE FILES
-SOURCE = $(LLIST) $(TOOLS)
+INCLUDES = $(HEADERS_1) $(HEADERS_2) $(HEADERS_3)
+SOURCE = $(SOURCE_1) $(SOURCE_2) $(SOURCE_3)
 
-# PATHS
 vpath %.h $(INCLUDES)
 vpath %.c $(SOURCE)
 
-# COMPILER
+# COMPILER - with flags and libraries to link
 CC = gcc
-
-# FLAGS
 CFLAGS = -g -Wall -Wextra -Werror $(foreach dir, $(INCLUDES), -I$(dir))
-
-# LIBRARY LINKING
 LDLIBS = 
 
-# EXECUTABLES
-BCONV = base_convertor
-BCONV_HEADERS = linked_list.h convertors.h printing.h
-BCONV_SOURCES = base_convertor.c linked_list.c convertors.c printing.c
-BCONV_OBJECTS := $(BCONV_SOURCES:%.c=%.o)
+# EXECUTABLE - the final binary file
+BUILD_DIR = ./build
+BIN = base_convertor
+TARGET = $(BUILD_DIR)/$(BIN)
 
-EXECUTABLES = $(BCONV)
-OBJECTS = $(BCONV_OBJECTS)
-HEADERS = $(BCONV_HEADERS)
+# FILES
+PWD_HEADERS := $(wildcard *.h)
+PWD_SOURCES := $(wildcard *.c)
+HEADERS = $(PWD_HEADERS) linked_list.h convertors.h printing.h
+SOURCES = $(PWD_SOURCES) linked_list.c convertors.c printing.c
+OBJECTS := $(SOURCES:%.c=$(BUILD_DIR)/%.o)
+DEPENDS = $(OBJECTS:%.o=%.d)
 
 # TARGETS
 .PHONY: all clean rebuild test
 
-all: $(EXECUTABLES)
+all: $(TARGET)
 
-$(BCONV): $(BCONV_OBJECTS) $(BCONV_HEADERS) Makefile
-	$(CC) $(CFLAGS) $(BCONV_OBJECTS) -o $(BCONV)
+$(TARGET): $(OBJECTS) $(HEADERS) Makefile
+	mkdir -p $(@D)
+	$(CC) $(CFLAGS) $(OBJECTS) $(LDLIBS) -o $(TARGET)
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+-include $(DEPENDS)
+
+$(BUILD_DIR)/%.o: %.c
+	mkdir -p $(@D)
+	$(CC) $(CFLAGS) -MMD -MP -c $< -o $@
 
 clean:
-	$(RM) $(EXECUTABLES) $(OBJECTS)
+	$(RM) $(TARGET) $(OBJECTS)
 
-rebuild: clean $(EXECUTABLES)
+rebuild: clean $(TARGET)
 
 test:
-	@echo "EXECUTABLES = ${EXECUTABLES}"
+	@echo "EXECUTABLES = ${TARGET}"
 	@echo "OBJECTS = ${OBJECTS}"
