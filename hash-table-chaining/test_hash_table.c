@@ -30,7 +30,23 @@ int main()
 
         if (hashtable_search(hashtable, &to_find, &String))
         {
-                printf("yes\n");
+                printf("yes %s is found\n", to_find);
+        }
+        else
+        {
+                printf("%s not found\n", to_find);
+        }
+
+        printf("deleting %s...\n", to_find);
+        hashtable_key_delete(hashtable, &to_find, &String);
+
+        if (hashtable_search(hashtable, &to_find, &String))
+        {
+                printf("yes %s is found\n", to_find);
+        }
+        else
+        {
+                printf("%s not found\n", to_find);
         }
 
         hashtable_delete(hashtable);
