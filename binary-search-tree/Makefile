@@ -31,7 +31,7 @@ CFLAGS = -g -Wall -Wextra -Werror $(foreach dir, $(INCLUDES), -I$(dir))
 LDLIBS = 
 
 # EXECUTABLE
-BIN = bintree_demo
+BIN = test_binary_tree
 
 TARGET = $(BUILD_DIR)/$(BIN)
 
