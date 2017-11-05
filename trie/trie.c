@@ -234,6 +234,7 @@ TrieNode *find_node(TrieNode *root, char *key)
                 else
                 {
                         trie_ptr = NULL;
+                        return trie_ptr;
                 }
 
         }

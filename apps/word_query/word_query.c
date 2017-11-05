@@ -60,9 +60,6 @@ int main(int argc, char *argv[])
                 char word[MAX_LENGTH + 1];
                 char *msg = "Word to find";
                 get_string(msg, word, MAX_LENGTH);
-                /*printf("Word to find: ");
-                fgets(word, sizeof(word), stdin);
-                word[strcspn(word, "\n")] = '\0';*/
                 
                 if (search(root, word))
                 {
@@ -78,9 +75,6 @@ int main(int argc, char *argv[])
                 char word[MAX_LENGTH + 1];
                 char *msg = "Word to delete";
                 get_string(msg, word, MAX_LENGTH);
-                /*printf("Word to delete: ");
-                fgets(word, sizeof(word), stdin);
-                word[strcspn(word, "\n")] = '\0';*/
                 delete_key(root, word);
             }
             else if (strncmp(command, "count", 5) == 0)
@@ -88,9 +82,6 @@ int main(int argc, char *argv[])
                 char prefix[MAX_LENGTH + 1];
                 char *msg = "Prefix to count";
                 get_string(msg, prefix, MAX_LENGTH);
-                /*printf("Prefix to count: ");
-                fgets(prefix, sizeof(prefix), stdin);
-                prefix[strcspn(prefix, "\n")] = '\0';*/
                 printf("%d\n", count(root, prefix));
 
             }
@@ -99,9 +90,6 @@ int main(int argc, char *argv[])
                 char prefix[MAX_LENGTH + 1];
                 char *msg = "Prefix to print";
                 get_string(msg, prefix, MAX_LENGTH);
-                /*printf("Prefix to print: ");
-                fgets(prefix, sizeof(prefix), stdin);
-                prefix[strcspn(prefix, "\n")] = '\0';*/
                 print_key(root, prefix);
 
             }
