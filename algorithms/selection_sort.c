@@ -13,12 +13,6 @@ void selection_sort(void *array,
                     bool (*compare)(void *x, void *y))
 {
         int length = data_size/elem_size;
-
-        if (length < 2)
-        {
-                return;
-        }
-
         int start = 0;
 
         while (start < length)
