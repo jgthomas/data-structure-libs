@@ -19,7 +19,13 @@ TestCase **init_tests(int num_tests)
 }
 
 
-TestCase *new_test(void *test, void *answer, size_t data_size, size_t elem_size)
+TestCase *new_test(void *test,
+                   void *answer,
+                   size_t data_size,
+                   size_t elem_size,
+                   bool (*equal)(void *x, void *y),
+                   bool (*compare)(void *x, void *y),
+                   void (*print)(void *x))
 {
         TestCase *test_case = malloc(sizeof(*test_case));
         if (test_case == NULL)
@@ -46,6 +52,9 @@ TestCase *new_test(void *test, void *answer, size_t data_size, size_t elem_size)
         
         test_case->data_size = data_size;
         test_case->elem_size = elem_size;
+        test_case->equal = equal;
+        test_case->compare = compare;
+        test_case->print = print;
 
         return test_case;
 }

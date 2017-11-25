@@ -24,7 +24,7 @@ void bubble_sort(void *array,
                         void *left = array + elem_size * j;
                         void *right = array + elem_size * (j+1);
 
-                        if (compare(left, right))
+                        if (compare(right, left))
                         {
                                 swap(left, right, elem_size);
                                 last_swap = j;

@@ -1,5 +1,9 @@
 #include <stdio.h>
+#include <stdbool.h>
+#include <BCUnit/Basic.h>
+#include <BCUnit/BCUnit.h>
 #include "printing.h"
+#include "comparison.h"
 #include "shared_test.h"
 #include "shared_sort.h"
 #include "bubble_sort.h"
@@ -29,9 +33,9 @@ TestCase **make_tests(int num_tests)
 {        
         TestCase **test_array = init_tests(num_tests);
 
-        TestCase *testint = new_test(test_int, answer_int, sizeof(test_int), sizeof(int));
-        TestCase *testchar = new_test(test_char, answer_char, sizeof(test_char), sizeof(char));
-        TestCase *teststring = new_test(test_string, answer_string, sizeof(test_string), sizeof(char *));
+        TestCase *testint = new_test(test_int, answer_int, sizeof(test_int), sizeof(int), equal_int, less_than_int, print_int);
+        TestCase *testchar = new_test(test_char, answer_char, sizeof(test_char), sizeof(char), equal_char, less_than_char, print_char);
+        TestCase *teststring = new_test(test_string, answer_string, sizeof(test_string), sizeof(char *), equal_string, less_than_string, print_string);
 
         test_array[0] = testint;
         test_array[1] = testchar;
@@ -41,13 +45,51 @@ TestCase **make_tests(int num_tests)
 }
 
 
+void testBUBBLE_SORT(void)
+{
+        TestCase **tests = make_tests(NUM_TESTS);
+
+        for (int i = 0; i < NUM_TESTS; i++)
+        {
+                CU_ASSERT_FALSE(arrays_match(tests[i]->test, tests[i]->answer, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
+                bubble_sort(tests[i]->test, tests[i]->data_size, tests[i]->elem_size, tests[i]->compare);
+                CU_ASSERT_TRUE(arrays_match(tests[i]->test, tests[i]->answer, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
+                //print_array(tests[i]->test, tests[i]->data_size, tests[i]->elem_size, tests[i]->print);
+        }
+
+        clean_tests(tests, NUM_TESTS);
+}
+
+
 int main(void)
 {
-        TestCase **test_array = make_tests(NUM_TESTS);
+        // test suite
+        CU_pSuite suite = NULL;
 
-        print_array(test_array[0]->test, test_array[0]->data_size, test_array[0]->elem_size, print_int);
-        print_array(test_array[1]->test, test_array[1]->data_size, test_array[1]->elem_size, print_char);
-        print_array(test_array[2]->test, test_array[2]->data_size, test_array[2]->elem_size, print_string);
+        // initialize registry
+        if (CUE_SUCCESS != CU_initialize_registry())
+        {
+                return CU_get_error();
+        }
 
-        clean_tests(test_array, NUM_TESTS);
+        // add suite
+        suite = CU_add_suite("Sorting Algorithms", 0, 0);
+        if (NULL == suite)
+        {
+                CU_cleanup_registry();
+                return CU_get_error();
+        }
+
+        // add tests
+        if (NULL == CU_add_test(suite, "Bubble sort", testBUBBLE_SORT))
+        {
+                CU_cleanup_registry();
+                return CU_get_error();
+        }
+
+        // run tests
+        CU_basic_set_mode(CU_BRM_VERBOSE);
+        CU_basic_run_tests();
+        CU_cleanup_registry();
+        return CU_get_error();
 }

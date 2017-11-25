@@ -24,7 +24,7 @@ bool less_than_char(void *first, void *second)
 
 bool less_than_string(void *first, void *second)
 {
-    if (strcmp(*(char **)second, *(char **)first) < 0)
+    if (strcmp(*(char **)first, *(char **)second) < 0)
     {
         return true;
     }

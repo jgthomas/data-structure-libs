@@ -16,7 +16,7 @@ vpath %.c $(SOURCE)
 # COMPILER - with flags and libraries to link
 CC = gcc
 CFLAGS = -g -Wall -Wextra -Werror $(foreach dir, $(INCLUDES), -I$(dir))
-LDLIBS = 
+LDLIBS = -lbcunit
 
 # EXECUTABLE - the final binary file
 BUILD_DIR = ./build
@@ -26,8 +26,8 @@ TARGET = $(BUILD_DIR)/$(BIN)
 # FILES
 PWD_HEADERS := $(wildcard *.h)
 PWD_SOURCES := $(wildcard *.c)
-HEADERS = $(PWD_HEADERS) shared_test.h shared_sort.h printing.h bubble_sort.h
-SOURCES = $(PWD_SOURCES) shared_test.c shared_sort.c printing.c bubble_sort.c
+HEADERS = $(PWD_HEADERS) shared_test.h shared_sort.h printing.h comparison.h bubble_sort.h
+SOURCES = $(PWD_SOURCES) shared_test.c shared_sort.c printing.c comparison.c bubble_sort.c
 OBJECTS := $(SOURCES:%.c=$(BUILD_DIR)/%.o)
 DEPENDS = $(OBJECTS:%.o=%.d)
 
