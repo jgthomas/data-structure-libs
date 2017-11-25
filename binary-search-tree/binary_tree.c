@@ -2,8 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <stdint.h>
-#include "node.h"
-#include "bintree_funcs.h"
+#include "binary_tree.h"
 
 
 /**
@@ -13,9 +12,9 @@
  * data_size  :  size of node data type
  *
  * */
-Node *make_node(void *new_data, size_t data_size)
+BinTreeNode *make_node(void *new_data, size_t data_size)
 {
-        Node *new_node = malloc(sizeof(*new_node));
+        BinTreeNode *new_node = malloc(sizeof(*new_node));
 
         if (new_node == NULL)
         {
@@ -52,7 +51,7 @@ Node *make_node(void *new_data, size_t data_size)
  * less_than  :  function checks first item is less than second
  *
  * */
-void insert(Node **head,
+void insert(BinTreeNode **head,
             void *new_data,
             size_t data_size,
             bool (*less_than)(void *first, void *second))
@@ -81,7 +80,7 @@ void insert(Node **head,
  * less_than  :  function checks first item is less than second
  *
  * */
-bool search(Node **head,
+bool search(BinTreeNode **head,
             void *data,
             bool (*equals)(void *first, void *second),
             bool (*less_than)(void *first, void *second))
@@ -106,7 +105,7 @@ bool search(Node **head,
 }
 
 
-void print_tree(Node *node, int level, void (*print_ptr)(void *item))
+void print_tree(BinTreeNode *node, int level, void (*print_ptr)(void *item))
 {
 	    if (node == NULL)
 	    {
@@ -126,7 +125,7 @@ void print_tree(Node *node, int level, void (*print_ptr)(void *item))
 }
 
 
-void delete_tree(Node *head)
+void delete_tree(BinTreeNode *head)
 {
         if (head != NULL)
         {

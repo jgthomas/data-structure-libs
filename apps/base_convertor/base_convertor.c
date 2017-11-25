@@ -8,7 +8,6 @@
  *
  * Uses a STACK implemented with a LINKED LIST
  *
- *
  * */
 #include <stdio.h>
 #include <stdlib.h>
@@ -80,8 +79,8 @@ void convert_to_base(long long decimal, int base)
         Node *top = NULL;
         printf("base %d: ", base);
         convert(&top, &decimal, base);
-        print_values(top, print_char);
-        delete_list(top);
+        list_print_values(top, print_char);
+        list_delete(top);
 }
 
 
@@ -94,7 +93,7 @@ void convert(Node **top, long long *decimal, int base)
         while (base_10 >= 1)
         {
                 index = base_10 % base;
-                push(top, &BASE_MAP[index], char_size);
+                list_push(top, &BASE_MAP[index], char_size);
                 base_10 = base_10 / base;
         }
 }

@@ -2,8 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
-#include "node.h"
-#include "bintree_funcs.h"
+#include "binary_tree.h"
 #include "comparison.h"
 #include "printing.h"
 #include "get_input.h"
@@ -14,7 +13,7 @@ int get_int(char *message);
 
 int main()
 {
-        Node *head = NULL;
+        BinTreeNode *head = NULL;
         int nums[11] = {10, 4, 23, 20, 6, 21, 67, 9, 2, 100, 1};
         int num_len = 11;
 

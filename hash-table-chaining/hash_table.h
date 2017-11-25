@@ -24,9 +24,12 @@ extern TypeData String;
 extern TypeData Integer;
 
 
-HashTable *create_hashtable(int hashtable_size);
-void insert_record(HashTable *hashtable, void *new_data, TypeData *data);
-bool search(HashTable *hashtable, void *key, TypeData *data_type);
-void delete_hashtable(HashTable *hashtable);
+HashTable *hashtable_create(int hashtable_size);
+void hashtable_insert(HashTable *hashtable, void *new_data, TypeData *data);
+bool hashtable_search(HashTable *hashtable, void *key, TypeData *data_type);
+bool hashtable_search_promote(HashTable *hashtable, void *key, TypeData *data_type);
+void hashtable_delete(HashTable *hashtable);
+void hashtable_key_delete(HashTable *hashtable, void *key, TypeData *data_type);
+void hashtable_print_chain(HashTable *hashtable, void *key, TypeData *data_type);
 
 #endif

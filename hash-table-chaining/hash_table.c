@@ -20,7 +20,7 @@ TypeData Integer = { .hash = hash_int,
                      .size = sizeof(int) };
 
 
-HashTable *create_hashtable(int hashtable_size)
+HashTable *hashtable_create(int hashtable_size)
 {
         HashTable *hashtable = malloc(sizeof(*hashtable));
 
@@ -49,14 +49,21 @@ HashTable *create_hashtable(int hashtable_size)
 }
 
 
-void insert_record(HashTable *hashtable, void *key, TypeData *data_type)
+void hashtable_insert(HashTable *hashtable, void *key, TypeData *data_type)
 {
         unsigned int bucket = data_type->hash(key) % hashtable->hashtable_size;
-        push(&hashtable->buckets[bucket], key, data_type->size);
+        list_push(&hashtable->buckets[bucket], key, data_type->size);
 }
 
 
-bool search(HashTable *hashtable, void *key, TypeData *data_type)
+void hashtable_key_delete(HashTable *hashtable, void *key, TypeData *data_type)
+{
+        unsigned int bucket = data_type->hash(key) % hashtable->hashtable_size;
+        list_delete_value(&hashtable->buckets[bucket], key, data_type->compare);
+}
+
+
+bool hashtable_search(HashTable *hashtable, void *key, TypeData *data_type)
 {
         unsigned int bucket = data_type->hash(key) % hashtable->hashtable_size;
 
@@ -69,12 +76,36 @@ bool search(HashTable *hashtable, void *key, TypeData *data_type)
 }
 
 
-void delete_hashtable(HashTable *hashtable)
+bool hashtable_search_promote(HashTable *hashtable, void *key, TypeData *data_type)
+{
+        unsigned int bucket = data_type->hash(key) % hashtable->hashtable_size;
+
+        if (list_find_and_move(&hashtable->buckets[bucket], key, data_type->compare))
+        {
+                return true;
+        }
+
+        return false;
+}
+
+
+void hashtable_delete(HashTable *hashtable)
 {
         for (int bucket = 0; bucket < hashtable->hashtable_size; bucket++)
         {
-                delete_list(hashtable->buckets[bucket]);
+                list_delete(hashtable->buckets[bucket]);
         }
         free(hashtable->buckets);
         free(hashtable);
+}
+
+
+void hashtable_print_chain(HashTable *hashtable, void *key, TypeData *data_type)
+{
+        unsigned int bucket = data_type->hash(key) % hashtable->hashtable_size;
+
+        if (!list_is_empty(hashtable->buckets[bucket]))
+        {
+                list_print_visual(hashtable->buckets[bucket], data_type->print);
+        }
 }
