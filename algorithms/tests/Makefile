@@ -26,8 +26,12 @@ TARGET = $(BUILD_DIR)/$(BIN)
 # FILES
 PWD_HEADERS := $(wildcard *.h)
 PWD_SOURCES := $(wildcard *.c)
-HEADERS = $(PWD_HEADERS) shared_test.h shared_sort.h printing.h comparison.h bubble_sort.h selection_sort.h
-SOURCES = $(PWD_SOURCES) shared_test.c shared_sort.c printing.c comparison.c bubble_sort.c selection_sort.c
+TOOLS_HEADERS := printing.h comparison.h
+TOOLS_SOURCES := printing.c comparison.c
+SORT_HEADERS := shared_test.h shared_sort.h bubble_sort.h selection_sort.h
+SORT_SOURCES := shared_test.c shared_sort.c bubble_sort.c selection_sort.c
+HEADERS = $(PWD_HEADERS) $(TOOLS_HEADERS) $(SORT_HEADERS)
+SOURCES = $(PWD_SOURCES) $(TOOLS_SOURCES) $(SORT_SOURCES)
 OBJECTS := $(SOURCES:%.c=$(BUILD_DIR)/%.o)
 DEPENDS = $(OBJECTS:%.o=%.d)
 
