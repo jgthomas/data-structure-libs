@@ -2,12 +2,12 @@
 #include <stdbool.h>
 #include <BCUnit/Basic.h>
 #include <BCUnit/BCUnit.h>
-#include "printing.h"
-#include "comparison.h"
-#include "shared_test.h"
-#include "shared_sort.h"
-#include "bubble_sort.h"
-#include "selection_sort.h"
+#include "tools/printing.h"
+#include "tools/comparison.h"
+#include "tests/shared_test.h"
+#include "algorithms/shared_sort.h"
+#include "algorithms/bubble_sort.h"
+#include "algorithms/selection_sort.h"
 
 
 enum {NUM_TESTS = 3};

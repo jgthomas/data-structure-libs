@@ -1,9 +1,9 @@
 # PATHS - to search for the headers and source files
-HEADERS_1 = ../../tests ../../tools ../
+HEADERS_1 = ../../
 HEADERS_2 = 
 HEADERS_3 = 
 
-SOURCE_1 = ../../tests ../../tools ../
+SOURCE_1 = ../../
 SOURCE_2 = 
 SOURCE_3 = 
 
@@ -26,12 +26,14 @@ TARGET = $(BUILD_DIR)/$(BIN)
 # FILES
 PWD_HEADERS := $(wildcard *.h)
 PWD_SOURCES := $(wildcard *.c)
-TOOLS_HEADERS := printing.h comparison.h general.h
-TOOLS_SOURCES := printing.c comparison.c general.c
-SORT_HEADERS := shared_test.h shared_sort.h bubble_sort.h selection_sort.h
-SORT_SOURCES := shared_test.c shared_sort.c bubble_sort.c selection_sort.c
-HEADERS = $(PWD_HEADERS) $(TOOLS_HEADERS) $(SORT_HEADERS)
-SOURCES = $(PWD_SOURCES) $(TOOLS_SOURCES) $(SORT_SOURCES)
+TOOLS_HEADERS := tools/printing.h tools/comparison.h tools/general.h
+TOOLS_SOURCES := tools/printing.c tools/comparison.c tools/general.c
+TEST_HEADERS := tests/shared_test.h
+TEST_SOURCES := tests/shared_test.c
+SORT_HEADERS := algorithms/shared_sort.h algorithms/bubble_sort.h algorithms/selection_sort.h
+SORT_SOURCES := algorithms/shared_sort.c algorithms/bubble_sort.c algorithms/selection_sort.c
+HEADERS = $(PWD_HEADERS) $(TOOLS_HEADERS) $(TEST_HEADERS) $(SORT_HEADERS)
+SOURCES = $(PWD_SOURCES) $(TOOLS_SOURCES) $(TEST_SOURCES) $(SORT_SOURCES)
 OBJECTS := $(SOURCES:%.c=$(BUILD_DIR)/%.o)
 DEPENDS = $(OBJECTS:%.o=%.d)
 
