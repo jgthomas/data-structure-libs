@@ -8,24 +8,17 @@
 #include "binary_heap.h"
 
 
-void print_array(void *array[],
-                 size_t data_size,
-                 size_t elem_size,
-                 void (*print_ptr)(void *data));
+void print_array(BinHeap *heap, size_t elem_size, void (*print_ptr)(void *data));
+void display_heap(BinHeap *heap, size_t elem_size, void (*print_ptr)(void *data));
 
 
 int main(void)
 {
-        int array[] = {15,13,46,10};
+        int array[] = {15,13,46,10,1,23,5};
 
         BinHeap *heap = heap_init();
         heap_add_data(heap, array, sizeof(array), sizeof(array[0]), less_than_int);
-        //print_array(heap->array, sizeof(array), sizeof(array[0]), print_int);
-        printf("first one: %d\n", *(int *)heap->array[sizeof(array[0]) * 0]);
-        printf("second one: %d\n", *(int *)heap->array[sizeof(array[0]) * 1]);
-        printf("third one: %d\n", *(int *)heap->array[sizeof(array[0]) * 2]);
-        printf("fourth one: %d\n", *(int *)heap->array[sizeof(array[0]) * 3]);
-        printf("heap len: %d\n", heap->len);
+        display_heap(heap, sizeof(int), print_int);
         heap_delete(heap);
 }
 
@@ -52,17 +45,39 @@ void heap_delete(BinHeap *heap)
 }
 
 
-void print_array(void *array[],
-                 size_t data_size,
-                 size_t elem_size,
-                 void (*print_ptr)(void *data))
+void print_array(BinHeap *heap, size_t elem_size, void (*print_ptr)(void *data))
 {
-        int size = data_size/elem_size;
-
-        for (int i = 0; i < size; i++)
+        for (int i = 0; i < heap->len; i++)
         {
-                print_ptr(array + i*elem_size);
+                print_ptr(heap->array[elem_size * i]);
                 printf(" ");
+        }
+        printf("\n");
+}
+
+
+void display_heap(BinHeap *heap, size_t elem_size, void (*print_ptr)(void *data))
+{
+        print_array(heap, elem_size, print_ptr);
+
+        for (int i = 0; i < heap->len; i++)
+        {
+                if (left_child_idx(i) < heap->len)
+                {
+                        printf("parent node: ");
+                        print_ptr(heap->array[elem_size * i]);
+                        printf("\n");
+                        printf("---> left child: ");
+                        print_ptr(heap->array[elem_size * left_child_idx(i)]);
+                        printf("\n");
+                }
+
+                if (right_child_idx(i) < heap->len)
+                {
+                        printf("---> right child: ");
+                        print_ptr(heap->array[elem_size * right_child_idx(i)]);
+                        printf("\n");
+                }
         }
         printf("\n");
 }
@@ -104,22 +119,20 @@ void heap_insert(BinHeap *heap,
 }
 
 
-/**
- * index = position of newly inserted element in array
- *
- * */
 void bubble_up(BinHeap *heap,
                size_t elem_size,
                int child_index,
                bool (*compare)(void *x, void *y))
 {
-        int parent_index = parent_node(child_index);
+        void *child = heap->array[elem_size * child_index];
+        void *parent = heap->array[elem_size * parent_node(child_index)];
 
-        while (compare(heap->array[elem_size * child_index], heap->array[elem_size * parent_index]))
+        while (compare(child, parent))
         {
-                swap(heap->array[elem_size * parent_index], heap->array[elem_size * child_index], elem_size);
-                child_index = parent_index;
-                parent_index = parent_node(parent_index);
+                swap(child, parent, elem_size);
+                child_index = parent_node(child_index);
+                child = heap->array[elem_size * child_index];
+                parent = heap->array[elem_size * parent_node(child_index)];
         }
 }
 
