@@ -26,3 +26,12 @@ void heap_add_data(BinHeap *heap,
                    bool (*compare)(void *x, void *y));
 void heap_print_array(BinHeap *heap, size_t elem_size, void (*print_ptr)(void *data));
 void heap_display(BinHeap *heap, size_t elem_size, void (*print_ptr)(void *data));
+void sink_down(BinHeap *heap,
+               size_t elem_size,
+               int index,
+               bool (*compare)(void *x, void *y));
+void heap_delete_element(BinHeap *heap,
+                         void *value,
+                         size_t elem_size,
+                         bool (*equal)(void *x, void *y),
+                         bool (*compare)(void *x, void *y));

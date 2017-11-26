@@ -114,6 +114,73 @@ void bubble_up(BinHeap *heap,
 }
 
 
+void heap_delete_element(BinHeap *heap,
+                         void *value,
+                         size_t elem_size,
+                         bool (*equal)(void *x, void *y),
+                         bool (*compare)(void *x, void *y))
+{
+        int del_index = -1;
+
+        for (int i = 0; i < heap->len; i++)
+        {
+                void *current = heap->array[elem_size * i];
+
+                if (equal(current, value))
+                {
+                        del_index = i;
+                        break;
+                }
+        }
+
+        if (del_index == -1)
+        {
+                return;
+        }
+
+        heap->array[elem_size * del_index] = heap->array[elem_size * (heap->len -1)];
+        sink_down(heap, elem_size, del_index, compare);
+        heap->len -= 1;
+}
+
+
+void sink_down(BinHeap *heap,
+               size_t elem_size,
+               int index,
+               bool (*compare)(void *x, void *y))
+{
+        while (left_child_idx(index) < heap->len)
+        {
+                int swap_child_idx = left_child_idx(index);
+                void *swap_child = heap->array[elem_size * swap_child_idx];
+
+                if (right_child_idx(index) < heap->len)
+                {
+                        void *right_child = heap->array[elem_size * right_child_idx(index)];
+
+                        if (compare(right_child, swap_child))
+                        {
+                                swap_child_idx = right_child_idx(index);
+                                swap_child = right_child;
+                        }
+                }
+
+                void *current = heap->array[elem_size * index];
+
+                if (compare(swap_child, current))
+                {
+                        swap(swap_child, current, elem_size);
+                        index = swap_child_idx;
+                }
+                else
+                {
+                        index = heap->len;
+                }
+
+        }
+}
+
+
 /**
  * Functions for locating position of parent and child nodes
  * assumes that the binary heap starts at index 0 of an array
