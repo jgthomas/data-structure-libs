@@ -8,10 +8,6 @@
 #include "binary_heap.h"
 
 
-void print_array(BinHeap *heap, size_t elem_size, void (*print_ptr)(void *data));
-void display_heap(BinHeap *heap, size_t elem_size, void (*print_ptr)(void *data));
-
-
 int main(void)
 {
         int array[] = {15,13,46,10,1,23,5};
