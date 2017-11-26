@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <stdint.h>
+#include "general.h"
 #include "shared_sort.h"
 #include "bubble_sort.h"
 

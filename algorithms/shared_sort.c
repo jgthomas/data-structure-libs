@@ -5,15 +5,6 @@
 #include "shared_sort.h"
 
 
-void swap(void *left, void *right, size_t elem_size)
-{
-        uint8_t temp[elem_size];
-        memcpy(temp, left, elem_size);
-        memcpy(left, right, elem_size);
-        memcpy(right, temp, elem_size);
-}
-
-
 void print_array(void *array,
                  size_t data_size,
                  size_t elem_size,
