@@ -5,18 +5,8 @@
 #include <stdbool.h>
 #include "comparison.h"
 #include "printing.h"
+#include "general.h"
 #include "binary_heap.h"
-
-
-int main(void)
-{
-        int array[] = {15,13,46,10,1,23,5};
-
-        BinHeap *heap = heap_init();
-        heap_add_data(heap, array, sizeof(array), sizeof(array[0]), less_than_int);
-        display_heap(heap, sizeof(int), print_int);
-        heap_delete(heap);
-}
 
 
 BinHeap *heap_init(void)
@@ -41,7 +31,7 @@ void heap_delete(BinHeap *heap)
 }
 
 
-void print_array(BinHeap *heap, size_t elem_size, void (*print_ptr)(void *data))
+void heap_print_array(BinHeap *heap, size_t elem_size, void (*print_ptr)(void *data))
 {
         for (int i = 0; i < heap->len; i++)
         {
@@ -52,9 +42,9 @@ void print_array(BinHeap *heap, size_t elem_size, void (*print_ptr)(void *data))
 }
 
 
-void display_heap(BinHeap *heap, size_t elem_size, void (*print_ptr)(void *data))
+void heap_display(BinHeap *heap, size_t elem_size, void (*print_ptr)(void *data))
 {
-        print_array(heap, elem_size, print_ptr);
+        heap_print_array(heap, elem_size, print_ptr);
 
         for (int i = 0; i < heap->len; i++)
         {
@@ -76,15 +66,6 @@ void display_heap(BinHeap *heap, size_t elem_size, void (*print_ptr)(void *data)
                 }
         }
         printf("\n");
-}
-
-
-void swap(void *left, void *right, size_t elem_size)
-{
-        uint8_t temp[elem_size];
-        memcpy(temp, left, elem_size);
-        memcpy(left, right, elem_size);
-        memcpy(right, temp, elem_size);
 }
 
 

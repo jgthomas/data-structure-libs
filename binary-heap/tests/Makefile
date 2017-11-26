@@ -1,9 +1,9 @@
 # PATHS - to search for the headers and source files
-HEADERS_1 = ../tools
+HEADERS_1 = ../../tools ../../tests ../
 HEADERS_2 = 
 HEADERS_3 = 
 
-SOURCE_1 = ../tools
+SOURCE_1 = ../../tools ../../tests ../
 SOURCE_2 = 
 SOURCE_3 = 
 
@@ -16,18 +16,20 @@ vpath %.c $(SOURCE)
 # COMPILER - with flags and libraries to link
 CC = gcc
 CFLAGS = -g -Wall -Wextra -Werror $(foreach dir, $(INCLUDES), -I$(dir))
-LDLIBS = 
+LDLIBS = -lbcunit
 
 # EXECUTABLE - the final binary file
 BUILD_DIR = ./build
-BIN = binary_heap_demo
+BIN = test_binary_heap
 TARGET = $(BUILD_DIR)/$(BIN)
 
 # FILES
 PWD_HEADERS := $(wildcard *.h)
 PWD_SOURCES := $(wildcard *.c)
-HEADERS = $(PWD_HEADERS) comparison.h printing.h
-SOURCES = $(PWD_SOURCES) comparison.c printing.c
+TOOLS_HEADERS := printing.h comparison.h general.h
+TOOLS_SOURCES := printing.c comparison.c general.c
+HEADERS = $(PWD_HEADERS) $(TOOLS_HEADERS) binary_heap.h shared_test.h
+SOURCES = $(PWD_SOURCES) $(TOOLS_SOURCES) binary_heap.c shared_test.c
 OBJECTS := $(SOURCES:%.c=$(BUILD_DIR)/%.o)
 DEPENDS = $(OBJECTS:%.o=%.d)
 

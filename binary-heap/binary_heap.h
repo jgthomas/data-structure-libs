@@ -24,5 +24,5 @@ void heap_add_data(BinHeap *heap,
                    size_t data_size,
                    size_t elem_size,
                    bool (*compare)(void *x, void *y));
-void print_array(BinHeap *heap, size_t elem_size, void (*print_ptr)(void *data));
-void display_heap(BinHeap *heap, size_t elem_size, void (*print_ptr)(void *data));
+void heap_print_array(BinHeap *heap, size_t elem_size, void (*print_ptr)(void *data));
+void heap_display(BinHeap *heap, size_t elem_size, void (*print_ptr)(void *data));
