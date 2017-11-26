@@ -6,7 +6,7 @@
 #include "tests/shared_test.h"
 #include "tools/printing.h"
 #include "tools/comparison.h"
-#include "binary_heap.h"
+#include "data_structures/binary_heap.h"
 
 
 enum {NUM_TESTS = 3};
