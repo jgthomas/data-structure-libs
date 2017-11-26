@@ -15,6 +15,11 @@ bool less_than_int(void *first, void *second)
 }
 
 
+bool more_than_int(void *first, void *second)
+{
+    return *(int *)first > *(int *)second;
+}
+
 
 bool less_than_char(void *first, void *second)
 {
