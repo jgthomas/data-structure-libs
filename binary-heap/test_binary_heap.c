@@ -3,9 +3,9 @@
 #include <stdlib.h>
 #include <BCUnit/Basic.h>
 #include <BCUnit/BCUnit.h>
-#include "shared_test.h"
-#include "printing.h"
-#include "comparison.h"
+#include "tests/shared_test.h"
+#include "tools/printing.h"
+#include "tools/comparison.h"
 #include "binary_heap.h"
 
 
