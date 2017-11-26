@@ -1,9 +1,9 @@
 # PATHS - to search for the headers and source files
-HEADERS_1 = ../../tools ../../tests ../
+HEADERS_1 = ../tools ../tests
 HEADERS_2 = 
 HEADERS_3 = 
 
-SOURCE_1 = ../../tools ../../tests ../
+SOURCE_1 = ../tools ../tests
 SOURCE_2 = 
 SOURCE_3 = 
 
@@ -28,8 +28,8 @@ PWD_HEADERS := $(wildcard *.h)
 PWD_SOURCES := $(wildcard *.c)
 TOOLS_HEADERS := printing.h comparison.h general.h
 TOOLS_SOURCES := printing.c comparison.c general.c
-HEADERS = $(PWD_HEADERS) $(TOOLS_HEADERS) binary_heap.h shared_test.h
-SOURCES = $(PWD_SOURCES) $(TOOLS_SOURCES) binary_heap.c shared_test.c
+HEADERS = $(PWD_HEADERS) $(TOOLS_HEADERS) shared_test.h
+SOURCES = $(PWD_SOURCES) $(TOOLS_SOURCES) shared_test.c
 OBJECTS := $(SOURCES:%.c=$(BUILD_DIR)/%.o)
 DEPENDS = $(OBJECTS:%.o=%.d)
 

@@ -9,11 +9,26 @@
 #include "binary_heap.h"
 
 
-enum {NUM_TESTS = 1};
+enum {NUM_TESTS = 3};
 
 
 int test_int[] = {15,13,46,10,1,23,5};
 int answer_int[] = {1,10,5,15,13,46,23};
+
+char test_char[] = {'e','a','r','t','b'};
+char answer_char[] = {'a','b','r','t','e'};
+
+char *test_string[] = {"zebra",
+                       "moose",
+                       "elephant",
+                       "armadillo",
+                       "coyote"};
+
+char *answer_string[] = {"armadillo",
+                         "coyote",
+                         "moose",
+                         "zebra",
+                         "elephant"};
 
 
 TestCase **make_tests(int num_tests)
@@ -21,8 +36,12 @@ TestCase **make_tests(int num_tests)
         TestCase **test_array = init_tests(num_tests);
 
         TestCase *testint = new_test(test_int, answer_int, sizeof(test_int), sizeof(int), equal_int, less_than_int, print_int);
+        TestCase *testchar = new_test(test_char, answer_char, sizeof(test_char), sizeof(char), equal_char, less_than_char, print_char);
+        TestCase *teststring = new_test(test_string, answer_string, sizeof(test_string), sizeof(char *), equal_string, less_than_string, print_string);
 
         test_array[0] = testint;
+        test_array[1] = testchar;
+        test_array[2] = teststring;
 
         return test_array;
 }
