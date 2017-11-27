@@ -22,6 +22,11 @@ BinHeap *make_heap(void)
 }
 
 
+/**
+ * Create heap data structure with an empty array of a preset
+ * buffer size to be filled in as required.
+ *
+ * */
 BinHeap *heap_init(void *data)
 {
         BinHeap *heap = make_heap();
@@ -32,6 +37,11 @@ BinHeap *heap_init(void *data)
 }
 
 
+/**
+ * Create heap data structure for the sorting in-place of
+ * a pre-exisiting array
+ *
+ * */
 BinHeap *heapsort_init(void *data,
                        size_t data_size,
                        size_t elem_size,
@@ -75,7 +85,7 @@ void bubble_up(BinHeap *heap,
         {
                 swap(child, parent, elem_size);
                 child_index = parent_node(child_index);
-                child = heap->array + (elem_size * child_index);
+                child =heap->array + (elem_size * child_index);
                 parent = heap->array + (elem_size * parent_node(child_index));
         }
 }
@@ -129,6 +139,11 @@ void heap_insert(BinHeap *heap,
 }
 
 
+/**
+ * Convenience function for the loading of data into a heap
+ * data structure buffer
+ *
+ * */
 void heap_add_data(BinHeap *heap,
                    void *data,
                    size_t data_size,
