@@ -1,9 +1,9 @@
 /**
- * Functions to print various types, useful for passing as
- * function pointers to create some basic polymorphism.
+ * Functions to print various types
  *
  * */
 #include <stdio.h>
+#include "printing.h"
 
 
 /**
@@ -67,4 +67,50 @@ void print_char(void *c)
 void print_string(void *s)
 {
         printf("%s", *(char **)s);
+}
+
+
+/**
+ * Print values, of any type, stored in an adjacent sequence of
+ * memory loctations.
+ *
+ * Requires a type-specific function pointer.
+ *
+ * */
+void print_sequence(void *sequence,
+                    size_t data_size,
+                    size_t elem_size,
+                    void (*print)(void *data))
+{
+        int size = data_size/elem_size;
+
+        for (int i = 0; i < size; i++)
+        {
+                print(sequence + elem_size * i);
+                printf(" ");
+        }
+        printf("\n");
+}
+
+
+/**
+ * Print values, of any type, stored in a generic array
+ * of void pointers
+ *
+ * Requires a type-specific function pointer.
+ *
+ * */
+void print_generic_array(void *array[],
+                         size_t data_size,
+                         size_t elem_size,
+                         void (*print)(void *data))
+{
+        int size = data_size/elem_size;
+
+        for (int i = 0; i < size; i++)
+        {
+                print(array[elem_size * i]);
+                printf(" ");
+        }
+        printf("\n");
 }
