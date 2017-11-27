@@ -20,8 +20,8 @@
 #include <string.h>
 #include <stdbool.h>
 #include <stdlib.h>
-#include "trie.h"
-#include "get_input.h"
+#include "tools/get_input.h"
+#include "data_structures/trie.h"
 
 
 void print_commands(void);
