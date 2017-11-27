@@ -5,7 +5,6 @@
 #include "tools/printing.h"
 #include "tools/comparison.h"
 #include "tests/shared_test.h"
-#include "algorithms/shared_sort.h"
 #include "algorithms/bubble_sort.h"
 #include "algorithms/selection_sort.h"
 
@@ -55,7 +54,7 @@ void testBUBBLE_SORT(void)
                 CU_ASSERT_FALSE(arrays_match(tests[i]->test, tests[i]->answer, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
                 bubble_sort(tests[i]->test, tests[i]->data_size, tests[i]->elem_size, tests[i]->compare);
                 CU_ASSERT_TRUE(arrays_match(tests[i]->test, tests[i]->answer, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
-                //print_array(tests[i]->test, tests[i]->data_size, tests[i]->elem_size, tests[i]->print);
+                //print_sequence(tests[i]->test, tests[i]->data_size, tests[i]->elem_size, tests[i]->print);
         }
 
         clean_tests(tests, NUM_TESTS);
@@ -71,7 +70,7 @@ void testSELECTION_SORT(void)
                 CU_ASSERT_FALSE(arrays_match(tests[i]->test, tests[i]->answer, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
                 selection_sort(tests[i]->test, tests[i]->data_size, tests[i]->elem_size, tests[i]->compare);
                 CU_ASSERT_TRUE(arrays_match(tests[i]->test, tests[i]->answer, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
-                //print_array(tests[i]->test, tests[i]->data_size, tests[i]->elem_size, tests[i]->print);
+                //print_sequence(tests[i]->test, tests[i]->data_size, tests[i]->elem_size, tests[i]->print);
         }
 
         clean_tests(tests, NUM_TESTS);

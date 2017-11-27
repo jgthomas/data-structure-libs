@@ -30,8 +30,8 @@ TOOLS_HEADERS := tools/printing.h tools/comparison.h tools/general.h
 TOOLS_SOURCES := tools/printing.c tools/comparison.c tools/general.c
 TEST_HEADERS := tests/shared_test.h
 TEST_SOURCES := tests/shared_test.c
-SORT_HEADERS := algorithms/shared_sort.h algorithms/bubble_sort.h algorithms/selection_sort.h
-SORT_SOURCES := algorithms/shared_sort.c algorithms/bubble_sort.c algorithms/selection_sort.c
+SORT_HEADERS := algorithms/bubble_sort.h algorithms/selection_sort.h
+SORT_SOURCES := algorithms/bubble_sort.c algorithms/selection_sort.c
 HEADERS = $(PWD_HEADERS) $(TOOLS_HEADERS) $(TEST_HEADERS) $(SORT_HEADERS)
 SOURCES = $(PWD_SOURCES) $(TOOLS_SOURCES) $(TEST_SOURCES) $(SORT_SOURCES)
 OBJECTS := $(SOURCES:%.c=$(BUILD_DIR)/%.o)
