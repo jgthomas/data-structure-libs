@@ -30,10 +30,12 @@ TOOLS_HEADERS := tools/printing.h tools/comparison.h tools/general.h
 TOOLS_SOURCES := tools/printing.c tools/comparison.c tools/general.c
 TEST_HEADERS := tests/shared_test.h
 TEST_SOURCES := tests/shared_test.c
-SORT_HEADERS := algorithms/bubble_sort.h algorithms/selection_sort.h
-SORT_SOURCES := algorithms/bubble_sort.c algorithms/selection_sort.c
-HEADERS = $(PWD_HEADERS) $(TOOLS_HEADERS) $(TEST_HEADERS) $(SORT_HEADERS)
-SOURCES = $(PWD_SOURCES) $(TOOLS_SOURCES) $(TEST_SOURCES) $(SORT_SOURCES)
+SORT_HEADERS := algorithms/bubble_sort.h algorithms/selection_sort.h algorithms/heapsort.h
+SORT_SOURCES := algorithms/bubble_sort.c algorithms/selection_sort.c algorithms/heapsort.c
+DS_HEADERS := data_structures/binary_heap.h
+DS_SOURCES := data_structures/binary_heap.c
+HEADERS = $(PWD_HEADERS) $(TOOLS_HEADERS) $(TEST_HEADERS) $(SORT_HEADERS) $(DS_HEADERS)
+SOURCES = $(PWD_SOURCES) $(TOOLS_SOURCES) $(TEST_SOURCES) $(SORT_SOURCES) $(DS_SOURCES)
 OBJECTS := $(SOURCES:%.c=$(BUILD_DIR)/%.o)
 DEPENDS = $(OBJECTS:%.o=%.d)
 

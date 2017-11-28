@@ -7,6 +7,7 @@
 #include "tests/shared_test.h"
 #include "algorithms/bubble_sort.h"
 #include "algorithms/selection_sort.h"
+#include "algorithms/heapsort.h"
 
 
 enum {NUM_TESTS = 3};
@@ -77,6 +78,26 @@ void testSELECTION_SORT(void)
 }
 
 
+void testHEAPSORT(void)
+{
+        TestCase **tests = make_tests(NUM_TESTS);
+
+        tests[0]->compare = more_than_int;
+        tests[1]->compare = more_than_char;
+        tests[2]->compare = more_than_string;
+
+        for (int i = 0; i < NUM_TESTS; i++)
+        {
+                CU_ASSERT_FALSE(arrays_match(tests[i]->test, tests[i]->answer, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
+                heapsort(tests[i]->test, tests[i]->data_size, tests[i]->elem_size, tests[i]->compare);
+                CU_ASSERT_TRUE(arrays_match(tests[i]->test, tests[i]->answer, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
+                //print_sequence(tests[i]->test, tests[i]->data_size, tests[i]->elem_size, tests[i]->print);
+        }
+
+        clean_tests(tests, NUM_TESTS);
+}
+
+
 int main(void)
 {
         // test suite
@@ -98,7 +119,8 @@ int main(void)
 
         // add tests
         if (NULL == CU_add_test(suite, "Bubble sort", testBUBBLE_SORT) ||
-            NULL == CU_add_test(suite, "Selection sort", testSELECTION_SORT))
+            NULL == CU_add_test(suite, "Selection sort", testSELECTION_SORT) ||
+            NULL == CU_add_test(suite, "Heapsort", testHEAPSORT))
         {
                 CU_cleanup_registry();
                 return CU_get_error();

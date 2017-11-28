@@ -3,7 +3,7 @@
 #include <stdint.h>
 #include <string.h>
 #include <stdbool.h>
-#include "tools/general"
+#include "tools/general.h"
 #include "binary_heap.h"
 
 

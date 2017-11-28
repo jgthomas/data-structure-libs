@@ -5,14 +5,12 @@
 #include "heapsort.h"
 
 
-void heap_sort(void *data,
-               size_t data_size,
-               size_t elem_size,
-               bool (*compare)(void *x, void *y))
+void heapsort(void *data,
+              size_t data_size,
+              size_t elem_size,
+              bool (*compare)(void *x, void *y))
 {
     BinHeap *heap = heapsort_init(data, data_size, elem_size, compare);
-    
-    int length = heap->len;
     
     while (heap->len > 0)
     {

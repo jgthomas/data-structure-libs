@@ -91,23 +91,3 @@ void print_sequence(void *sequence,
         }
         printf("\n");
 }
-
-
-/**
- * Print values, of any type, stored in a sequence
- *
- * */
-void print_sequence(void *data,
-                    size_t data_size,
-                    size_t elem_size,
-                    void (*print)(void *x))
-{
-        int len = data_size/elem_size;
-
-        for (int i = 0; i < len; i++)
-        {
-                print(data + elem_size * i);
-                printf(" ");
-        }
-        printf("\n");
-}
