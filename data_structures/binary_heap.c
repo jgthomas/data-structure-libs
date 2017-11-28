@@ -3,11 +3,11 @@
 #include <stdint.h>
 #include <string.h>
 #include <stdbool.h>
-#include "tools/general.h"
+#include "tools/general"
 #include "binary_heap.h"
 
 
-BinHeap *heap_init(void)
+BinHeap *make_heap(void)
 {
         BinHeap *heap = malloc(sizeof(*heap));
 
@@ -16,57 +16,44 @@ BinHeap *heap_init(void)
                 fprintf(stderr, "Failed to allocate memory for heap\n");
                 exit(EXIT_FAILURE);
         }
+        return heap;
+}
+
+
+BinHeap *binheap_init(size_t elem_size)
+{
+        BinHeap *heap = make_heap();
 
         heap->len = 0;
+        heap->array = malloc(sizeof(elem_size) * HEAP_BUFFER);
 
         return heap;
 }
 
 
-void heap_delete(BinHeap *heap)
+/**
+ * Load single element into binary heap
+ * 
+ * */
+void heap_insert(BinHeap *heap,
+                 size_t elem_size,
+                 void *data,
+                 bool (*compare)(void *x, void *y))
 {
-        free(heap);
+        void *last = heap->array + (elem_size * heap->len);
+        copy(last, data, elem_size);
+        
+        bubble_up(heap, elem_size, heap->len, compare);
+        
+        heap->len += 1;
 }
 
 
-void heap_print_array(BinHeap *heap, size_t elem_size, void (*print_ptr)(void *data))
-{
-        for (int i = 0; i < heap->len; i++)
-        {
-                print_ptr(heap->array[elem_size * i]);
-                printf(" ");
-        }
-        printf("\n");
-}
-
-
-void heap_display(BinHeap *heap, size_t elem_size, void (*print_ptr)(void *data))
-{
-        heap_print_array(heap, elem_size, print_ptr);
-
-        for (int i = 0; i < heap->len; i++)
-        {
-                if (left_child_idx(i) < heap->len)
-                {
-                        printf("parent node: ");
-                        print_ptr(heap->array[elem_size * i]);
-                        printf("\n");
-                        printf("---> left child: ");
-                        print_ptr(heap->array[elem_size * left_child_idx(i)]);
-                        printf("\n");
-                }
-
-                if (right_child_idx(i) < heap->len)
-                {
-                        printf("---> right child: ");
-                        print_ptr(heap->array[elem_size * right_child_idx(i)]);
-                        printf("\n");
-                }
-        }
-        printf("\n");
-}
-
-
+/**
+ * Convenience function for the loading of data into a heap
+ * data structure buffer
+ *
+ * */
 void heap_add_data(BinHeap *heap,
                    void *data,
                    size_t data_size,
@@ -77,37 +64,8 @@ void heap_add_data(BinHeap *heap,
 
         for (int i = 0; i < length; i++)
         {
-                void *data_current = data + elem_size * i;
+                void *data_current = data + (elem_size * i);
                 heap_insert(heap, elem_size, data_current, compare);
-        }
-}
-
-
-void heap_insert(BinHeap *heap,
-                 size_t elem_size,
-                 void *data,
-                 bool (*compare)(void *x, void *y))
-{
-        heap->array[elem_size * heap->len] = data;
-        bubble_up(heap, elem_size, heap->len, compare);
-        heap->len += 1;
-}
-
-
-void bubble_up(BinHeap *heap,
-               size_t elem_size,
-               int child_index,
-               bool (*compare)(void *x, void *y))
-{
-        void *child = heap->array[elem_size * child_index];
-        void *parent = heap->array[elem_size * parent_node(child_index)];
-
-        while (compare(child, parent))
-        {
-                swap(child, parent, elem_size);
-                child_index = parent_node(child_index);
-                child = heap->array[elem_size * child_index];
-                parent = heap->array[elem_size * parent_node(child_index)];
         }
 }
 
@@ -122,7 +80,7 @@ void heap_delete_element(BinHeap *heap,
 
         for (int i = 0; i < heap->len; i++)
         {
-                void *current = heap->array[elem_size * i];
+                void *current = heap->array + (elem_size * i);
 
                 if (equal(current, value))
                 {
@@ -135,10 +93,55 @@ void heap_delete_element(BinHeap *heap,
         {
                 return;
         }
-
-        heap->array[elem_size * del_index] = heap->array[elem_size * (heap->len -1)];
-        sink_down(heap, elem_size, del_index, compare);
+        
+        void *to_delete = heap->array + (elem_size * del_index);
+        void *last = heap->array + (elem_size * (heap->len -1));
+        swap(to_delete, last, elem_size);
+        
         heap->len -= 1;
+        sink_down(heap, elem_size, del_index, compare);
+}
+
+
+void heap_delete(BinHeap *heap)
+{
+        free(heap);
+}
+
+
+void bin_heap_delete(BinHeap *heap)
+{
+        free(heap->array);
+        free(heap);
+}
+
+
+void heapify(BinHeap *heap,
+             size_t elem_size,
+             bool (*compare)(void *x, void *y))
+{
+    for (int i = 0; i < heap->len; i++)
+    {
+        bubble_up(heap, elem_size, i, compare);
+    }
+}
+
+
+void bubble_up(BinHeap *heap,
+               size_t elem_size,
+               int child_index,
+               bool (*compare)(void *x, void *y))
+{
+        void *child = heap->array + (elem_size * child_index);
+        void *parent = heap->array + (elem_size * parent_node(child_index));
+
+        while (compare(child, parent))
+        {
+                swap(child, parent, elem_size);
+                child_index = parent_node(child_index);
+                child =heap->array + (elem_size * child_index);
+                parent = heap->array + (elem_size * parent_node(child_index));
+        }
 }
 
 
@@ -150,11 +153,11 @@ void sink_down(BinHeap *heap,
         while (left_child_idx(index) < heap->len)
         {
                 int swap_child_idx = left_child_idx(index);
-                void *swap_child = heap->array[elem_size * swap_child_idx];
+                void *swap_child = heap->array + (elem_size * swap_child_idx);
 
                 if (right_child_idx(index) < heap->len)
                 {
-                        void *right_child = heap->array[elem_size * right_child_idx(index)];
+                        void *right_child = heap->array + (elem_size * right_child_idx(index));
 
                         if (compare(right_child, swap_child))
                         {
@@ -163,7 +166,7 @@ void sink_down(BinHeap *heap,
                         }
                 }
 
-                void *current = heap->array[elem_size * index];
+                void *current = heap->array + (elem_size * index);
 
                 if (compare(swap_child, current))
                 {
@@ -174,15 +177,56 @@ void sink_down(BinHeap *heap,
                 {
                         index = heap->len;
                 }
-
         }
+}
+
+
+void heap_print_array(BinHeap *heap,
+                      size_t elem_size,
+                      void (*print_ptr)(void *data))
+{
+        for (int i = 0; i < heap->len; i++)
+        {
+                print_ptr(heap->array + (elem_size * i));
+                printf(" ");
+        }
+        printf("\n");
+}
+
+
+void heap_display(BinHeap *heap,
+                  size_t elem_size,
+                  void (*print_ptr)(void *data))
+{
+        heap_print_array(heap, elem_size, print_ptr);
+
+        for (int i = 0; i < heap->len; i++)
+        {
+                if (left_child_idx(i) < heap->len)
+                {
+                        printf("parent node: ");
+                        print_ptr(heap->array + (elem_size * i));
+                        printf("\n");
+                        printf("---> left child: ");
+                        print_ptr(heap->array + (elem_size * left_child_idx(i)));
+                        printf("\n");
+                }
+
+                if (right_child_idx(i) < heap->len)
+                {
+                        printf("---> right child: ");
+                        print_ptr(heap->array + (elem_size * right_child_idx(i)));
+                        printf("\n");
+                }
+        }
+        printf("\n");
 }
 
 
 /**
  * Functions for locating position of parent and child nodes
  * assumes that the binary heap starts at index 0 of an array
- * 
+ *
  * */
 int left_child_idx(int pos)
 {
