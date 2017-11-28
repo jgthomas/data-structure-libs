@@ -47,28 +47,6 @@ TestCase **make_tests(int num_tests)
 }
 
 
-bool all_items_match(void *answer,
-                     void *guess[],
-                     size_t data_size,
-                     size_t elem_size,
-                     bool (*equal)(void *x, void *y))
-{
-        int length = data_size/elem_size;
-
-        for (int i = 0; i < length; i++)
-        {
-                void *first = answer + elem_size * i;
-                void *second = guess[elem_size * i];
-
-                if (!equal(first, second))
-                {
-                        return false;
-                }
-        }
-        return true;
-}
-
-
 void testBINARY_HEAP(void)
 {
         TestCase **tests = make_tests(NUM_TESTS);
@@ -76,11 +54,11 @@ void testBINARY_HEAP(void)
         for (int i = 0; i < NUM_TESTS; i++)
         {
                 CU_ASSERT_FALSE(arrays_match(tests[i]->test, tests[i]->answer, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
-                BinHeap *heap = heap_init();
+                BinHeap *heap = binheap_init(tests[i]->elem_size);
                 heap_add_data(heap, tests[i]->test, tests[i]->data_size, tests[i]->elem_size, tests[i]->compare);
-                CU_ASSERT_TRUE(all_items_match(tests[i]->answer, heap->array, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
+                CU_ASSERT_TRUE(arrays_match(tests[i]->answer, heap->array, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
                 //heap_print_array(heap, tests[i]->elem_size, tests[i]->print);
-                heap_delete(heap);
+                bin_heap_delete(heap);
         }
 
         clean_tests(tests, NUM_TESTS);
