@@ -94,22 +94,19 @@ void print_sequence(void *sequence,
 
 
 /**
- * Print values, of any type, stored in a generic array
- * of void pointers
- *
- * Requires a type-specific function pointer.
+ * Print values, of any type, stored in a sequence
  *
  * */
-void print_generic_array(void *array[],
-                         size_t data_size,
-                         size_t elem_size,
-                         void (*print)(void *data))
+void print_sequence(void *data,
+                    size_t data_size,
+                    size_t elem_size,
+                    void (*print)(void *x))
 {
-        int size = data_size/elem_size;
+        int len = data_size/elem_size;
 
-        for (int i = 0; i < size; i++)
+        for (int i = 0; i < len; i++)
         {
-                print(array[elem_size * i]);
+                print(data + elem_size * i);
                 printf(" ");
         }
         printf("\n");

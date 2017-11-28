@@ -11,9 +11,9 @@ void print_sequence(void *sequence,
                     size_t elem_size,
                     void (*print)(void *data));
 
-void print_generic_array(void *array[],
-                         size_t data_size,
-                         size_t elem_size,
-                         void (*print)(void *data));
+void print_sequence(void *data,
+                    size_t data_size,
+                    size_t elem_size,
+                    void (*print)(void *x));
 
 #endif
