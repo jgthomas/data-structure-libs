@@ -4,8 +4,6 @@
 #include <string.h>
 #include <stdbool.h>
 #include "bin_heap.h"
-#include "tools/comparison.h"
-#include "tools/printing.h"
 #include "tools/general.h"
 
 

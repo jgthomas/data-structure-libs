@@ -3,8 +3,6 @@
 #include <stdint.h>
 #include <string.h>
 #include <stdbool.h>
-#include "tools/comparison.h"
-#include "tools/printing.h"
 #include "tools/general.h"
 #include "binary_heap.h"
 
