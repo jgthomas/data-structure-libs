@@ -11,3 +11,9 @@ void swap(void *left, void *right, size_t elem_size)
         memcpy(left, right, elem_size);
         memcpy(right, temp, elem_size);
 }
+
+
+void copy(void *target, void *data, size_t elem_size)
+{
+        memcpy(target, data, elem_size);
+}
