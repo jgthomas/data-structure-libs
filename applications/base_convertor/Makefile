@@ -1,10 +1,10 @@
 # PATHS - to search for the headers and source files
-HEADERS_1 = ../../linked-list
-HEADERS_2 = ../../tools
+HEADERS_1 = ../../
+HEADERS_2 =
 HEADERS_3 = 
 
-SOURCE_1 = ../../linked-list
-SOURCE_2 = ../../tools
+SOURCE_1 = ../../
+SOURCE_2 = 
 SOURCE_3 = 
 
 INCLUDES = $(HEADERS_1) $(HEADERS_2) $(HEADERS_3)
@@ -26,8 +26,8 @@ TARGET = $(BUILD_DIR)/$(BIN)
 # FILES
 PWD_HEADERS := $(wildcard *.h)
 PWD_SOURCES := $(wildcard *.c)
-HEADERS = $(PWD_HEADERS) linked_list.h convertors.h printing.h
-SOURCES = $(PWD_SOURCES) linked_list.c convertors.c printing.c
+HEADERS = $(PWD_HEADERS) data_structures/linked_list.h tools/convertors.h tools/printing.h tools/general.h
+SOURCES = $(PWD_SOURCES) data_structures/linked_list.c tools/convertors.c tools/printing.c tools/general.c
 OBJECTS := $(SOURCES:%.c=$(BUILD_DIR)/%.o)
 DEPENDS = $(OBJECTS:%.o=%.d)
 

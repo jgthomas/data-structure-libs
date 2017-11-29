@@ -12,9 +12,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "linked_list.h"
-#include "convertors.h"
-#include "printing.h"
+#include "tools/convertors.h"
+#include "tools/printing.h"
+#include "tools/general.h"
+#include "data_structures/linked_list.h"
 
 
 void convert_to_base(long long decimal, int base);
