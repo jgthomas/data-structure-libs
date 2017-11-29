@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <stdint.h>
+#include <string.h>
 #include "binary_tree.h"
 
 
@@ -24,19 +24,16 @@ BinTreeNode *make_node(void *new_data, size_t data_size)
 
         new_node->left = NULL;
         new_node->right = NULL;
-        
+
         new_node->data = malloc(sizeof(data_size));
-        
+
         if (new_node->data == NULL)
         {
                 fprintf(stderr, "Failed to allocate memory\n");
                 exit(EXIT_FAILURE);
         }
 
-        for (unsigned int i = 0; i < data_size; i++)
-        {
-                *(uint8_t *)(new_node->data + i) = *(uint8_t *)(new_data + i);
-        }
+        memcpy(new_node->data, new_data, data_size);
 
         return new_node;
 }
@@ -138,9 +135,9 @@ void visualise_tree(BinTreeNode *node, int level, void (*print_ptr)(void *item))
 void in_order_print(BinTreeNode *node, void (*print)(void *x))
 {
         if (node == NULL)
-	    {
+        {
 	            return;
-	    }
+        }
 
         in_order_print(node->left, print);
         print(node->data);
@@ -185,7 +182,7 @@ void post_order_print(BinTreeNode *node, void (*print)(void *x))
         {
                 return;
         }
-        
+
         post_order_print(node->left, print);
         post_order_print(node->right, print);
         print(node->data);
