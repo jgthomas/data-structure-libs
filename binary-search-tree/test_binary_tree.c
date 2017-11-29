@@ -14,8 +14,8 @@ int get_int(char *message);
 int main()
 {
         BinTreeNode *head = NULL;
-        int nums[11] = {10, 4, 23, 20, 6, 21, 67, 9, 2, 100, 1};
-        int num_len = 11;
+        int nums[] = {10,4,23,20,6,21,67,9,2,100,1,55,68,12,3,89,1000};
+        int num_len = sizeof(nums) / sizeof(nums[0]);
 
         int int_size = sizeof(int);
 
