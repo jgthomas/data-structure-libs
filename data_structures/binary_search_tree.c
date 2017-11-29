@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
-#include "binary_tree.h"
+#include "binary_search_tree.h"
 
 
 /**

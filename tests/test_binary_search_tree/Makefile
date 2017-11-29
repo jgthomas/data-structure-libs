@@ -1,33 +1,45 @@
-# PATHS - to search for the headers and source files
-HEADERS_1 = ../
-HEADERS_2 =
+# MY HEADERS - paths to search for includes
+HEADERS_1 = ../../
+HEADERS_2 = 
 HEADERS_3 = 
 
-SOURCE_1 = ../
-SOURCE_2 =
+# MY SOURCES - paths to search for source files
+SOURCE_1 = ../../
+SOURCE_2 = 
 SOURCE_3 = 
 
+# HEADER FILES
 INCLUDES = $(HEADERS_1) $(HEADERS_2) $(HEADERS_3)
+
+# SOURCE FILES
 SOURCE = $(SOURCE_1) $(SOURCE_2) $(SOURCE_3)
 
+# PATHS - to search for the wildcarded filetypes
 vpath %.h $(INCLUDES)
 vpath %.c $(SOURCE)
 
-# COMPILER - with flags and libraries to link
+# DIRECTORIES
+BUILD_DIR = ./build
+
+# COMPILER
 CC = gcc
+
+# FLAGS
 CFLAGS = -g -Wall -Wextra -Werror $(foreach dir, $(INCLUDES), -I$(dir))
+
+# LIBRARY LINKING
 LDLIBS = 
 
-# EXECUTABLE - the final binary file
-BUILD_DIR = ./build
-BIN = test_hash_table
+# EXECUTABLE
+BIN = test_binary_tree
+
 TARGET = $(BUILD_DIR)/$(BIN)
 
 # FILES
-#PWD_HEADERS := $(wildcard *.h)
-#PWD_SOURCES := $(wildcard *.c)
-HEADERS = $(PWD_HEADERS) tools/hash_functions.h data_structures/linked_list.h data_structures/hash_table.h tools/printing.h tools/comparison.h
-SOURCES = $(PWD_SOURCES) tools/hash_functions.c data_structures/linked_list.c data_structures/hash_table.c tools/printing.c tools/comparison.c test_hash_table.c
+PWD_HEADERS := $(wildcard *.h)
+PWD_SOURCES := $(wildcard *.c)
+HEADERS = $(PWD_HEADERS) tools/comparison.h tools/printing.h tools/get_input.h data_structures/binary_search_tree.h
+SOURCES = $(PWD_SOURCES) tools/comparison.c tools/printing.c tools/get_input.c data_structures/binary_search_tree.c
 OBJECTS := $(SOURCES:%.c=$(BUILD_DIR)/%.o)
 DEPENDS = $(OBJECTS:%.o=%.d)
 
