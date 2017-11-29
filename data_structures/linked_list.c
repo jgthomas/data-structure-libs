@@ -2,21 +2,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <stdint.h>
-#include "tools/general.h"
+#include <string.h>
 #include "linked_list.h"
-
-
-/**
- * Copy each byte of "new_data" into "node->data"
- *
- * */
-/*static void copy_by_byte(Node **node, void *new_data, size_t data_size)
-{
-        for (unsigned int i = 0; i < data_size; i++)
-        {
-                *(uint8_t *)((*node)->data + i) = *(uint8_t *)(new_data + i);
-        }
-}*/
 
 
 static void free_node(Node *node)
@@ -52,7 +39,7 @@ Node *create_node(void *new_data, size_t data_size)
             exit(EXIT_FAILURE);
         }
 
-        copy(new_node->data, new_data, data_size);
+        memcpy(new_node->data, new_data, data_size);
 
         return new_node;
 }

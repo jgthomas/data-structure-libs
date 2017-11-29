@@ -26,8 +26,8 @@ TARGET = $(BUILD_DIR)/$(BIN)
 # FILES
 PWD_HEADERS := $(wildcard *.h)
 PWD_SOURCES := $(wildcard *.c)
-HEADERS = $(PWD_HEADERS) data_structures/linked_list.h tools/convertors.h tools/printing.h tools/general.h
-SOURCES = $(PWD_SOURCES) data_structures/linked_list.c tools/convertors.c tools/printing.c tools/general.c
+HEADERS = $(PWD_HEADERS) data_structures/linked_list.h tools/convertors.h tools/printing.h
+SOURCES = $(PWD_SOURCES) data_structures/linked_list.c tools/convertors.c tools/printing.c
 OBJECTS := $(SOURCES:%.c=$(BUILD_DIR)/%.o)
 DEPENDS = $(OBJECTS:%.o=%.d)
 
