@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "linked_list.h"
+#include "tools/hash_functions.h"
+#include "tools/printing.h"
+#include "tools/comparison.h"
+#include "data_structures/linked_list.h"
 #include "hash_table.h"
-#include "hash_functions.h"
-#include "printing.h"
-#include "comparison.h"
 
 
 TypeData String = { .hash = hash_string,

@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
-#include "linked_list.h"
+#include "data_structures/linked_list.h"
 #include "hash_table.h"
 
 
