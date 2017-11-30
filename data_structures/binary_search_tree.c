@@ -196,7 +196,49 @@ int total_nodes(BinTreeNode *node)
         {
                 return 0;
         }
+
         return total_nodes(node->left) + 1 + total_nodes(node->right);
+}
+
+
+int max_depth(BinTreeNode *node)
+{
+        if (node == NULL)
+        {
+                return 0;
+        }
+
+        int left_depth = max_depth(node->left) + 1;
+        int right_depth = max_depth(node->right) + 1;
+
+        if (left_depth > right_depth)
+        {
+                return left_depth;
+        }
+
+        return right_depth;
+}
+
+
+void *min_value(BinTreeNode *node)
+{
+        while (node->left != NULL)
+        {
+                node = node->left;
+        }
+
+        return node->data;
+}
+
+
+void *max_value(BinTreeNode *node)
+{
+        while (node->right != NULL)
+        {
+                node = node->right;
+        }
+
+        return node->data;
 }
 
 

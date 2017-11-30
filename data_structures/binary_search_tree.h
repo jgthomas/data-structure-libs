@@ -26,5 +26,8 @@ int total_nodes(BinTreeNode *node);
 void post_order_print(BinTreeNode *node, void (*print)(void *x));
 void pre_order_print(BinTreeNode *node, void (*print)(void *x));
 void in_order_print(BinTreeNode *node, void (*print)(void *x));
+int max_depth(BinTreeNode *node);
+void *min_value(BinTreeNode *node);
+void *max_value(BinTreeNode *node);
 
 #endif
