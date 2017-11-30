@@ -28,7 +28,7 @@ char to_char(void *x)
 
 char *to_string(void *x)
 {
-        return *(char **)n;
+        return *(char **)x;
 }
 
 
