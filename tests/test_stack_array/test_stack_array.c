@@ -13,28 +13,6 @@
 enum {NUM_TESTS = 3};
 
 
-bool match(void *array1,
-           void *array2[],
-           size_t data_size,
-           size_t elem_size,
-           bool (*equal)(void *x, void *y))
-{
-        int length = data_size/elem_size;
-
-        for (int i = 0; i < length; i++)
-        {
-                void *first = array1 + elem_size * i;
-                void *second = array2[i];
-
-                if (!equal(first, second))
-                {
-                        return false;
-                }
-        }
-        return true;
-}
-
-
 void testBASIC_STACK_OPERATIONS(void)
 {
         // test stack_empty
@@ -44,7 +22,6 @@ void testBASIC_STACK_OPERATIONS(void)
 
         // test initial data load
         stack_add_data(stack, array, sizeof(array), sizeof(array[0]));
-        stack_print(stack, print_int);
         CU_ASSERT_TRUE(match(array, stack->array, sizeof(array), sizeof(array[0]), equal_int));
         
         // test stack_peek
@@ -55,6 +32,8 @@ void testBASIC_STACK_OPERATIONS(void)
         top_of_stack = 89;
         stack_pop(stack);
         CU_ASSERT_EQUAL(top_of_stack, to_int(stack_peek(stack)));
+
+        stack_delete(stack);
 }
 
 

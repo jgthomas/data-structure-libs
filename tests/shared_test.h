@@ -28,3 +28,8 @@ bool arrays_match(void *array1,
                   size_t data_size,
                   size_t elem_size,
                   bool (*equal)(void *x, void *y));
+bool match(void *array1,
+           void *array2[],
+           size_t data_size,
+           size_t elem_size,
+           bool (*equal)(void *x, void *y));
