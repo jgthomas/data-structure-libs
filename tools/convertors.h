@@ -11,3 +11,6 @@ char int_to_char(void *input);
 char float_to_char(void *input);
 char index_to_lower_char(void *input);
 char index_to_upper_char(void *input);
+int to_int(void *x);
+char to_char(void *x);
+char *to_string(void *x);

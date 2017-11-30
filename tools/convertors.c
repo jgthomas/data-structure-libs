@@ -11,6 +11,29 @@ enum {LOWER_BASE = 97, UPPER_BASE = 65};
 
 
 /**
+ * Cast from void to type
+ *
+ * */
+int to_int(void *x)
+{
+        return *(int *)x;
+}
+
+
+char to_char(void *x)
+{
+        return *(char *)x;
+}
+
+
+char *to_string(void *x)
+{
+        return *(char **)n;
+}
+
+
+
+/**
  * INTEGERS
  *
  * */
