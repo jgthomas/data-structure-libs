@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "hash_table.h"
+#include "hash_table_probing.h"
 
 
 Record **new_hashtable(int hashtable_size)

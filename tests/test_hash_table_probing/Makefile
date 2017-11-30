@@ -1,9 +1,9 @@
 # PATHS - to search for the headers and source files
-HEADERS_1 = ../tools
+HEADERS_1 = ../../
 HEADERS_2 = 
 HEADERS_3 = 
 
-SOURCE_1 = ../tools
+SOURCE_1 = ../../
 SOURCE_2 = 
 SOURCE_3 = 
 
@@ -20,14 +20,14 @@ LDLIBS =
 
 # EXECUTABLE - the final binary file
 BUILD_DIR = ./build
-BIN = hash-table_demo
+BIN = test_hash_table_probing
 TARGET = $(BUILD_DIR)/$(BIN)
 
 # FILES
 PWD_HEADERS := $(wildcard *.h)
 PWD_SOURCES := $(wildcard *.c)
-HEADERS = $(PWD_HEADERS) comparison.h
-SOURCES = $(PWD_SOURCES) comparison.c
+HEADERS = $(PWD_HEADERS) tools/comparison.h data_structures/hash_table_probing.h
+SOURCES = $(PWD_SOURCES) tools/comparison.c data_structures/hash_table_probing.c
 OBJECTS := $(SOURCES:%.c=$(BUILD_DIR)/%.o)
 DEPENDS = $(OBJECTS:%.o=%.d)
 

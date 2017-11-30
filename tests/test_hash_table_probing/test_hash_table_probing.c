@@ -1,10 +1,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "comparison.h"
-#include "hash_table.h"
-#include "hash_functions.h"
+#include <string.h>
+#include <ctype.h>
+#include "tools/comparison.h"
+#include "data_structures/hash_table_probing.h"
 
+unsigned int dumb_hash(unsigned int key) 
+{
+   return (key % 97);
+}
+
+unsigned int simple_string_hash(const char *word)
+{
+        unsigned int hash = 0;
+
+        for (int i = 0, n = strlen(word); i < n; i++)
+        {
+            hash = (hash << 2) ^ tolower(word[i]);
+        }
+
+        return hash;
+}
 
 // pull hash function from library
 unsigned int (*hash_func_int)(unsigned int n) = dumb_hash;

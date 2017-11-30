@@ -1,3 +1,6 @@
+#ifndef HASH_TABLE_PROBING_H
+#define HASH_TABLE_PROBING_H
+
 typedef struct Record {
    void *key;
    void *value;
@@ -12,3 +15,5 @@ void delete_table(Record **hashtable, int hashtable_size);
 void print_hash_table(Record **hashtable, int hashtable_size, void (*print_fptr)(Record *r));
 void print_int_kv(Record *r);
 void print_string_kv(Record *r);
+
+#endif
