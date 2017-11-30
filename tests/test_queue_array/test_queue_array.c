@@ -13,28 +13,6 @@
 enum {NUM_TESTS = 3};
 
 
-bool match(void *array1,
-           void *array2[],
-           size_t data_size,
-           size_t elem_size,
-           bool (*equal)(void *x, void *y))
-{
-        int length = data_size/elem_size;
-
-        for (int i = 0; i < length; i++)
-        {
-                void *first = array1 + elem_size * i;
-                void *second = array2[i];
-
-                if (!equal(first, second))
-                {
-                        return false;
-                }
-        }
-        return true;
-}
-
-
 void testBASIC_QUEUE_OPERATIONS(void)
 {
         // test queue empty 
@@ -56,6 +34,8 @@ void testBASIC_QUEUE_OPERATIONS(void)
         front_of_queue = 3;
         CU_ASSERT_EQUAL(front_of_queue, to_int(queue_peek(queue)));
         CU_ASSERT_EQUAL(1, queue->front);
+
+        queue_delete(queue);
 }
 
 
