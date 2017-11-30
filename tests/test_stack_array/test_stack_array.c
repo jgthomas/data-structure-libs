@@ -37,6 +37,57 @@ void testBASIC_STACK_OPERATIONS(void)
 }
 
 
+void testMULTIPLE_TYPES(void)
+{
+        int array[] = {15,13,46,10,1,23,5};
+        char char_array[] = {'e','a','r','t','b'};
+        char *string_array[] = {"zebra",
+                                "moose",
+                                "elephant",
+                                "armadillo",
+                                "coyote"};
+
+        // integer
+        Stack *stack = stack_init();
+        CU_ASSERT_TRUE(stack_empty(stack));
+        stack_add_data(stack, array, sizeof(array), sizeof(array[0]));
+        CU_ASSERT_TRUE(match(array, stack->array, sizeof(array), sizeof(array[0]), equal_int));
+        int top_of_stack = 5;
+        CU_ASSERT_EQUAL(top_of_stack, to_int(stack_peek(stack)));
+        stack_pop(stack);
+        stack_pop(stack);
+        top_of_stack = 1;
+        CU_ASSERT_EQUAL(top_of_stack, to_int(stack_peek(stack)));
+        stack_delete(stack);
+
+        // char
+        Stack *stack1 = stack_init();
+        CU_ASSERT_TRUE(stack_empty(stack1));
+        stack_add_data(stack1, char_array, sizeof(char_array), sizeof(char_array[0]));
+        CU_ASSERT_TRUE(match(char_array, stack1->array, sizeof(char_array), sizeof(char_array[0]), equal_char));
+        char top_of_stack1 = 'b';
+        CU_ASSERT_EQUAL(top_of_stack1, to_char(stack_peek(stack1)));
+        stack_pop(stack1);
+        stack_pop(stack1);
+        top_of_stack1 = 'r';
+        CU_ASSERT_EQUAL(top_of_stack1, to_char(stack_peek(stack1)));
+        stack_delete(stack);
+
+        // string
+        Stack *stack2 = stack_init();
+        CU_ASSERT_TRUE(stack_empty(stack2));
+        stack_add_data(stack2, string_array, sizeof(string_array), sizeof(string_array[0]));
+        CU_ASSERT_TRUE(match(string_array, stack1->array, sizeof(string_array), sizeof(string_array[0]), equal_string));
+        char *top_of_stack2 = "coyote";
+        CU_ASSERT_EQUAL(top_of_stack2, to_string(stack_peek(stack2)));
+        stack_pop(stack2);
+        stack_pop(stack2);
+        top_of_stack2 = "elephant";
+        CU_ASSERT_EQUAL(top_of_stack2, to_string(stack_peek(stack2)));
+        stack_delete(stack2);
+}
+
+
 int main(void)
 {
         // test suite
@@ -57,7 +108,8 @@ int main(void)
         }
 
         // add tests
-        if (NULL == CU_add_test(suite, "Basic operations", testBASIC_STACK_OPERATIONS))
+        if (NULL == CU_add_test(suite, "Basic operations", testBASIC_STACK_OPERATIONS) ||
+            NULL == CU_add_test(suite, "Multiple types", testMULTIPLE_TYPES))
         {
                 CU_cleanup_registry();
                 return CU_get_error();
