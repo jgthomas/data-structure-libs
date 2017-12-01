@@ -52,7 +52,7 @@ HashTable *hashtable_create(int hashtable_size)
 void hashtable_insert(HashTable *hashtable, void *key, TypeData *data_type)
 {
         unsigned int bucket = data_type->hash(key) % hashtable->hashtable_size;
-        list_push(&hashtable->buckets[bucket], key, data_type->size);
+        list_push(&hashtable->buckets[bucket], key);
 }
 
 

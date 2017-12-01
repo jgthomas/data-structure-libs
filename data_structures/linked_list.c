@@ -6,9 +6,8 @@
 #include "linked_list.h"
 
 
-static void free_node(Node *node)
+static void delete_node(Node *node)
 {
-        free(node->data);
         free(node);
 }
 
@@ -21,7 +20,7 @@ static void free_node(Node *node)
  * copy each byte of new_data into data member
  *
  * */
-Node *create_node(void *new_data, size_t data_size)
+Node *create_node()
 {
         Node *new_node = malloc(sizeof(*new_node));
 
@@ -31,16 +30,6 @@ Node *create_node(void *new_data, size_t data_size)
             exit(EXIT_FAILURE);
         }
  
-        new_node->data = malloc(data_size);
-
-        if (new_node->data == NULL)
-        {
-            fprintf(stderr, "Failed to allocate memory for node->data\n");
-            exit(EXIT_FAILURE);
-        }
-
-        memcpy(new_node->data, new_data, data_size);
-
         return new_node;
 }
 
@@ -49,10 +38,11 @@ Node *create_node(void *new_data, size_t data_size)
  * Add node to front of list
  * 
  * */
-void list_push(Node **head, void *new_data, size_t data_size)
+void list_push(Node **head, void *new_data)
 {
-        Node *new_node = create_node(new_data, data_size);
+        Node *new_node = create_node();
 
+        new_node->data = new_data;
         new_node->next = (*head);
  
         (*head) = new_node;
@@ -63,10 +53,11 @@ void list_push(Node **head, void *new_data, size_t data_size)
  * Add node to end of list
  * 
  * */
-void list_append(Node **head, void *new_data, size_t data_size)
+void list_append(Node **head, void *new_data)
 {
-        Node *new_node = create_node(new_data, data_size);
+        Node *new_node = create_node();
 
+        new_node->data = new_data;
         new_node->next = NULL;
 
         // set a 'cursor' node to head of list
@@ -179,9 +170,10 @@ bool list_contains(Node *node, void *search, bool (*fptr)(void *, void *))
  * Insert data at specified index, if index longer than list append data
  *
  * */
-void list_insert(Node **node, void *new_data, size_t data_size, int pos)
+void list_insert(Node **node, void *new_data, int pos)
 {
-        Node *new_node = create_node(new_data, data_size);
+        Node *new_node = create_node();
+        new_node->data = new_data;
         new_node->next = NULL;
 
         int index = 0;
@@ -237,7 +229,7 @@ void list_delete_index(Node **node, int index)
                         before->next = (*node)->next;
                 }
 
-                free_node(temp);
+                delete_node(temp);
         }
 
         if (index > 0)
@@ -270,7 +262,7 @@ void list_delete_value(Node **node, void *val, bool (*fptr)(void *, void *))
                                 before->next = (*node)->next;
                         }
 
-                        free_node(temp);
+                        delete_node(temp);
                         break;
                 }
 
@@ -337,8 +329,7 @@ void list_delete(Node *node)
         {
             Node *temp = node;
             node = node->next;
-            free(temp->data);
-            free(temp);
+            delete_node(temp);
         }
 }
 

@@ -88,12 +88,11 @@ void convert(Node **top, long long *decimal, int base)
 {
         int index;
         int base_10 = *decimal;
-        int char_size = sizeof(char);
 
         while (base_10 >= 1)
         {
                 index = base_10 % base;
-                list_push(top, &BASE_MAP[index], char_size);
+                list_push(top, &BASE_MAP[index]);
                 base_10 = base_10 / base;
         }
 }
