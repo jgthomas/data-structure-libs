@@ -119,7 +119,8 @@ void dl_list_reverse(Node **head)
                 // point next to the stored, old previous
                 (*head)->next = temp;
 
-                // as we swapped next and previous, new previous moves us to next in list
+                // as we swapped next and previous,
+                // previous moves us to next in list
                 (*head) = (*head)->previous;
         }
     
@@ -127,4 +128,96 @@ void dl_list_reverse(Node **head)
         {
                 (*head) = temp->previous;
         }
+}
+
+
+void dl_list_delete_value(Node **node,
+                          void *val,
+                          bool (*equal)(void *x, void *y))
+{
+        Node *original_head = (*node);
+        Node *before = NULL;
+        bool first_elem_deleted = true;
+
+        while ((*node) != NULL)
+        {
+                if (equal(val, (*node)->data))
+                {
+                        Node *temp = (*node);
+
+                        if (first_elem_deleted)
+                        {
+                                (*node) = (*node)->next;
+                                (*node)->previous = NULL;
+                        }
+                        else
+                        {
+                                before->next = (*node)->next;
+
+                                if ((*node)->next != NULL)
+                                {
+                                        (*node)->next->previous = before;
+                                }
+                        }
+
+                        delete_node(temp);
+                        break;
+                }
+
+                before = (*node);
+                (*node) = (*node)->next;
+                first_elem_deleted = false;
+        }
+
+        if (!first_elem_deleted)
+        {
+                (*node) = original_head;
+        }
+}
+
+
+/**
+ * Search and move the found node to the front of the list
+ *
+ * */
+bool list_find_and_move(Node **node,
+                        void *search,
+                        bool (*equal)(void *, void *))
+{
+        // if item is already in first position, do nothing
+        if (equal(search, (*node)->data))
+        {
+                return true;
+        }
+
+        Node *original_head = (*node);
+
+        while ((*node) != NULL)
+        {
+                (*node) = (*node)->next;
+
+                if (equal(search, (*node)->data))
+                {
+                        if ((*node)->next != NULL)
+                        {
+                                (*node)->previous->next = (*node)->next;
+                                (*node)->next->previous = (*node)->previous;
+                        }
+                        else
+                        {
+                                (*node)->previous->next = NULL;
+                        }
+
+                        (*node)->next = original_head;
+                        original_head->previous = (*node);
+
+                        (*node)->previous = NULL;
+
+                        return true;
+                }
+        }
+
+        // if not found, restore list to initial state
+        (*node) = original_head;
+        return false;
 }

@@ -16,4 +16,12 @@ void print_from_tail(Node *node, void (*print)(void *x));
 void delete_list(Node *node);
 void dl_list_reverse(Node **head);
 
+void dl_list_delete_value(Node **node,
+                          void *val,
+                          bool (*equal)(void *x, void *y));
+
+bool list_find_and_move(Node **node,
+                        void *search,
+                        bool (*equal)(void *, void *));
+
 #endif
