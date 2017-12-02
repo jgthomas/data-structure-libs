@@ -496,6 +496,35 @@ void testLIST_LENGTH(void)
         clean_tests(tests, NUM_TESTS);
 }
 
+
+void testLIST_EMPTY(void)
+{
+        TestCase **tests = make_tests(NUM_TESTS);
+
+        int empty_int[] = {};
+        char empty_char[] = {};
+        char *empty_string[] = {};
+
+        tests[0]->test = empty_int;
+        tests[0]->data_size = sizeof(empty_int);
+        tests[1]->test = empty_char;
+        tests[1]->data_size = sizeof(empty_char);
+        tests[2]->test = empty_string;
+        tests[2]->data_size = sizeof(empty_string);
+
+        for (int i = 0; i < NUM_TESTS; i++)
+        {
+                Node *head = list_init();
+                list_add_data(&head, tests[i]->test, tests[i]->data_size, tests[i]->elem_size, list_push);
+                CU_ASSERT_EQUAL(list_length(head), (tests[i]->data_size/tests[i]->elem_size));
+                CU_ASSERT_TRUE(list_is_empty(head));
+                list_delete(head);
+        }
+
+        clean_tests(tests, NUM_TESTS);
+}
+
+
 int main(void)
 {
         // test suite
@@ -526,7 +555,8 @@ int main(void)
             NULL == CU_add_test(suite, "Find elements in list", testLIST_CONTAINS) ||
             NULL == CU_add_test(suite, "Find element and move to front", testLIST_FIND_AND_MOVE) ||
             NULL == CU_add_test(suite, "Insert elements into list", testLIST_INSERT) ||
-            NULL == CU_add_test(suite, "Check list length", testLIST_LENGTH))
+            NULL == CU_add_test(suite, "Check list length", testLIST_LENGTH) ||
+            NULL == CU_add_test(suite, "Empty lists handled", testLIST_EMPTY))
         {
                 CU_cleanup_registry();
                 return CU_get_error();
