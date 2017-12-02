@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include "shared_test.h"
+#include "../data_structures/linked_list.h"
 
 
 TestCase **init_tests(int num_tests)

@@ -1,4 +1,5 @@
 #include <stdbool.h>
+#include "../data_structures/linked_list.h"
 
 typedef struct TestCase {
         void *test;

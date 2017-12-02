@@ -137,6 +137,7 @@ static void print_list(Node *node, void (*fptr)(void *), const char *sep)
         while (node != NULL)
         {
             (*fptr)(node->data);
+            printf(" ");
             node = node->next;
             
             if (sep != NULL)
