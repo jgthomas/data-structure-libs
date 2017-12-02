@@ -33,3 +33,9 @@ bool match(void *array1,
            size_t data_size,
            size_t elem_size,
            bool (*equal)(void *x, void *y));
+
+bool ll_array_match(Node *node,
+                    void *array2,
+                    size_t data_size,
+                    size_t elem_size,
+                    bool (*equal)(void *x, void *y));

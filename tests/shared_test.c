@@ -127,3 +127,28 @@ bool match(void *array1,
         }
         return true;
 }
+
+
+bool ll_array_match(Node *node,
+                    void *array2,
+                    size_t data_size,
+                    size_t elem_size,
+                    bool (*equal)(void *x, void *y))
+{
+        int length = data_size/elem_size;
+
+        for (int i = 0; i < length; i++)
+        {
+                void *first = node->data;
+                void *second = array2 + elem_size * i;
+
+                if (!equal(first, second))
+                {
+                        return false;
+                }
+
+                node = node->next;
+        }
+
+        return true;
+}
