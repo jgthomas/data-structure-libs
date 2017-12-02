@@ -239,7 +239,6 @@ void list_delete_index(Node **node, int index)
 {
         Node *old_head = (*node);
         Node *before = NULL;
-        Node *temp = NULL;
         int count = 0;
 
         while ((*node) != NULL && count != index)
@@ -251,7 +250,7 @@ void list_delete_index(Node **node, int index)
 
         if ((*node) != NULL && count == index)
         {
-                temp = (*node);
+                Node *temp = (*node);
 
                 if (index == 0)
                 {
