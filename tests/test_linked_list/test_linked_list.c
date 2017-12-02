@@ -525,6 +525,38 @@ void testLIST_EMPTY(void)
 }
 
 
+void testLIST_SINGLE_ELEMENT(void)
+{
+        TestCase **tests = make_tests(NUM_TESTS);
+
+        int single_int[] = {1};
+        char single_char[] = {'w'};
+        char *single_string[] = {"cow"};
+
+        tests[0]->test = single_int;
+        tests[0]->answer = single_int;
+        tests[0]->data_size = sizeof(single_int);
+        tests[1]->test = single_char;
+        tests[1]->answer = single_char;
+        tests[1]->data_size = sizeof(single_char);
+        tests[2]->test = single_string;
+        tests[2]->answer = single_string;
+        tests[2]->data_size = sizeof(single_string);
+
+        for (int i = 0; i < NUM_TESTS; i++)
+        {
+                Node *head = list_init();
+                list_add_data(&head, tests[i]->test, tests[i]->data_size, tests[i]->elem_size, list_push);
+                CU_ASSERT_EQUAL(list_length(head), (tests[i]->data_size/tests[i]->elem_size));
+                CU_ASSERT_FALSE(list_is_empty(head));
+                CU_ASSERT_TRUE(ll_array_match(head, tests[i]->answer, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
+                list_delete(head);
+        }
+
+        clean_tests(tests, NUM_TESTS);
+}
+
+
 int main(void)
 {
         // test suite
@@ -556,7 +588,8 @@ int main(void)
             NULL == CU_add_test(suite, "Find element and move to front", testLIST_FIND_AND_MOVE) ||
             NULL == CU_add_test(suite, "Insert elements into list", testLIST_INSERT) ||
             NULL == CU_add_test(suite, "Check list length", testLIST_LENGTH) ||
-            NULL == CU_add_test(suite, "Empty lists handled", testLIST_EMPTY))
+            NULL == CU_add_test(suite, "Empty lists handled", testLIST_EMPTY) ||
+            NULL == CU_add_test(suite, "Single element list handed", testLIST_SINGLE_ELEMENT))
         {
                 CU_cleanup_registry();
                 return CU_get_error();
