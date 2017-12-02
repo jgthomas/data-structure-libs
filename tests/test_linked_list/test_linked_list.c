@@ -467,6 +467,35 @@ void testLIST_INSERT(void)
 }
 
 
+void testLIST_LENGTH(void)
+{
+        TestCase **tests = make_tests(NUM_TESTS);
+
+        int test_int_new_len[] = {15,13,46,10,1,12,33,56,77};
+        char test_char_new_len[] = {'e','a','r','t','b','w'};
+        char *test_string_new_len[] = {"zebra",
+                                       "moose",
+                                       "armadillo",
+                                       "coyote"};
+
+        tests[0]->test = test_int_new_len;
+        tests[0]->data_size = sizeof(test_int_new_len);
+        tests[1]->test = test_char_new_len;
+        tests[1]->data_size = sizeof(test_char_new_len);
+        tests[2]->test = test_string_new_len;
+        tests[2]->data_size = sizeof(test_string_new_len);
+
+        for (int i = 0; i < NUM_TESTS; i++)
+        {
+                Node *head = list_init();
+                list_add_data(&head, tests[i]->test, tests[i]->data_size, tests[i]->elem_size, list_push);
+                CU_ASSERT_EQUAL(list_length(head), (tests[i]->data_size/tests[i]->elem_size));
+                list_delete(head);
+        }
+
+        clean_tests(tests, NUM_TESTS);
+}
+
 int main(void)
 {
         // test suite
@@ -496,7 +525,8 @@ int main(void)
             NULL == CU_add_test(suite, "Delete value start, middle, end", testLIST_DELETE_VALUE) ||
             NULL == CU_add_test(suite, "Find elements in list", testLIST_CONTAINS) ||
             NULL == CU_add_test(suite, "Find element and move to front", testLIST_FIND_AND_MOVE) ||
-            NULL == CU_add_test(suite, "Insert elements into list", testLIST_INSERT))
+            NULL == CU_add_test(suite, "Insert elements into list", testLIST_INSERT) ||
+            NULL == CU_add_test(suite, "Check list length", testLIST_LENGTH))
         {
                 CU_cleanup_registry();
                 return CU_get_error();
