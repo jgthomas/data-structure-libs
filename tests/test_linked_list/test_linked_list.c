@@ -392,6 +392,81 @@ void testLIST_FIND_AND_MOVE(void)
 }
 
 
+void testLIST_INSERT(void)
+{
+        TestCase **tests = make_tests(NUM_TESTS);
+
+        int new_answer_int[] = {200,1,10,46,13,15};
+        int new_answer_int2[] = {200,1,10,300,46,13,15};
+        int new_answer_int3[] = {200,1,10,300,46,13,15,400};
+        char new_answer_char[] = {'b','t','r','a','m','e'};
+        char *new_answer_string[] = {"coyote",
+                                     "armadillo",
+                                     "donkey",
+                                     "elephant",
+                                     "moose",
+                                     "zebra"};
+
+        for (int i = 0; i < NUM_TESTS; i++)
+        {
+                Node *head = list_init();
+                list_add_data(&head, tests[i]->test, tests[i]->data_size, tests[i]->elem_size, list_push);
+                CU_ASSERT_TRUE(ll_array_match(head, tests[i]->answer, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
+
+                if (i == 0)
+                {
+                        // insert at front
+                        int n1 = 200;
+                        void *to_start = &n1;
+                        tests[i]->answer = new_answer_int;
+                        tests[i]->data_size = sizeof(new_answer_int);
+                        list_insert(&head, to_start, 0);
+                        CU_ASSERT_TRUE(ll_array_match(head, tests[i]->answer, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
+
+                        // insert mid-list
+                        int n2 = 300;
+                        void *to_middle = &n2;
+                        tests[i]->answer = new_answer_int2;
+                        tests[i]->data_size = sizeof(new_answer_int2);
+                        list_insert(&head, to_middle, 3);
+                        CU_ASSERT_TRUE(ll_array_match(head, tests[i]->answer, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
+
+                        // insert past end, should append
+                        int n3 = 400;
+                        void *past_end = &n3;
+                        tests[i]->answer = new_answer_int3;
+                        tests[i]->data_size = sizeof(new_answer_int3);
+                        list_insert(&head, past_end, 30);
+                        CU_ASSERT_TRUE(ll_array_match(head, tests[i]->answer, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
+                }
+                else if (i == 1)
+                {
+                        // insert in last position
+                        char c = 'm';
+                        void *to_insert_char = &c;
+                        tests[i]->answer = new_answer_char;
+                        tests[i]->data_size = sizeof(new_answer_char);
+                        list_insert(&head, to_insert_char, 4);
+                        CU_ASSERT_TRUE(ll_array_match(head, tests[i]->answer, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
+                }
+                else if (i == 2)
+                {
+                        // insert mid-list
+                        char *s = "donkey";
+                        void *to_insert_string = &s;
+                        tests[i]->answer = new_answer_string;
+                        tests[i]->data_size = sizeof(new_answer_string);
+                        list_insert(&head, to_insert_string, 2);
+                        CU_ASSERT_TRUE(ll_array_match(head, tests[i]->answer, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
+                }
+
+                list_delete(head);
+        }
+
+        clean_tests(tests, NUM_TESTS);
+}
+
+
 int main(void)
 {
         // test suite
@@ -420,7 +495,8 @@ int main(void)
             NULL == CU_add_test(suite, "Delete last element", testLIST_DELETE_LAST_ELEMENT) ||
             NULL == CU_add_test(suite, "Delete value start, middle, end", testLIST_DELETE_VALUE) ||
             NULL == CU_add_test(suite, "Find elements in list", testLIST_CONTAINS) ||
-            NULL == CU_add_test(suite, "Find element and move to front", testLIST_FIND_AND_MOVE))
+            NULL == CU_add_test(suite, "Find element and move to front", testLIST_FIND_AND_MOVE) ||
+            NULL == CU_add_test(suite, "Insert elements into list", testLIST_INSERT))
         {
                 CU_cleanup_registry();
                 return CU_get_error();
