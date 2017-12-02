@@ -99,6 +99,51 @@ void testLIST_REVERSE(void)
 }
 
 
+void testLIST_DELETE_FIRST_ELEMENT(void)
+{
+        TestCase **tests = make_tests(NUM_TESTS);
+
+        int new_answer_int[] = {23,1,10,46,13,15};
+        char new_answer_char[] = {'t','r','a','e'};
+        char *new_answer_string[] = {"armadillo",
+                                     "elephant",
+                                     "moose",
+                                     "zebra"};
+
+        for (int i = 0; i < NUM_TESTS; i++)
+        {
+                Node *head = list_init();
+                list_add_data(&head, tests[i]->test, tests[i]->data_size, tests[i]->elem_size, list_push);
+
+                CU_ASSERT_TRUE(ll_array_match(head, tests[i]->answer, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
+
+                list_delete_index(&head, 0);
+
+                if (i == 0)
+                {
+                        tests[i]->answer = new_answer_int;
+                        tests[i]->data_size = sizeof(new_answer_int);
+                }
+                else if (i == 1)
+                {
+                        tests[i]->answer = new_answer_char;
+                        tests[i]->data_size = sizeof(new_answer_char);
+                }
+                else if (i == 2)
+                {
+                        tests[i]->answer = new_answer_string;
+                        tests[i]->data_size = sizeof(new_answer_string);
+                }
+
+                CU_ASSERT_TRUE(ll_array_match(head, tests[i]->answer, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
+                list_delete(head);
+        }
+
+        clean_tests(tests, NUM_TESTS);
+
+}
+
+
 int main(void)
 {
         // test suite
@@ -121,7 +166,8 @@ int main(void)
         // add tests
         if (NULL == CU_add_test(suite, "Pushing to list", testLIST_PUSH)||
             NULL == CU_add_test(suite, "Appending to list", testLIST_APPEND) ||
-            NULL == CU_add_test(suite, "Reverse the list", testLIST_REVERSE))
+            NULL == CU_add_test(suite, "Reverse the list", testLIST_REVERSE) ||
+            NULL == CU_add_test(suite, "Delete first element", testLIST_DELETE_FIRST_ELEMENT))
         {
                 CU_cleanup_registry();
                 return CU_get_error();
