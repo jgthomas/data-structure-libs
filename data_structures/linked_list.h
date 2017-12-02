@@ -33,6 +33,7 @@ void list_delete_value(Node **node, void *val, bool (*fptr)(void *, void *));
 void list_add_data(Node **head,
                    void *data,
                    size_t data_size,
-                   size_t elem_size);
+                   size_t elem_size,
+                   void (*add_to_list)(Node **head, void *new_data));
 
 #endif

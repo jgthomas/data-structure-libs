@@ -63,14 +63,15 @@ void list_push(Node **head, void *new_data)
 void list_add_data(Node **head,
                    void *data,
                    size_t data_size,
-                   size_t elem_size)
+                   size_t elem_size,
+                   void (*add_to_list)(Node **head, void *new_data))
 {
         int len = data_size/elem_size;
 
         for (int i = 0; i < len; i++)
         {
                 void *new_data = data + elem_size * i;
-                list_push(head, new_data);
+                add_to_list(head, new_data);
         }
 }
 
@@ -82,9 +83,14 @@ void list_add_data(Node **head,
 void list_append(Node **head, void *new_data)
 {
         Node *new_node = create_node();
-
         new_node->data = new_data;
         new_node->next = NULL;
+
+        if ((*head) == NULL)
+        {
+                (*head) = new_node;
+                return;
+        }
 
         // set a 'cursor' node to head of list
         Node *node_ptr = (*head);
