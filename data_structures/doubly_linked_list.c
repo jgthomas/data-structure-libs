@@ -41,6 +41,13 @@ void append(Node **node, void *new_data, size_t data_size)
         // create new node, set next to NULL as last
         Node *new_node = create_node(new_data);;
         new_node->next = NULL;
+        new_node->previous = NULL;
+
+        if ((*node) == NULL)
+        {
+                (*node) = new_node;
+                return;
+        }
 
         // set up cursor
         Node *node_ptr = (*node);
