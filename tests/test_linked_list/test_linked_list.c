@@ -81,6 +81,24 @@ void testLIST_APPEND(void)
 }
 
 
+void testLIST_REVERSE(void)
+{
+        TestCase **tests = make_tests(NUM_TESTS);
+
+        for (int i = 0; i < NUM_TESTS; i++)
+        {
+                Node *head = list_init();
+                list_add_data(&head, tests[i]->test, tests[i]->data_size, tests[i]->elem_size, list_push);
+                list_reverse(&head);
+                //list_print_values(head, tests[i]->print);
+                CU_ASSERT_TRUE(ll_array_match(head, tests[i]->test, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
+                list_delete(head);
+        }
+
+        clean_tests(tests, NUM_TESTS);
+}
+
+
 int main(void)
 {
         // test suite
@@ -102,7 +120,8 @@ int main(void)
 
         // add tests
         if (NULL == CU_add_test(suite, "Pushing to list", testLIST_PUSH)||
-            NULL == CU_add_test(suite, "Appending to list", testLIST_APPEND))
+            NULL == CU_add_test(suite, "Appending to list", testLIST_APPEND) ||
+            NULL == CU_add_test(suite, "Reverse the list", testLIST_REVERSE))
         {
                 CU_cleanup_registry();
                 return CU_get_error();
