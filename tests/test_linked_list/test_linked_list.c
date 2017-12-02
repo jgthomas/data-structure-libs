@@ -47,16 +47,33 @@ TestCase **make_tests(int num_tests)
 }
 
 
-void testCREATE_LIST(void)
+void testLIST_PUSH(void)
 {
         TestCase **tests = make_tests(NUM_TESTS);
 
         for (int i = 0; i < NUM_TESTS; i++)
         {
                 Node *head = list_init();
-                list_add_data(&head, tests[i]->test, tests[i]->data_size, tests[i]->elem_size);
-                list_print_values(head, tests[i]->print);
+                list_add_data(&head, tests[i]->test, tests[i]->data_size, tests[i]->elem_size, list_push);
+                //list_print_values(head, tests[i]->print);
                 CU_ASSERT_TRUE(ll_array_match(head, tests[i]->answer, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
+                list_delete(head);
+        }
+
+        clean_tests(tests, NUM_TESTS);
+}
+
+
+void testLIST_APPEND(void)
+{
+        TestCase **tests = make_tests(NUM_TESTS);
+
+        for (int i = 0; i < NUM_TESTS; i++)
+        {
+                Node *head = list_init();
+                list_add_data(&head, tests[i]->test, tests[i]->data_size, tests[i]->elem_size, list_append);
+                //list_print_values(head, tests[i]->print);
+                CU_ASSERT_TRUE(ll_array_match(head, tests[i]->test, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
                 list_delete(head);
         }
 
@@ -84,7 +101,8 @@ int main(void)
         }
 
         // add tests
-        if (NULL == CU_add_test(suite, "Binary heap types", testCREATE_LIST))
+        if (NULL == CU_add_test(suite, "Pushing to list", testLIST_PUSH)||
+            NULL == CU_add_test(suite, "Appending to list", testLIST_APPEND))
         {
                 CU_cleanup_registry();
                 return CU_get_error();
