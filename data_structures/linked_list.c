@@ -12,6 +12,13 @@ static void delete_node(Node *node)
 }
 
 
+Node *list_init()
+{
+        Node *head = NULL;
+        return head;
+}
+
+
 /**
  * Create new node
  *
@@ -46,6 +53,25 @@ void list_push(Node **head, void *new_data)
         new_node->next = (*head);
  
         (*head) = new_node;
+}
+
+
+/**
+ * Convenience function for loading data into list
+ *
+ * */
+void list_add_data(Node **head,
+                   void *data,
+                   size_t data_size,
+                   size_t elem_size)
+{
+        int len = data_size/elem_size;
+
+        for (int i = 0; i < len; i++)
+        {
+                void *new_data = data + elem_size * i;
+                list_push(head, new_data);
+        }
 }
 
 

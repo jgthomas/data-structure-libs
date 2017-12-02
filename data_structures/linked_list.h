@@ -14,6 +14,7 @@ typedef struct List {
 List;
 
 
+Node *list_init();
 Node *create_node();
 void list_push(Node **head_ref, void *new_data);
 unsigned int list_length(Node *node);
@@ -28,5 +29,10 @@ bool list_find_and_move(Node **node, void *search, bool (*fptr)(void *, void *))
 void list_insert(Node **node, void *new_data, int pos);
 void list_delete_index(Node **node, int index);
 void list_delete_value(Node **node, void *val, bool (*fptr)(void *, void *));
+
+void list_add_data(Node **head,
+                   void *data,
+                   size_t data_size,
+                   size_t elem_size);
 
 #endif
