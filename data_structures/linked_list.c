@@ -209,6 +209,13 @@ void list_insert(Node **node, void *new_data, int pos)
         new_node->data = new_data;
         new_node->next = NULL;
 
+        if (pos == 0)
+        {
+                new_node->next = (*node);
+                (*node) = new_node;
+                return;
+        }
+
         int index = 0;
         Node *old_head = (*node);
         Node *before = NULL;
