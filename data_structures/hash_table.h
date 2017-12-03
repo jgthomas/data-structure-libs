@@ -32,5 +32,6 @@ void hashtable_delete(HashTable *hashtable);
 void hashtable_key_delete(HashTable *hashtable, void *key, TypeData *data_type);
 void hashtable_print_chain(HashTable *hashtable, void *key, TypeData *data_type);
 void hashtable_add_data(HashTable *hashtable, void *data, size_t data_size, TypeData *data_type);
+Node *hashtable_get_bucket(HashTable *hashtable, void *key, TypeData *data_type);
 
 #endif

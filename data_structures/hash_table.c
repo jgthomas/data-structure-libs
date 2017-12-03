@@ -88,6 +88,19 @@ bool hashtable_search(HashTable *hashtable, void *key, TypeData *data_type)
 }
 
 
+Node *hashtable_get_bucket(HashTable *hashtable, void *key, TypeData *data_type)
+{
+        unsigned int bucket = data_type->hash(key) % hashtable->hashtable_size;
+
+        if (list_contains(hashtable->buckets[bucket], key, data_type->compare))
+        {
+                return hashtable->buckets[bucket];
+        }
+
+        return NULL;
+}
+
+
 bool hashtable_search_promote(HashTable *hashtable, void *key, TypeData *data_type)
 {
         unsigned int bucket = data_type->hash(key) % hashtable->hashtable_size;
