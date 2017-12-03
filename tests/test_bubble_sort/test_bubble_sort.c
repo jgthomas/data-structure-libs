@@ -44,7 +44,7 @@ TestCase **make_tests(int num_tests)
 }
 
 
-void testBUBBLE_SORT(void)
+void testBASIC_SORTING(void)
 {
         TestCase **tests = make_tests(NUM_TESTS);
 
@@ -73,7 +73,7 @@ int main(void)
         }
 
         // add suite
-        suite = CU_add_suite("Sorting Algorithms", 0, 0);
+        suite = CU_add_suite("Bubble Sort", 0, 0);
         if (NULL == suite)
         {
                 CU_cleanup_registry();
@@ -81,7 +81,7 @@ int main(void)
         }
 
         // add tests
-        if (NULL == CU_add_test(suite, "Bubble sort", testBUBBLE_SORT)) 
+        if (NULL == CU_add_test(suite, "Basic sorting", testBASIC_SORTING)) 
         {
                 CU_cleanup_registry();
                 return CU_get_error();
