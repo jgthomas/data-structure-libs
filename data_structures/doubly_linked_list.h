@@ -8,20 +8,22 @@ typedef struct new_node {
 }
 Node;
 
-Node *create_node(void *new_data);
-void list_push(Node **head, void *new_data, size_t data_size);
-void append(Node **node, void *new_data, size_t data_size);
-void print_from_head(Node *node, void (*print)(void *x));
-void print_from_tail(Node *node, void (*print)(void *x));
-void delete_list(Node *node);
-void dl_list_reverse(Node **head);
+Node *DL_list_create_node(void);
+void DL_list_push(Node **head, void *new_data, size_t data_size);
+void DL_list_append(Node **node, void *new_data, size_t data_size);
+void DL_print_from_head(Node *node, void (*print)(void *x));
+void DL_print_from_tail(Node *node, void (*print)(void *x));
+void DL_list_delete(Node *node);
+void DL_list_reverse(Node **head);
+void DL_list_insert(Node **node, void *new_data, int pos);
+void DL_list_delete_index(Node **node, int index);
 
-void dl_list_delete_value(Node **node,
+void DL_list_delete_value(Node **node,
                           void *val,
                           bool (*equal)(void *x, void *y));
 
-bool list_find_and_move(Node **node,
-                        void *search,
-                        bool (*equal)(void *, void *));
+bool DL_list_find_and_move(Node **node,
+                           void *search,
+                           bool (*equal)(void *, void *));
 
 #endif
