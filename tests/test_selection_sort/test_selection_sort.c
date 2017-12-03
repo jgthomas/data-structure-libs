@@ -48,19 +48,6 @@ void testBASIC_SORTING(void)
 {
         TestCase **tests = make_tests(NUM_TESTS);
 
-        int test_int[] = {1,7,6,5,22,8,1,15,74};
-        char test_char[] = {'c','d','b','f','g','a'};
-        char *test_string[] = {"abacus",
-                               "zebra",
-                               "doggy",
-                               "thinning",
-                               "soldier"};
-
-
-        tests[0]->test = test_int;
-        tests[1]->test = test_char;
-        tests[2]->test = test_string;
-
         for (int i = 0; i < NUM_TESTS; i++)
         {
                 CU_ASSERT_FALSE(arrays_match(tests[i]->test, tests[i]->answer, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
