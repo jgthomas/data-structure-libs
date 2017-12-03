@@ -6,85 +6,116 @@
 #include "tests/shared_test.h"
 #include "tools/printing.h"
 #include "tools/comparison.h"
-#include "tools/convertors.h"
 #include "data_structures/stack_array.h"
 
 
 enum {NUM_TESTS = 3};
 
 
-void testBASIC_STACK_OPERATIONS(void)
-{
-        // test stack_empty
-        int array[] = {12,3,45,67,87,89,9};
-        Stack *stack = stack_init();
-        CU_ASSERT_TRUE(stack_empty(stack));
+int test_int[] = {15,13,46,10,1};
+int answer_int[] = {1,10,46,13,15};
 
-        // test initial data load
-        stack_add_data(stack, array, sizeof(array), sizeof(array[0]));
-        CU_ASSERT_TRUE(match(array, stack->array, sizeof(array), sizeof(array[0]), equal_int));
-        
-        // test stack_peek
-        int top_of_stack = 9;
-        CU_ASSERT_EQUAL(top_of_stack, to_int(stack_peek(stack)));
+char test_char[] = {'e','a','r','t','b'};
+char answer_char[] = {'b','t','r','a','e'};
 
-        // test stack_pop
-        top_of_stack = 89;
-        stack_pop(stack);
-        CU_ASSERT_EQUAL(top_of_stack, to_int(stack_peek(stack)));
+char *test_string[] = {"zebra",
+                       "moose",
+                       "elephant",
+                       "armadillo",
+                       "coyote"};
 
-        stack_delete(stack);
+char *answer_string[] = {"coyote",
+                         "armadillo",
+                         "elephant",
+                         "moose",
+                         "zebra"};
+int LENGTH = 5;
+
+
+TestCase **make_tests(int num_tests)
+{        
+        TestCase **test_array = init_tests(num_tests);
+
+        TestCase *testint = new_test(test_int, answer_int, sizeof(test_int), sizeof(int), equal_int, less_than_int, print_int);
+        TestCase *testchar = new_test(test_char, answer_char, sizeof(test_char), sizeof(char), equal_char, less_than_char, print_char);
+        TestCase *teststring = new_test(test_string, answer_string, sizeof(test_string), sizeof(char *), equal_string, less_than_string, print_string);
+
+        test_array[0] = testint;
+        test_array[1] = testchar;
+        test_array[2] = teststring;
+
+        return test_array;
 }
 
 
-void testMULTIPLE_TYPES(void)
+void testSTACK_LOAD_DATA(void)
 {
-        int array[] = {15,13,46,10,1,23,5};
-        char char_array[] = {'e','a','r','t','b'};
-        char *string_array[] = {"zebra",
-                                "moose",
-                                "elephant",
-                                "armadillo",
-                                "coyote"};
+        TestCase **tests = make_tests(NUM_TESTS);
 
-        // integer
-        Stack *stack = stack_init();
-        CU_ASSERT_TRUE(stack_empty(stack));
-        stack_add_data(stack, array, sizeof(array), sizeof(array[0]));
-        CU_ASSERT_TRUE(match(array, stack->array, sizeof(array), sizeof(array[0]), equal_int));
-        int top_of_stack = 5;
-        CU_ASSERT_EQUAL(top_of_stack, to_int(stack_peek(stack)));
-        stack_pop(stack);
-        stack_pop(stack);
-        top_of_stack = 1;
-        CU_ASSERT_EQUAL(top_of_stack, to_int(stack_peek(stack)));
-        stack_delete(stack);
+        for (int i = 0; i < NUM_TESTS; i++)
+        {
+                Stack *stack = stack_init();
+                CU_ASSERT_TRUE(stack_empty(stack));
 
-        // char
-        Stack *stack1 = stack_init();
-        CU_ASSERT_TRUE(stack_empty(stack1));
-        stack_add_data(stack1, char_array, sizeof(char_array), sizeof(char_array[0]));
-        CU_ASSERT_TRUE(match(char_array, stack1->array, sizeof(char_array), sizeof(char_array[0]), equal_char));
-        char top_of_stack1 = 'b';
-        CU_ASSERT_EQUAL(top_of_stack1, to_char(stack_peek(stack1)));
-        stack_pop(stack1);
-        stack_pop(stack1);
-        top_of_stack1 = 'r';
-        CU_ASSERT_EQUAL(top_of_stack1, to_char(stack_peek(stack1)));
-        stack_delete(stack);
+                stack_add_data(stack, tests[i]->test, tests[i]->data_size, tests[i]->elem_size);
+                CU_ASSERT_FALSE(stack_empty(stack));
+                CU_ASSERT_TRUE(match(tests[i]->test, stack->array, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
 
-        // string
-        Stack *stack2 = stack_init();
-        CU_ASSERT_TRUE(stack_empty(stack2));
-        stack_add_data(stack2, string_array, sizeof(string_array), sizeof(string_array[0]));
-        CU_ASSERT_TRUE(match(string_array, stack1->array, sizeof(string_array), sizeof(string_array[0]), equal_string));
-        char *top_of_stack2 = "coyote";
-        CU_ASSERT_EQUAL(top_of_stack2, to_string(stack_peek(stack2)));
-        stack_pop(stack2);
-        stack_pop(stack2);
-        top_of_stack2 = "elephant";
-        CU_ASSERT_EQUAL(top_of_stack2, to_string(stack_peek(stack2)));
-        stack_delete(stack2);
+                stack_delete(stack);
+        }
+
+        clean_tests(tests, NUM_TESTS);
+}
+
+
+void testSTACK_PEEK(void)
+{
+        TestCase **tests = make_tests(NUM_TESTS);
+
+        for (int i = 0; i < NUM_TESTS; i++)
+        {
+                Stack *stack = stack_init();
+                CU_ASSERT_TRUE(stack_empty(stack));
+
+                stack_add_data(stack, tests[i]->test, tests[i]->data_size, tests[i]->elem_size);
+                CU_ASSERT_FALSE(stack_empty(stack));
+                CU_ASSERT_TRUE(match(tests[i]->test, stack->array, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
+
+                void *peeked = stack_peek(stack);
+                void *should_be_top = tests[i]->test + tests[i]->elem_size * (LENGTH-1);
+                CU_ASSERT_TRUE(tests[i]->equal(peeked, should_be_top));
+
+                stack_delete(stack);
+        }
+
+        clean_tests(tests, NUM_TESTS);
+}
+
+
+void testSTACK_POP(void)
+{
+
+        TestCase **tests = make_tests(NUM_TESTS);
+
+        for (int i = 0; i < NUM_TESTS; i++)
+        {
+                Stack *stack = stack_init();
+                CU_ASSERT_TRUE(stack_empty(stack));
+
+                stack_add_data(stack, tests[i]->test, tests[i]->data_size, tests[i]->elem_size);
+                CU_ASSERT_FALSE(stack_empty(stack));
+                CU_ASSERT_TRUE(match(tests[i]->test, stack->array, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
+
+                stack_pop(stack);
+                void *peeked = stack_peek(stack);
+                void *should_be_top = tests[i]->test + tests[i]->elem_size * (LENGTH-2);
+                CU_ASSERT_TRUE(tests[i]->equal(peeked, should_be_top));
+                CU_ASSERT_EQUAL(stack->top, LENGTH-2);
+
+                stack_delete(stack);
+        }
+
+        clean_tests(tests, NUM_TESTS);
 }
 
 
@@ -108,8 +139,9 @@ int main(void)
         }
 
         // add tests
-        if (NULL == CU_add_test(suite, "Basic operations", testBASIC_STACK_OPERATIONS) ||
-            NULL == CU_add_test(suite, "Multiple types", testMULTIPLE_TYPES))
+        if (NULL == CU_add_test(suite, "Load data into stack", testSTACK_LOAD_DATA) ||
+            NULL == CU_add_test(suite, "Peek returns top of stack", testSTACK_PEEK) ||
+            NULL == CU_add_test(suite, "Pop removes element from top", testSTACK_POP)) 
         {
                 CU_cleanup_registry();
                 return CU_get_error();

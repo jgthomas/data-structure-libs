@@ -26,8 +26,8 @@ TARGET = $(BUILD_DIR)/$(BIN)
 # FILES
 PWD_HEADERS := $(wildcard *.h)
 PWD_SOURCES := $(wildcard *.c)
-TOOLS_HEADERS := tools/printing.h tools/comparison.h tools/convertors.h
-TOOLS_SOURCES := tools/printing.c tools/comparison.c tools/convertors.c
+TOOLS_HEADERS := tools/printing.h tools/comparison.h tools/general.h
+TOOLS_SOURCES := tools/printing.c tools/comparison.c tools/general.c
 TESTS_HEADERS := tests/shared_test.h
 TESTS_SOURCES := tests/shared_test.c
 DS_HEADERS := data_structures/stack_array.h
