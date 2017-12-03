@@ -56,3 +56,14 @@ void stack_delete(Node *top)
 {
         list_delete(top);
 }
+
+
+bool stack_empty(Node *top)
+{
+        if (top == NULL)
+        {
+                return true;
+        }
+
+        return false;
+}
