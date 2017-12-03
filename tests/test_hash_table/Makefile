@@ -1,10 +1,10 @@
 # PATHS - to search for the headers and source files
 HEADERS_1 = ../../
-HEADERS_2 =
+HEADERS_2 = 
 HEADERS_3 = 
 
 SOURCE_1 = ../../
-SOURCE_2 =
+SOURCE_2 = 
 SOURCE_3 = 
 
 INCLUDES = $(HEADERS_1) $(HEADERS_2) $(HEADERS_3)
@@ -16,7 +16,7 @@ vpath %.c $(SOURCE)
 # COMPILER - with flags and libraries to link
 CC = gcc
 CFLAGS = -g -Wall -Wextra -Werror $(foreach dir, $(INCLUDES), -I$(dir))
-LDLIBS = 
+LDLIBS = -lbcunit
 
 # EXECUTABLE - the final binary file
 BUILD_DIR = ./build
@@ -26,8 +26,14 @@ TARGET = $(BUILD_DIR)/$(BIN)
 # FILES
 PWD_HEADERS := $(wildcard *.h)
 PWD_SOURCES := $(wildcard *.c)
-HEADERS = $(PWD_HEADERS) tools/hash_functions.h data_structures/linked_list.h data_structures/hash_table.h tools/printing.h tools/comparison.h
-SOURCES = $(PWD_SOURCES) tools/hash_functions.c data_structures/linked_list.c data_structures/hash_table.c tools/printing.c tools/comparison.c
+TOOLS_HEADERS := tools/printing.h tools/comparison.h tools/general.h tools/hash_functions.h
+TOOLS_SOURCES := tools/printing.c tools/comparison.c tools/general.c tools/hash_functions.c
+TESTS_HEADERS := tests/shared_test.h
+TESTS_SOURCES := tests/shared_test.c
+DS_HEADERS := data_structures/hash_table.h data_structures/linked_list.h
+DS_SOURCES := data_structures/hash_table.c data_structures/linked_list.c
+HEADERS = $(PWD_HEADERS) $(TOOLS_HEADERS) $(TESTS_HEADERS) $(DS_HEADERS)
+SOURCES = $(PWD_SOURCES) $(TOOLS_SOURCES) $(TESTS_SOURCES) $(DS_SOURCES)
 OBJECTS := $(SOURCES:%.c=$(BUILD_DIR)/%.o)
 DEPENDS = $(OBJECTS:%.o=%.d)
 
