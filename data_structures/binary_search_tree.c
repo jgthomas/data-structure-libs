@@ -116,7 +116,7 @@ void visualise_tree(BinTreeNode *node, int level, void (*print_ptr)(void *item))
 	            printf("     ");
 	    }
 	    print_ptr(node->data);
-	    printf("\n");
+	    printf("\n\n");
 
 	    visualise_tree(node->left, level+1, print_ptr);
 }
