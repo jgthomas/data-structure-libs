@@ -31,5 +31,6 @@ bool hashtable_search_promote(HashTable *hashtable, void *key, TypeData *data_ty
 void hashtable_delete(HashTable *hashtable);
 void hashtable_key_delete(HashTable *hashtable, void *key, TypeData *data_type);
 void hashtable_print_chain(HashTable *hashtable, void *key, TypeData *data_type);
+void hashtable_add_data(HashTable *hashtable, void *data, size_t data_size, TypeData *data_type);
 
 #endif

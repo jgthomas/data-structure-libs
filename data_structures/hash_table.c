@@ -56,6 +56,18 @@ void hashtable_insert(HashTable *hashtable, void *key, TypeData *data_type)
 }
 
 
+void hashtable_add_data(HashTable *hashtable, void *data, size_t data_size, TypeData *data_type)
+{
+        int len = data_size/data_type->size;
+
+        for (int i = 0; i < len; i++)
+        {
+                void *key = data + data_type->size * i;
+                hashtable_insert(hashtable, key, data_type);
+        }
+}
+
+
 void hashtable_key_delete(HashTable *hashtable, void *key, TypeData *data_type)
 {
         unsigned int bucket = data_type->hash(key) % hashtable->hashtable_size;
