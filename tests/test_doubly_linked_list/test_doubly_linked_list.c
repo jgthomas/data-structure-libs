@@ -47,7 +47,7 @@ TestCase **make_tests(int num_tests)
 }
 
 
-void testLIST_PUSH(void)
+void testDL_LIST_PUSH(void)
 {
         TestCase **tests = make_tests(NUM_TESTS);
 
@@ -55,8 +55,23 @@ void testLIST_PUSH(void)
         {
                 DllNode *head = DL_list_init();
                 DL_list_add_data(&head, tests[i]->test, tests[i]->data_size, tests[i]->elem_size, DL_list_push);
-                //list_print_values(head, tests[i]->print);
                 CU_ASSERT_TRUE(dll_array_match(head, tests[i]->answer, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
+                DL_list_delete(head);
+        }
+
+        clean_tests(tests, NUM_TESTS);
+}
+
+
+void testDL_LIST_APPEND(void)
+{
+        TestCase **tests = make_tests(NUM_TESTS);
+
+        for (int i = 0; i < NUM_TESTS; i++)
+        {
+                DllNode *head = DL_list_init();
+                DL_list_add_data(&head, tests[i]->test, tests[i]->data_size, tests[i]->elem_size, DL_list_append);
+                CU_ASSERT_TRUE(dll_array_match(head, tests[i]->test, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
                 DL_list_delete(head);
         }
 
@@ -84,7 +99,8 @@ int main(void)
         }
 
         // add tests
-        if (NULL == CU_add_test(suite, "Pushing to list", testLIST_PUSH))
+        if (NULL == CU_add_test(suite, "Pushing to list", testDL_LIST_PUSH) ||
+            NULL == CU_add_test(suite, "Appending to list", testDL_LIST_APPEND))
         {
                 CU_cleanup_registry();
                 return CU_get_error();
