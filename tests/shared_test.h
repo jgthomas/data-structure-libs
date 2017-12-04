@@ -1,5 +1,6 @@
 #include <stdbool.h>
 #include "../data_structures/linked_list.h"
+#include "../data_structures/doubly_linked_list.h"
 
 typedef struct TestCase {
         void *test;
@@ -43,3 +44,9 @@ bool ll_array_match(Node *node,
                     size_t data_size,
                     size_t elem_size,
                     bool (*equal)(void *x, void *y));
+
+bool dll_array_match(DllNode *node,
+                     void *array2,
+                     size_t data_size,
+                     size_t elem_size,
+                     bool (*equal)(void *x, void *y));

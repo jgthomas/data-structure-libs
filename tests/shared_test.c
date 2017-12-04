@@ -4,6 +4,7 @@
 #include <string.h>
 #include "shared_test.h"
 #include "../data_structures/linked_list.h"
+#include "../data_structures/doubly_linked_list.h"
 
 
 /**
@@ -117,6 +118,31 @@ bool ll_array_match(Node *node,
                     size_t data_size,
                     size_t elem_size,
                     bool (*equal)(void *x, void *y))
+{
+        int length = data_size/elem_size;
+
+        for (int i = 0; i < length; i++)
+        {
+                void *first = node->data;
+                void *second = array2 + elem_size * i;
+
+                if (!equal(first, second))
+                {
+                        return false;
+                }
+
+                node = node->next;
+        }
+
+        return true;
+}
+
+
+bool dll_array_match(DllNode *node,
+                     void *array2,
+                     size_t data_size,
+                     size_t elem_size,
+                     bool (*equal)(void *x, void *y))
 {
         int length = data_size/elem_size;
 
