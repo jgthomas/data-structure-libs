@@ -1,12 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <stdbool.h>
 #include "doubly_linked_list.h"
 
 
-Node *DL_list_create_node(void)
+DllNode *DL_list_init()
 {
-        Node *new_node = malloc(sizeof(*new_node));
+        DllNode *head = NULL;
+        return head;
+}
+
+
+DllNode *DL_list_create_node(void)
+{
+        DllNode *new_node = malloc(sizeof(*new_node));
 
         if (new_node == NULL)
         {
@@ -18,9 +25,9 @@ Node *DL_list_create_node(void)
 }
 
 
-void DL_list_push(Node **head, void *new_data, size_t data_size)
+void DL_list_push(DllNode **head, void *new_data)
 {
-        Node *new_node = DL_list_create_node();
+        DllNode *new_node = DL_list_create_node();
 
         new_node->data = new_data;
         new_node->next = (*head);
@@ -35,9 +42,9 @@ void DL_list_push(Node **head, void *new_data, size_t data_size)
 }
 
 
-void DL_list_append(Node **node, void *new_data, size_t data_size)
+void DL_list_append(DllNode **node, void *new_data)
 {
-        Node *new_node = DL_list_create_node();;
+        DllNode *new_node = DL_list_create_node();;
         new_node->data = new_data;
         new_node->next = NULL;
         new_node->previous = NULL;
@@ -49,7 +56,7 @@ void DL_list_append(Node **node, void *new_data, size_t data_size)
         }
 
         // set up cursor
-        Node *node_ptr = (*node);
+        DllNode *node_ptr = (*node);
 
         // advance to end of list
         while (node_ptr->next != NULL)
@@ -68,7 +75,23 @@ void DL_list_append(Node **node, void *new_data, size_t data_size)
 }
 
 
-void DL_print_from_head(Node *node, void (*print)(void *x))
+void DL_list_add_data(DllNode **head,
+                      void *data,
+                      size_t data_size,
+                      size_t elem_size,
+                      void (*add_to_list)(DllNode **head, void *new_data))
+{
+        int len = data_size/elem_size;
+
+        for (int i = 0; i < len; i++)
+        {
+                void *new_data = data + elem_size * i;
+                add_to_list(head, new_data);
+        }
+}
+
+
+void DL_print_from_head(DllNode *node, void (*print)(void *x))
 {
         while (node != NULL)
         {
@@ -81,7 +104,7 @@ void DL_print_from_head(Node *node, void (*print)(void *x))
 }
 
 
-void DL_print_from_tail(Node *node, void (*print)(void *x))
+void DL_print_from_tail(DllNode *node, void (*print)(void *x))
 {
         while (node->next != NULL)
         {
@@ -99,20 +122,26 @@ void DL_print_from_tail(Node *node, void (*print)(void *x))
 }
 
 
-void DL_list_delete(Node *node)
+void DL_list_delete_node(DllNode *node)
+{
+        free(node);
+}
+
+
+void DL_list_delete(DllNode *node)
 {
         while (node != NULL)
         {
-                Node *temp = node;
+                DllNode *temp = node;
                 node = node->next;
-                free(temp);
+                DL_list_delete_node(temp);
         }
 }
 
 
-void DL_list_reverse(Node **head)
+void DL_list_reverse(DllNode **head)
 {
-        Node *temp = NULL;
+        DllNode *temp = NULL;
 
         while ((*head) != NULL)
         {
@@ -137,19 +166,19 @@ void DL_list_reverse(Node **head)
 }
 
 
-void DL_list_delete_value(Node **node,
+void DL_list_delete_value(DllNode **node,
                           void *val,
                           bool (*equal)(void *x, void *y))
 {
-        Node *original_head = (*node);
-        Node *before = NULL;
+        DllNode *original_head = (*node);
+        DllNode *before = NULL;
         bool first_elem_deleted = true;
 
         while ((*node) != NULL)
         {
                 if (equal(val, (*node)->data))
                 {
-                        Node *temp = (*node);
+                        DllNode *temp = (*node);
 
                         if (first_elem_deleted)
                         {
@@ -166,7 +195,7 @@ void DL_list_delete_value(Node **node,
                                 }
                         }
 
-                        delete_node(temp);
+                        DL_list_delete_node(temp);
                         break;
                 }
 
@@ -186,7 +215,7 @@ void DL_list_delete_value(Node **node,
  * Search and move the found node to the front of the list
  *
  * */
-bool DL_list_find_and_move(Node **node,
+bool DL_list_find_and_move(DllNode **node,
                            void *search,
                            bool (*equal)(void *, void *))
 {
@@ -196,7 +225,7 @@ bool DL_list_find_and_move(Node **node,
                 return true;
         }
 
-        Node *original_head = (*node);
+        DllNode *original_head = (*node);
 
         while ((*node) != NULL)
         {
@@ -229,9 +258,9 @@ bool DL_list_find_and_move(Node **node,
 }
 
 
-void DL_list_insert(Node **node, void *new_data, int pos)
+void DL_list_insert(DllNode **node, void *new_data, int pos)
 {
-        Node *new_node = DL_list_create_node();
+        DllNode *new_node = DL_list_create_node();
         new_node->data = new_data;
         new_node->next = NULL;
         new_node->previous = NULL;
@@ -244,8 +273,8 @@ void DL_list_insert(Node **node, void *new_data, int pos)
         }
 
         int index = 0;
-        Node *old_head = (*node);
-        Node *before = NULL;
+        DllNode *old_head = (*node);
+        DllNode *before = NULL;
 
         while ((*node) != NULL && index != pos)
         {
@@ -267,10 +296,10 @@ void DL_list_insert(Node **node, void *new_data, int pos)
 }
 
 
-void DL_list_delete_index(Node **node, int index)
+void DL_list_delete_index(DllNode **node, int index)
 {
-        Node *old_head = (*node);
-        Node *before = NULL;
+        DllNode *old_head = (*node);
+        DllNode *before = NULL;
         int count = 0;
 
         while ((*node) != NULL && count != index)
@@ -282,7 +311,7 @@ void DL_list_delete_index(Node **node, int index)
 
         if ((*node) != NULL && count == index)
         {
-                Node *temp = (*node);
+                DllNode *temp = (*node);
 
                 if (index == 0)
                 {
@@ -294,7 +323,7 @@ void DL_list_delete_index(Node **node, int index)
                         (*node)->next->previous = before;
                 }
 
-                delete_node(temp);
+                DL_list_delete_node(temp);
         }
 
         if (index > 0)
