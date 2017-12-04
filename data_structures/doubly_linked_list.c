@@ -320,7 +320,11 @@ void DL_list_delete_index(DllNode **node, int index)
                 else
                 {
                         before->next = (*node)->next;
-                        (*node)->next->previous = before;
+
+                        if ((*node)->next != NULL)
+                        {
+                                (*node)->next->previous = before;
+                        }
                 }
 
                 DL_list_delete_node(temp);
