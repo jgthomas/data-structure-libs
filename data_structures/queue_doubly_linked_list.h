@@ -1,8 +1,8 @@
 #include "doubly_linked_list.h"
 
 typedef struct Queue {
-        Node *front;
-        Node *back;
+        DllNode *front;
+        DllNode *back;
 }
 Queue;
 

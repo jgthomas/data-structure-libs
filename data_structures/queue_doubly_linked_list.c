@@ -22,7 +22,7 @@ Queue *queue_init(void)
 
 void enqueue(Queue *queue, void *data)
 {
-        Node *new_node = DL_list_create_node();
+        DllNode *new_node = DL_list_create_node();
         new_node->data = data;
 
         if (empty_queue(queue))
@@ -43,7 +43,7 @@ void enqueue(Queue *queue, void *data)
 
 void dequeue(Queue *queue, void *data)
 {
-        Node *new_node = DL_list_create_node();
+        DllNode *new_node = DL_list_create_node();
         new_node->data = data;
 
         if (queue_empty(queue))
@@ -53,7 +53,7 @@ void dequeue(Queue *queue, void *data)
         }
         else
         {
-                Node *node_ptr = front;
+                DllNode *node_ptr = front;
                 queue->front = queue->front->previous;
                 free(node_ptr);
         }
