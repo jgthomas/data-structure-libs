@@ -8,25 +8,19 @@
 #include "data_structures/binary_search_tree.h"
 
 
-int get_int(char *message);
+void print_commands(void);
 
 
 int main()
 {
         BinTreeNode *head = NULL;
-        int nums[] = {10,4,23,20,6,21,67,9,2,100,1,55,68,12,3,89,1000};
-        int num_len = sizeof(nums) / sizeof(nums[0]);
+        int nums[] = {10,4,23,20,6,21,67,9,2,100,1,55,12,3};
 
-        int int_size = sizeof(int);
-
-        for (int i = 0; i < num_len; i++)
-        {
-                insert(&head, &nums[i], int_size, less_than_int);
-        }
+        BST_load_data(&head, nums, sizeof(nums), sizeof(nums[0]), less_than_int);
 
         char command[20];
 
-        printf("commands: search, print, quit\n\n");
+        print_commands();
 
         while (1)
         {
@@ -48,15 +42,47 @@ int main()
                             printf("not found\n");
                         }
                 }
-                else if (strncmp(command, "print", 5) == 0)
+                else if (strncmp(command, "insert", 6) == 0)
                 {
-                        int level = 0;
-                        visualise_tree(head, level, print_int);
+                        char *msg = "Number to insert";
+                        int n = get_int(msg);
+                        void *new_num = &n;
+                        insert(&head, new_num, less_than_int);
+                }
+                else if (strncmp(command, "show", 4) == 0)
+                {
+                        visualise_tree(head, 0, print_int);
+                }
+                else if (strncmp(command, "inorder", 7) == 0)
+                {
+                        in_order_print(head, print_int);
+                        printf("\n");
+                }
+                else if (strncmp(command, "preorder", 8) == 0)
+                {
+                        pre_order_print(head, print_int);
+                        printf("\n");
+                }
+                else if (strncmp(command, "postorder", 9) == 0)
+                {
+                        post_order_print(head, print_int);
+                        printf("\n");
                 }
                 else if (strncmp(command, "quit", 4) == 0)
                 {
                         delete_tree(head);
                         break;
                 }
+                else
+                {
+                        print_commands();
+                        continue;
+                }
         }
+}
+
+
+void print_commands(void)
+{
+        printf("commands: search, insert, show, inorder, preorder, postorder, quit\n\n");
 }
