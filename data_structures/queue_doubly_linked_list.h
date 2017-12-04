@@ -1,4 +1,4 @@
-#include "linked_list.h"
+#include "doubly_linked_list.h"
 
 typedef struct Queue {
         Node *front;
