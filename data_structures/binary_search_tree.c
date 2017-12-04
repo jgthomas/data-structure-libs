@@ -12,7 +12,7 @@
  * data_size  :  size of node data type
  *
  * */
-BinTreeNode *make_node(void *new_data, size_t data_size)
+BinTreeNode *make_node(void *new_data)
 {
         BinTreeNode *new_node = malloc(sizeof(*new_node));
 
@@ -22,20 +22,31 @@ BinTreeNode *make_node(void *new_data, size_t data_size)
                 exit(EXIT_FAILURE);
         }
 
+        new_node->data = new_data;
         new_node->left = NULL;
         new_node->right = NULL;
 
-        new_node->data = malloc(sizeof(data_size));
-
-        if (new_node->data == NULL)
-        {
-                fprintf(stderr, "Failed to allocate memory\n");
-                exit(EXIT_FAILURE);
-        }
-
-        memcpy(new_node->data, new_data, data_size);
-
         return new_node;
+}
+
+
+/**
+ * Convenience function for loading data into BST
+ *
+ * */
+void BST_load_data(BinTreeNode **head,
+                   void *new_data,
+                   size_t data_size,
+                   size_t elem_size,
+                   bool (*less_than)(void *first, void *second))
+{
+        int len = data_size/elem_size;
+
+        for (int i = 0; i < len; i++)
+        {
+                void *next = new_data + elem_size * i;
+                insert(head, next, less_than);
+        }
 }
 
 
@@ -50,20 +61,19 @@ BinTreeNode *make_node(void *new_data, size_t data_size)
  * */
 void insert(BinTreeNode **head,
             void *new_data,
-            size_t data_size,
             bool (*less_than)(void *first, void *second))
 {
         if ((*head) == NULL)
         {
-                (*head) = make_node(new_data, data_size);
+                (*head) = make_node(new_data);
         }
         else if (less_than(new_data, (*head)->data))
         {
-                insert(&(*head)->left, new_data, data_size, less_than);
+                insert(&(*head)->left, new_data, less_than);
         }
         else
         {
-                insert(&(*head)->right, new_data, data_size, less_than);
+                insert(&(*head)->right, new_data, less_than);
         }
 }
 
@@ -248,7 +258,6 @@ void delete_tree(BinTreeNode *head)
         {
                 delete_tree(head->left);
                 delete_tree(head->right);
-                free(head->data);
                 free(head);
         }
 }

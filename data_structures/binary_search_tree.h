@@ -8,12 +8,17 @@ typedef struct new_node {
 }
 BinTreeNode;
 
-BinTreeNode *make_node(void *new_data, size_t data_size);
+BinTreeNode *make_node(void *new_data);
 
 void insert(BinTreeNode **head,
             void *new_data,
-            size_t data_size,
             bool (*less)(void *first, void *second));
+
+void BST_load_data(BinTreeNode **head,
+                   void *new_data,
+                   size_t data_size,
+                   size_t elem_size,
+                   bool (*less_than)(void *first, void *second));
 
 bool search(BinTreeNode **head,
             void *data,
