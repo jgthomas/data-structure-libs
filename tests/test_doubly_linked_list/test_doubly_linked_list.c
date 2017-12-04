@@ -79,6 +79,23 @@ void testDL_LIST_APPEND(void)
 }
 
 
+void testDL_LIST_REVERSE(void)
+{
+        TestCase **tests = make_tests(NUM_TESTS);
+
+        for (int i = 0; i < NUM_TESTS; i++)
+        {
+                DllNode *head = DL_list_init();
+                DL_list_add_data(&head, tests[i]->test, tests[i]->data_size, tests[i]->elem_size, DL_list_push);
+                DL_list_reverse(&head);
+                CU_ASSERT_TRUE(dll_array_match(head, tests[i]->test, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
+                DL_list_delete(head);
+        }
+
+        clean_tests(tests, NUM_TESTS);
+}
+
+
 int main(void)
 {
         // test suite
@@ -100,7 +117,8 @@ int main(void)
 
         // add tests
         if (NULL == CU_add_test(suite, "Pushing to list", testDL_LIST_PUSH) ||
-            NULL == CU_add_test(suite, "Appending to list", testDL_LIST_APPEND))
+            NULL == CU_add_test(suite, "Appending to list", testDL_LIST_APPEND) ||
+            NULL == CU_add_test(suite, "Reverse list", testDL_LIST_REVERSE))
         {
                 CU_cleanup_registry();
                 return CU_get_error();
