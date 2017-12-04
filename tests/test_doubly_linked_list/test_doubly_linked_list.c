@@ -140,6 +140,51 @@ void testDL_LIST_DELETE_FIRST_ELEMENT(void)
 }
 
 
+void testDL_LIST_DELETE_MIDDLE_ELEMENT(void)
+{
+        TestCase **tests = make_tests(NUM_TESTS);
+
+        int new_answer_int[] = {1,10,13,15};
+        char new_answer_char[] = {'b','t','a','e'};
+        char *new_answer_string[] = {"coyote",
+                                     "armadillo",
+                                     "moose",
+                                     "zebra"};
+
+        for (int i = 0; i < NUM_TESTS; i++)
+        {
+                DllNode *head = DL_list_init();
+                DL_list_add_data(&head, tests[i]->test, tests[i]->data_size, tests[i]->elem_size, DL_list_push);
+
+                CU_ASSERT_TRUE(dll_array_match(head, tests[i]->answer, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
+
+                DL_list_delete_index(&head, 2);
+
+                if (i == 0)
+                {
+                        tests[i]->answer = new_answer_int;
+                        tests[i]->data_size = sizeof(new_answer_int);
+                }
+                else if (i == 1)
+                {
+                        tests[i]->answer = new_answer_char;
+                        tests[i]->data_size = sizeof(new_answer_char);
+                }
+                else if (i == 2)
+                {
+                        tests[i]->answer = new_answer_string;
+                        tests[i]->data_size = sizeof(new_answer_string);
+                }
+
+                CU_ASSERT_TRUE(dll_array_match(head, tests[i]->answer, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
+
+                DL_list_delete(head);
+        }
+
+        clean_tests(tests, NUM_TESTS);
+}
+
+
 int main(void)
 {
         // test suite
@@ -163,7 +208,8 @@ int main(void)
         if (NULL == CU_add_test(suite, "Pushing to list", testDL_LIST_PUSH) ||
             NULL == CU_add_test(suite, "Appending to list", testDL_LIST_APPEND) ||
             NULL == CU_add_test(suite, "Reverse list", testDL_LIST_REVERSE) ||
-            NULL == CU_add_test(suite, "Delete first element", testDL_LIST_DELETE_FIRST_ELEMENT))
+            NULL == CU_add_test(suite, "Delete first element", testDL_LIST_DELETE_FIRST_ELEMENT) ||
+            NULL == CU_add_test(suite, "Delete mid-list element", testDL_LIST_DELETE_MIDDLE_ELEMENT))
         {
                 CU_cleanup_registry();
                 return CU_get_error();
