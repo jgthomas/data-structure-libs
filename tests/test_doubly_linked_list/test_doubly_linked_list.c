@@ -282,6 +282,66 @@ void testDL_LIST_DELETE_VALUE(void)
 }
 
 
+void testDL_LIST_EMPTY(void)
+{
+        TestCase **tests = make_tests(NUM_TESTS);
+
+        int empty_int[] = {};
+        char empty_char[] = {};
+        char *empty_string[] = {};
+
+        tests[0]->test = empty_int;
+        tests[0]->data_size = sizeof(empty_int);
+        tests[1]->test = empty_char;
+        tests[1]->data_size = sizeof(empty_char);
+        tests[2]->test = empty_string;
+        tests[2]->data_size = sizeof(empty_string);
+
+        for (int i = 0; i < NUM_TESTS; i++)
+        {
+                DllNode *head = DL_list_init();
+                DL_list_add_data(&head, tests[i]->test, tests[i]->data_size, tests[i]->elem_size, DL_list_push);
+                CU_ASSERT_EQUAL(DL_list_length(head), (tests[i]->data_size/tests[i]->elem_size));
+                CU_ASSERT_TRUE(DL_list_is_empty(head));
+                DL_list_delete(head);
+        }
+
+        clean_tests(tests, NUM_TESTS);
+}
+
+
+void testDL_LIST_SINGLE_ELEMENT(void)
+{
+        TestCase **tests = make_tests(NUM_TESTS);
+
+        int single_int[] = {1};
+        char single_char[] = {'w'};
+        char *single_string[] = {"cow"};
+
+        tests[0]->test = single_int;
+        tests[0]->answer = single_int;
+        tests[0]->data_size = sizeof(single_int);
+        tests[1]->test = single_char;
+        tests[1]->answer = single_char;
+        tests[1]->data_size = sizeof(single_char);
+        tests[2]->test = single_string;
+        tests[2]->answer = single_string;
+        tests[2]->data_size = sizeof(single_string);
+
+        for (int i = 0; i < NUM_TESTS; i++)
+        {
+                DllNode *head = DL_list_init();
+                DL_list_add_data(&head, tests[i]->test, tests[i]->data_size, tests[i]->elem_size, DL_list_push);
+                CU_ASSERT_EQUAL(DL_list_length(head), (tests[i]->data_size/tests[i]->elem_size));
+                CU_ASSERT_FALSE(DL_list_is_empty(head));
+                CU_ASSERT_TRUE(dll_array_match(head, tests[i]->answer, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
+                DL_list_delete(head);
+        }
+
+        clean_tests(tests, NUM_TESTS);
+}
+
+
 int main(void)
 {
         // test suite
@@ -294,7 +354,7 @@ int main(void)
         }
 
         // add suite
-        suite = CU_add_suite("Binary heap", 0, 0);
+        suite = CU_add_suite("Doubly linked list", 0, 0);
         if (NULL == suite)
         {
                 CU_cleanup_registry();
@@ -308,7 +368,9 @@ int main(void)
             NULL == CU_add_test(suite, "Delete first element", testDL_LIST_DELETE_FIRST_ELEMENT) ||
             NULL == CU_add_test(suite, "Delete mid-list element", testDL_LIST_DELETE_MIDDLE_ELEMENT) ||
             NULL == CU_add_test(suite, "Delete last element", testDL_LIST_DELETE_LAST_ELEMENT) ||
-            NULL == CU_add_test(suite, "Delete value from list", testDL_LIST_DELETE_VALUE))
+            NULL == CU_add_test(suite, "Delete value from list", testDL_LIST_DELETE_VALUE) ||
+            NULL == CU_add_test(suite, "Empty lists handled", testDL_LIST_EMPTY) ||
+            NULL == CU_add_test(suite, "Single element lists handled", testDL_LIST_SINGLE_ELEMENT))
         {
                 CU_cleanup_registry();
                 return CU_get_error();
