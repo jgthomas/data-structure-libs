@@ -447,6 +447,52 @@ void testDL_LIST_INSERT(void)
 }
 
 
+void testDL_LIST_CONTAINS(void)
+{
+        TestCase **tests = make_tests(NUM_TESTS);
+
+
+        for (int i = 0; i < NUM_TESTS; i++)
+        {
+                DllNode *head = DL_list_init();
+                DL_list_add_data(&head, tests[i]->test, tests[i]->data_size, tests[i]->elem_size, DL_list_push);
+                CU_ASSERT_TRUE(dll_array_match(head, tests[i]->answer, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
+
+                if (i == 0)
+                {
+                        int n1 = 46;
+                        int n2 = 100;
+                        void *in_list_int = &n1;
+                        void *not_in_list_int = &n2;
+                        CU_ASSERT_TRUE(DL_list_contains(head, in_list_int, tests[i]->equal));
+                        CU_ASSERT_FALSE(DL_list_contains(head, not_in_list_int, tests[i]->equal));
+                }
+                else if (i == 1)
+                {
+                        char c1 = 'r';
+                        char c2 = 'n';
+                        void *in_list_char = &c1;
+                        void *not_in_list_char= &c2;
+                        CU_ASSERT_TRUE(DL_list_contains(head, in_list_char, tests[i]->equal));
+                        CU_ASSERT_FALSE(DL_list_contains(head, not_in_list_char, tests[i]->equal));
+                }
+                else if (i == 2)
+                {
+                        char *s1 = "coyote";
+                        char *s2 = "blowfish";
+                        void *in_list_string = &s1;
+                        void *not_in_list_string = &s2;
+                        CU_ASSERT_TRUE(DL_list_contains(head, in_list_string, tests[i]->equal));
+                        CU_ASSERT_FALSE(DL_list_contains(head, not_in_list_string , tests[i]->equal));
+                }
+
+                DL_list_delete(head);
+        }
+
+        clean_tests(tests, NUM_TESTS);
+}
+
+
 int main(void)
 {
         // test suite
@@ -477,7 +523,8 @@ int main(void)
             NULL == CU_add_test(suite, "Insert elements into list", testDL_LIST_INSERT) ||
             NULL == CU_add_test(suite, "Empty lists handled", testDL_LIST_EMPTY) ||
             NULL == CU_add_test(suite, "Single element lists handled", testDL_LIST_SINGLE_ELEMENT) ||
-            NULL == CU_add_test(suite, "Check list length", testDL_LIST_LENGTH))
+            NULL == CU_add_test(suite, "Check list length", testDL_LIST_LENGTH) ||
+            NULL == CU_add_test(suite, "Find elements in list", testDL_LIST_CONTAINS))
         {
                 CU_cleanup_registry();
                 return CU_get_error();
