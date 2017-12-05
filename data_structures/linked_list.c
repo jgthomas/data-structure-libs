@@ -194,7 +194,7 @@ bool list_contains(Node *node, void *search, bool (*fptr)(void *, void *))
             }
             node = node->next;
         }
-        
+
         return false;
 }
 
