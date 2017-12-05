@@ -91,7 +91,7 @@ void DL_list_add_data(DllNode **head,
 }
 
 
-int DL_list_length(DllNode *head)
+int DL_list_length(DllNode *node)
 {
         int count = 0;
 
@@ -105,7 +105,7 @@ int DL_list_length(DllNode *head)
 }
 
 
-bool DL_list_is_empty(DllNode *head)
+bool DL_list_is_empty(DllNode *node)
 {
         if (node == NULL)
         {
