@@ -569,7 +569,7 @@ int main(void)
         }
 
         // add suite
-        suite = CU_add_suite("Binary heap", 0, 0);
+        suite = CU_add_suite("Linked list", 0, 0);
         if (NULL == suite)
         {
                 CU_cleanup_registry();
