@@ -105,6 +105,23 @@ int DL_list_length(DllNode *node)
 }
 
 
+bool DL_list_contains(DllNode *node,
+                      void *search,
+                      bool (*equal)(void *, void *))
+{
+        while (node != NULL)
+        {
+            if (equal(search, node->data))
+            {
+                return true;
+            }
+            node = node->next;
+        }
+
+        return false;
+}
+
+
 bool DL_list_is_empty(DllNode *node)
 {
         if (node == NULL)

@@ -36,4 +36,8 @@ void DL_list_add_data(DllNode **head,
                       size_t elem_size,
                       void (*add_to_list)(DllNode **head, void *new_data));
 
+bool DL_list_contains(DllNode *node,
+                      void *search,
+                      bool (*equal)(void *, void *));
+
 #endif
