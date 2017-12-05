@@ -261,41 +261,44 @@ bool DL_list_find_and_move(DllNode **node,
                            void *search,
                            bool (*equal)(void *, void *))
 {
+        DllNode *node_ptr = (*node);
+        DllNode *original_head = (*node);
+
         // if item is already in first position, do nothing
-        if (equal(search, (*node)->data))
+        if (equal(search, node_ptr->data))
         {
                 return true;
         }
 
-        DllNode *original_head = (*node);
-
-        while ((*node) != NULL)
+        while (node_ptr->next != NULL)
         {
-                (*node) = (*node)->next;
+                node_ptr = node_ptr->next;
 
-                if (equal(search, (*node)->data))
+                if (equal(search, node_ptr->data))
                 {
-                        if ((*node)->next != NULL)
+                        if (node_ptr->next != NULL)
                         {
-                                (*node)->previous->next = (*node)->next;
-                                (*node)->next->previous = (*node)->previous;
+                                node_ptr->previous->next = node_ptr->next;
+                                node_ptr->next->previous = node_ptr->previous;
                         }
                         else
                         {
-                                (*node)->previous->next = NULL;
+                                node_ptr->previous->next = NULL;
                         }
 
-                        (*node)->next = original_head;
-                        original_head->previous = (*node);
+                        node_ptr->next = original_head;
+                        original_head->previous = node_ptr;
 
-                        (*node)->previous = NULL;
+                        node_ptr->previous = NULL;
+                        (*node) = node_ptr;
 
                         return true;
                 }
         }
 
         // if not found, restore list to initial state
-        (*node) = original_head;
+        node_ptr = original_head;
+        (*node) = node_ptr;
         return false;
 }
 
