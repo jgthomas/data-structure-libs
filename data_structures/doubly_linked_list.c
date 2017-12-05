@@ -91,6 +91,31 @@ void DL_list_add_data(DllNode **head,
 }
 
 
+int DL_list_length(DllNode *head)
+{
+        int count = 0;
+
+        while (node != NULL)
+        {
+                node = node->next;
+                count++;
+        }
+
+        return count;
+}
+
+
+bool DL_list_is_empty(DllNode *head)
+{
+        if (node == NULL)
+        {
+            return true;
+        }
+
+        return false;
+}
+
+
 void DL_print_from_head(DllNode *node, void (*print)(void *x))
 {
         while (node != NULL)

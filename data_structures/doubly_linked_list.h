@@ -10,6 +10,8 @@ DllNode;
 
 DllNode *DL_list_init();
 DllNode *DL_list_create_node(void);
+int DL_list_length(DllNode *head);
+bool DL_list_is_empty(DllNode *head);
 void DL_list_push(DllNode **head, void *new_data);
 void DL_list_append(DllNode **node, void *new_data);
 void DL_print_from_head(DllNode *node, void (*print)(void *x));
