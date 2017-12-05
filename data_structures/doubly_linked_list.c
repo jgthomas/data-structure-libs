@@ -261,10 +261,11 @@ bool DL_list_find_and_move(DllNode **node,
                            void *search,
                            bool (*equal)(void *, void *))
 {
-        DllNode *node_ptr = (*node);
         DllNode *original_head = (*node);
+        DllNode *node_ptr = (*node);
+        DllNode *before;
+        DllNode *after;
 
-        // if item is already in first position, do nothing
         if (equal(search, node_ptr->data))
         {
                 return true;
@@ -272,18 +273,20 @@ bool DL_list_find_and_move(DllNode **node,
 
         while (node_ptr->next != NULL)
         {
+                before = node_ptr;
                 node_ptr = node_ptr->next;
+                after = node_ptr->next;
 
                 if (equal(search, node_ptr->data))
                 {
                         if (node_ptr->next != NULL)
                         {
-                                node_ptr->previous->next = node_ptr->next;
-                                node_ptr->next->previous = node_ptr->previous;
+                                before->next = after;
+                                after->previous = before;
                         }
                         else
                         {
-                                node_ptr->previous->next = NULL;
+                                before->next = NULL;
                         }
 
                         node_ptr->next = original_head;
@@ -296,9 +299,8 @@ bool DL_list_find_and_move(DllNode **node,
                 }
         }
 
-        // if not found, restore list to initial state
         node_ptr = original_head;
-        (*node) = node_ptr;
+
         return false;
 }
 
