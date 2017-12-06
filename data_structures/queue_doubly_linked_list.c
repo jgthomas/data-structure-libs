@@ -20,6 +20,22 @@ Queue *queue_init(void)
 }
 
 
+void queue_add_data(Queue *queue,
+                    void *data,
+                    size_t data_size,
+                    size_t elem_size)
+{
+        int len = data_size/elem_size;
+
+        for (int i = 0; i < len; i++)
+        {
+                void *next_data = data + elem_size * i;
+
+                enqueue(queue, next_data);
+        }
+}
+
+
 void enqueue(Queue *queue, void *data)
 {
         DllNode *new_node = DL_list_create_node();
