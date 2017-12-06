@@ -37,7 +37,7 @@ CFLAGS  = -g -Wall -Wextra -Werror
 
 #--------------FILES--------------#
 
-EXECUTABLES = demo_linear_binary_search demo_bubble_sort
+EXECUTABLES = demo_linear_binary_search demo_bubble_sort demo_selection_sort
 
 SHARED = demo_algorithms_shared.o
 
@@ -66,6 +66,9 @@ demo_linear_binary_search: demo_linear_binary_search.o $(SHARED)
 
 demo_bubble_sort: demo_bubble_sort.o $(SHARED)
 	$(CC) $(CFLAGS) $(SHARED) demo_bubble_sort.o -o demo_bubble_sort
+
+demo_selection_sort: demo_selection_sort.o $(SHARED)
+	$(CC) $(CFLAGS) $(SHARED) demo_selection_sort.o -o demo_selection_sort
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
