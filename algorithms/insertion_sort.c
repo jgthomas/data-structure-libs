@@ -28,8 +28,8 @@ void insertion_sort(void *array,
 
                         if (previous >= 0)
                         {
-                                previous_value = array + elem_size * previous;
                                 current_value = array + elem_size * current;
+                                previous_value = array + elem_size * previous;
                         }
                 }
         }
