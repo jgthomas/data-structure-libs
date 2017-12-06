@@ -37,7 +37,9 @@ CFLAGS  = -g -Wall -Wextra -Werror
 
 #--------------FILES--------------#
 
-EXECUTABLES = demo_linear_binary_search demo_bubble_sort demo_selection_sort
+EXECUTABLES = demo_linear_binary_search \
+			  demo_bubble_sort \
+			  demo_selection_sort
 
 SHARED = demo_algorithms_shared.o
 
