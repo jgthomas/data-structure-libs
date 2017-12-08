@@ -51,10 +51,8 @@ void testBASIC_SORTING(void)
         for (int i = 0; i < NUM_TESTS; i++)
         {
                 CU_ASSERT_FALSE(arrays_match(tests[i]->test, tests[i]->answer, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
-                print_sequence(tests[i]->test, tests[i]->data_size, tests[i]->elem_size, tests[i]->print);
                 insertion_sort(tests[i]->test, tests[i]->data_size, tests[i]->elem_size, tests[i]->compare);
                 CU_ASSERT_TRUE(arrays_match(tests[i]->test, tests[i]->answer, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
-                print_sequence(tests[i]->test, tests[i]->data_size, tests[i]->elem_size, tests[i]->print);
         }
 
         clean_tests(tests, NUM_TESTS);
