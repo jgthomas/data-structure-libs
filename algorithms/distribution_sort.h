@@ -16,11 +16,6 @@ void build_records(Record *record_array[],
                    size_t data_size,
                    size_t elem_size);
 
-bool records_match_array(Record *record_array[],
-                         char *strings[],
-                         int len,
-                         bool (*equal)(void *x, void *y));
-
 void delete_records(Record *record_array[], int len);
 void print_records(Record *record_array[], int len, void (*print)(void *x));
 

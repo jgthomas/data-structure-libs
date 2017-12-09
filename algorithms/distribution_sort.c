@@ -39,19 +39,3 @@ void print_records(Record *record_array[], int len, void (*print)(void *x))
         }
         printf("\n");
 }
-
-
-bool records_match_array(Record *record_array[],
-                         char *strings[],
-                         int len,
-                         bool (*equal)(void *x, void *y))
-{
-        for (int i = 0; i < len; i++)
-        {
-                if (!equal(strings[i], record_array[i]->data))
-                {
-                        return false;
-                }
-        }
-        return true;
-}
