@@ -23,6 +23,7 @@ bool records_match_array(Record *record_array[],
                          bool (*equal)(void *x, void *y));
 
 void delete_records(Record *record_array[], int len);
+void print_record(Record *record, void (*print)(void *x));
 void print_records(Record *record_array[], int len, void (*print)(void *x));
 
 #endif

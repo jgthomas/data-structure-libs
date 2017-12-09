@@ -30,12 +30,18 @@ void delete_records(Record *record_array[], int len)
 }
 
 
+void print_record(Record *record, void (*print)(void *x))
+{
+        print(record->data);
+        printf(" %d   ", record_array[i]->key);
+}
+
+
 void print_records(Record *record_array[], int len, void (*print)(void *x))
 {
         for (int i = 0; i < len; i++)
         {
-                print(record_array[i]->data);
-                printf(" %d   ", record_array[i]->key);
+                print_record(record_array[i], print);
         }
         printf("\n");
 }
