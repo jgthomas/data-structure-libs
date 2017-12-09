@@ -11,29 +11,6 @@
 #include "algorithms/radix_sort.h"
 
 
-void print_array(int array[], int len)
-{
-        for (int i = 0; i < len; i++)
-        {
-                printf("%d ", array[i]);
-        }
-        printf("\n");
-}
-
-
-bool int_arrays_match(int array1[], int array2[], int len)
-{
-        for (int i = 0; i < len; i++)
-        {
-                if (array1[i] != array2[i])
-                {
-                        return false;
-                }
-        }
-        return true;
-}
-
-
 /**
  * Radix sort of a simple integer array
  *
@@ -45,9 +22,9 @@ void testRADIX_SORT_BASIC(void)
         int len = sizeof(input) / sizeof(input[0]);
         int max = find_max_integer(input, len) + 1;
 
-        CU_ASSERT_FALSE(int_arrays_match(input, sorted, len));
+        CU_ASSERT_FALSE(matching_sequences(input, sorted, sizeof(input), sizeof(input[0]), equal_int));
         radix_sort(input, len, max);
-        CU_ASSERT_TRUE(int_arrays_match(input, sorted, len));
+        CU_ASSERT_TRUE(matching_sequences(input, sorted, sizeof(input), sizeof(input[0]), equal_int));
 }
 
 
