@@ -4,7 +4,7 @@
  *
  * */
 #include <stdio.h>
-#include "distribution_sort.h"
+#include "tools/general_distro_sort.h"
 #include "counting_sort.h"
 
 

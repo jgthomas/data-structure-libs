@@ -26,12 +26,12 @@ TARGET = $(BUILD_DIR)/$(BIN)
 # FILES
 PWD_HEADERS := $(wildcard *.h)
 PWD_SOURCES := $(wildcard *.c)
-TOOLS_HEADERS := tools/printing.h tools/comparison.h tools/general.h
-TOOLS_SOURCES := tools/printing.c tools/comparison.c tools/general.c
+TOOLS_HEADERS := tools/printing.h tools/comparison.h tools/general.h tools/general_distro_sort.h
+TOOLS_SOURCES := tools/printing.c tools/comparison.c tools/general.c tools/general_distro_sort.c
 TEST_HEADERS := tests/shared_test.h
 TEST_SOURCES := tests/shared_test.c
-SORT_HEADERS := algorithms/counting_sort.h algorithms/distribution_sort.h
-SORT_SOURCES := algorithms/counting_sort.c algorithms/distribution_sort.c
+SORT_HEADERS := algorithms/counting_sort.h
+SORT_SOURCES := algorithms/counting_sort.c
 DS_HEADERS :=
 DS_SOURCES :=
 HEADERS = $(PWD_HEADERS) $(TOOLS_HEADERS) $(TEST_HEADERS) $(SORT_HEADERS) $(DS_HEADERS)

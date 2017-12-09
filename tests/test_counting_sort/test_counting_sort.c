@@ -6,10 +6,8 @@
 #include "tests/shared_test.h"
 #include "tools/printing.h"
 #include "tools/comparison.h"
-#include "algorithms/distribution_sort.h"
+#include "tools/general_distro_sort.h"
 #include "algorithms/counting_sort.h"
-
-
 
 
 void print_array(int array[], int len)
@@ -54,6 +52,7 @@ bool records_match_array(Record *record_array[],
         }
         return true;
 }
+
 
 void testSIMPLE_COUNTING_SORT_BASIC(void)
 {

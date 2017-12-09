@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "distribution_sort.h"
+#include "general_distro_sort.h"
 
 
 void build_records(Record *record_array[],
