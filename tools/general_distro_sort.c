@@ -39,3 +39,24 @@ void print_records(Record *record_array[], int len, void (*print)(void *x))
         }
         printf("\n");
 }
+
+
+bool records_match_array(Record *record_array[],
+                         void *answer_array,
+                         size_t data_size,
+                         size_t elem_size,
+                         bool (*equal)(void *x, void *y))
+{
+        int len = data_size/elem_size;
+
+        for (int i = 0; i < len; i++)
+        {
+                void *next_elem = answer_array + elem_size * i;
+
+                if (!equal(next_elem, record_array[i]->data))
+                {
+                        return false;
+                }
+        }
+        return true;
+}
