@@ -1,6 +1,8 @@
 #ifndef LIST_FUNCS_H
 #define LIST_FUNCS_H
 
+#include <stdbool.h>
+
 typedef struct new_node {
     void *data;
     struct new_node *next;
