@@ -17,3 +17,24 @@ void copy(void *target, void *data, size_t elem_size)
 {
         memcpy(target, data, elem_size);
 }
+
+
+int find_max_integer(int array[], int len)
+{
+        int max = 0;
+
+        if (len >= 1)
+        {
+                max = array[0];
+
+                for (int i = 1; i < len; i++)
+                {
+                        if (array[i] > max)
+                        {
+                                max = array[i];
+                        }
+                }
+        }
+
+        return max;
+}
