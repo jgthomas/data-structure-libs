@@ -35,6 +35,26 @@ bool int_arrays_match(int array1[], int array2[], int len)
 }
 
 
+bool records_match_array(Record *record_array[],
+                         void *answer_array,
+                         size_t data_size,
+                         size_t elem_size,
+                         bool (*equal)(void *x, void *y))
+{
+        int len = data_size/elem_size;
+
+        for (int i = 0; i < len; i++)
+        {
+                void *next_elem = answer_array + elem_size * i;
+
+                if (!equal(next_elem, record_array[i]->data))
+                {
+                        return false;
+                }
+        }
+        return true;
+}
+
 void testSIMPLE_COUNTING_SORT_BASIC(void)
 {
         int input[] = {3,2,5,7,9,12,3,56,7,23,14,8,9,13,17,8,25,32,12,21,6,11,42,12,6};
@@ -61,7 +81,7 @@ void testCOUNTING_SORT_BASIC(void)
 }
 
 
-/*void testOBJECT_COUNTING_SORT_BASIC(void)
+void testOBJECT_COUNTING_SORT_BASIC(void)
 {
         int int_array[] = {2,2,1,5,12,5};
 
@@ -72,7 +92,7 @@ void testCOUNTING_SORT_BASIC(void)
                               "jack",
                               "dave"};
 
-        char *answer_array[] = {"simon"
+        char *answer_array[] = {"simon",
                                 "steve",
                                 "jane",
                                 "james",
@@ -90,16 +110,12 @@ void testCOUNTING_SORT_BASIC(void)
                       sizeof(data_array),
                       sizeof(data_array[0]));
 
-        print_records(record_array, len, print_string);
-
-        CU_ASSERT_FALSE(records_match_array(record_array, answer_array, len, equal_string));
+        CU_ASSERT_FALSE(records_match_array(record_array, answer_array, sizeof(answer_array), sizeof(answer_array[0]), equal_string));
         object_counting_sort(record_array, len, max);
-        CU_ASSERT_TRUE(records_match_array(record_array, answer_array, len, equal_string));
-
-        print_records(record_array, len, print_string);
+        CU_ASSERT_TRUE(records_match_array(record_array, answer_array, sizeof(answer_array), sizeof(answer_array[0]), equal_string));
 
         delete_records(record_array, len);
-}*/
+}
 
 
 int main(void)
@@ -123,8 +139,8 @@ int main(void)
 
         // add tests
         if (NULL == CU_add_test(suite, "Simple counting sort basic", testSIMPLE_COUNTING_SORT_BASIC) ||
-            NULL == CU_add_test(suite, "Counting sort basic", testCOUNTING_SORT_BASIC))
-  //          NULL == CU_add_test(suite, "Object counting sort basic", testOBJECT_COUNTING_SORT_BASIC))
+            NULL == CU_add_test(suite, "Counting sort basic", testCOUNTING_SORT_BASIC) ||
+            NULL == CU_add_test(suite, "Object counting sort basic", testOBJECT_COUNTING_SORT_BASIC))
         {
                 CU_cleanup_registry();
                 return CU_get_error();
