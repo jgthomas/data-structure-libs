@@ -29,7 +29,7 @@ void testRADIX_SORT_BASIC(void)
 
 
 /**
- * Radix sort of an array of structs with integer keys 
+ * Radix sort of an array of structs with integer keys
  *
  * */
 void testOBJECT_RADIX_SORT_BASIC(void)
