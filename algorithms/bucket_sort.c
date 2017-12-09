@@ -77,26 +77,11 @@ void delete_bucket(Node *node)
 }
 
 
-Node *make_node(Record *record)
-{
-        Node *new_node = malloc(sizeof(*new_node));
-
-        if (new_node == NULL)
-        {
-                fprintf(stderr, "Failed to allocate memory for node.\n");
-                exit(EXIT_FAILURE);
-        }
-
-        new_node->data = record;
-        new_node->next = NULL;
-
-        return new_node;
-}
-
-
 void insert(Node **head, Record *record)
 {
-        Node *new_node = make_node(record);
+        Node *new_node = create_node();
+        new_node->data = record;
+        new_node->next = NULL;
 
         if ((*head) == NULL)
         {
@@ -115,7 +100,6 @@ void insert(Node **head, Record *record)
         }
         else
         {
-
                 while (current != NULL && record->key >= current_data->key)
                 {
                         previous = current;

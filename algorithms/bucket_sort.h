@@ -18,7 +18,6 @@ void gather(Node *buckets[],
 
 void delete_buckets(Node *buckets[], int len);
 void delete_bucket(Node *node);
-Node *make_node(Record *record);
 void insert(Node **head, Record *record);
 int pick_bucket(int n, int max, int len);
 

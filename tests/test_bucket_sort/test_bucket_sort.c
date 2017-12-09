@@ -6,6 +6,7 @@
 #include "tests/shared_test.h"
 #include "tools/printing.h"
 #include "tools/comparison.h"
+#include "tools/general.h"
 #include "tools/general_distro_sort.h"
 #include "algorithms/bucket_sort.h"
 
@@ -34,7 +35,7 @@ void testOBJECT_BUCKET_SORT_BASIC(void)
                                 "jack"};
 
         int len = sizeof(int_array) / sizeof(int_array[0]);
-        int max = 13;
+        int max = find_max_integer(int_array, len) + 1;
 
         Record *record_array[len];
 
