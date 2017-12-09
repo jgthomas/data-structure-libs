@@ -10,29 +10,6 @@
 #include "algorithms/counting_sort.h"
 
 
-void print_array(int array[], int len)
-{
-        for (int i = 0; i < len; i++)
-        {
-                printf("%d ", array[i]);
-        }
-        printf("\n");
-}
-
-
-bool int_arrays_match(int array1[], int array2[], int len)
-{
-        for (int i = 0; i < len; i++)
-        {
-                if (array1[i] != array2[i])
-                {
-                        return false;
-                }
-        }
-        return true;
-}
-
-
 void testSIMPLE_COUNTING_SORT_BASIC(void)
 {
         int input[] = {3,2,5,7,9,12,3,56,7,23,14,8,9,13,17,8,25,32,12,21,6,11,42,12,6};
@@ -40,9 +17,9 @@ void testSIMPLE_COUNTING_SORT_BASIC(void)
         int len = sizeof(input) / sizeof(input[0]);
         int max = 57;
 
-        CU_ASSERT_FALSE(int_arrays_match(input, sorted, len));
+        CU_ASSERT_FALSE(matching_sequences(input, sorted, sizeof(input), sizeof(input[0]), equal_int));
         simple_counting_sort(input, len, max);
-        CU_ASSERT_TRUE(int_arrays_match(input, sorted, len));
+        CU_ASSERT_TRUE(matching_sequences(input, sorted, sizeof(input), sizeof(input[0]), equal_int));
 }
 
 
@@ -53,9 +30,9 @@ void testCOUNTING_SORT_BASIC(void)
         int len = sizeof(input) / sizeof(input[0]);
         int max = 57;
 
-        CU_ASSERT_FALSE(int_arrays_match(input, sorted, len));
+        CU_ASSERT_FALSE(matching_sequences(input, sorted, sizeof(input), sizeof(input[0]), equal_int));
         counting_sort(input, len, max);
-        CU_ASSERT_TRUE(int_arrays_match(input, sorted, len));
+        CU_ASSERT_TRUE(matching_sequences(input, sorted, sizeof(input), sizeof(input[0]), equal_int));
 }
 
 
