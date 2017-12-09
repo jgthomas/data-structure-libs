@@ -10,6 +10,10 @@
 #include "algorithms/counting_sort.h"
 
 
+/**
+ * Counting sort of a simple integer array
+ *
+ * */
 void testSIMPLE_COUNTING_SORT_BASIC(void)
 {
         int input[] = {3,2,5,7,9,12,3,56,7,23,14,8,9,13,17,8,25,32,12,21,6,11,42,12,6};
@@ -23,6 +27,10 @@ void testSIMPLE_COUNTING_SORT_BASIC(void)
 }
 
 
+/**
+ * Counting sort of a simple integer array, maintaining stable order
+ *
+ * */
 void testCOUNTING_SORT_BASIC(void)
 {
         int input[] = {3,2,5,7,9,12,3,56,7,23,14,8,9,13,17,8,25,32,12,21,6,11,42,12,6};
@@ -36,6 +44,10 @@ void testCOUNTING_SORT_BASIC(void)
 }
 
 
+/**
+ * Counting sort of an array of structs with integer keys
+ *
+ * */
 void testOBJECT_COUNTING_SORT_BASIC(void)
 {
         int int_array[] = {2,2,1,5,12,5};
