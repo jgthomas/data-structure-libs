@@ -141,6 +141,7 @@ void print_bucket(Node *node_ptr, void (*print)(void *x))
                         printf(" --> ");
                 }
         }
+        printf("\n");
 }
 
 
