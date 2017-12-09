@@ -33,7 +33,7 @@ void delete_records(Record *record_array[], int len)
 void print_record(Record *record, void (*print)(void *x))
 {
         print(record->data);
-        printf(" %d   ", record_array[i]->key);
+        printf(" %d   ", record->key);
 }
 
 
