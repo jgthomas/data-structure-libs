@@ -85,3 +85,30 @@ bool equal_string(void *search, void *node_data)
         }
         return false;
 }
+
+
+/**
+ * Sequences of elements
+ *
+ * */
+bool matching_sequences(void *first,
+                        void *second,
+                        size_t data_size,
+                        size_t elem_size,
+                        bool (*equal)(void *x, void *y))
+{
+        int len = data_size/elem_size;
+
+        for (int i = 0; i < len; i++)
+        {
+                void *first_data = first + elem_size * i;
+                void *second_data = second + elem_size * i;
+
+                if (!equal(first_data, second_data))
+                {
+                        return false;
+                }
+        }
+
+        return true;
+}

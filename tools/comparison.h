@@ -13,4 +13,10 @@ bool less_than_string(void *first, void *second);
 bool more_than_string(void *first, void *second);
 bool equal_string(void *search, void *node_data);
 
+bool matching_sequences(void *first,
+                        void *second,
+                        size_t data_size,
+                        size_t elem_size,
+                        bool (*equal)(void *x, void *y));
+
 #endif
