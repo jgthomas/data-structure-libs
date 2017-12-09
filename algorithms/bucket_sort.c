@@ -125,3 +125,32 @@ int pick_bucket(int n, int max, int len)
 {
         return (n * len) / (max + 1);
 }
+
+
+void print_bucket(Node *node_ptr, void (*print)(void *x))
+{
+        while (node_ptr != NULL)
+        {
+                Record *current_record = (Record *)node_ptr->data;
+                print_record(current_record, print);
+
+                node_ptr = node_ptr->next;
+
+                if (node_ptr != NULL)
+                {
+                        printf(" --> ");
+                }
+        }
+}
+
+
+void print_all_buckets(Node *buckets[], int len, void (*print)(void *x))
+{
+        for (int i = 0; i < len; i++)
+        {
+                if (buckets[i] != NULL)
+                {
+                        print_bucket(buckets[i], print);
+                }
+        }
+}

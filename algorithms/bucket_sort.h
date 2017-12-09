@@ -20,5 +20,7 @@ void delete_buckets(Node *buckets[], int len);
 void delete_bucket(Node *node);
 void insert(Node **head, Record *record);
 int pick_bucket(int n, int max, int len);
+void print_bucket(Node *node_ptr, void (*print)(void *x));
+void print_all_buckets(Node *buckets[], int len, void (*print)(void *x));
 
 #endif
