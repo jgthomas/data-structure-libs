@@ -68,6 +68,11 @@ int main()
                         BST_post_order_print(head, print_int);
                         printf("\n");
                 }
+                else if (strncmp(command, "breadth", 7) == 0)
+                {
+                        BST_breadth_first_print(head, print_int);
+                        printf("\n");
+                }
                 else if (strncmp(command, "quit", 4) == 0)
                 {
                         BST_delete_tree(head);
