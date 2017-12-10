@@ -12,7 +12,7 @@ Queue;
 
 Queue *queue_init(void);
 void enqueue(Queue *queue, void *data);
-void dequeue(Queue *queue);
+void *dequeue(Queue *queue);
 void *queue_peek(Queue *queue);
 void queue_delete(Queue *queue);
 void queue_print(Queue *queue, void (*print)(void *x));

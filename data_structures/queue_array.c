@@ -42,9 +42,11 @@ void queue_add_data(Queue *queue,
 }
 
 
-void dequeue(Queue *queue)
+void *dequeue(Queue *queue)
 {
+        void *front_data = queue->array[queue->front];
         queue->front += 1;
+        return front_data;
 }
 
 
