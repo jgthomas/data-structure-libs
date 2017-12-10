@@ -51,7 +51,7 @@ int main()
                 }
                 else if (strncmp(command, "show", 4) == 0)
                 {
-                        visualise_tree(head, 0, print_int);
+                        BST_visualise_tree(head, 0, print_int);
                 }
                 else if (strncmp(command, "inorder", 7) == 0)
                 {
