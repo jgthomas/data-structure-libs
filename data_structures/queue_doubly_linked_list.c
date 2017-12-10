@@ -65,11 +65,8 @@ void enqueue(Queue *queue, void *data)
 }
 
 
-void dequeue(Queue *queue, void *data)
+void dequeue(Queue *queue)
 {
-        DllNode *new_node = DL_list_create_node();
-        new_node->data = data;
-
         if (queue_empty(queue))
         {
                 printf("Queue is empty\n");
