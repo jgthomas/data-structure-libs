@@ -57,7 +57,6 @@ void testQUEUE_LOAD_DATA(void)
         {
                 Queue *queue = queue_init();
                 queue_add_data(queue, tests[i]->test, tests[i]->data_size, tests[i]->elem_size);
-                queue_print_from_back(queue, tests[i]->print);
                 CU_ASSERT_TRUE(dll_array_match(queue->back, tests[i]->answer, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
 
                 queue_delete(queue);
@@ -67,7 +66,7 @@ void testQUEUE_LOAD_DATA(void)
 }
 
 
-/*void testQUEUE_PEEK(void)
+void testQUEUE_PEEK(void)
 {
         TestCase **tests = make_tests(NUM_TESTS);
 
@@ -75,7 +74,7 @@ void testQUEUE_LOAD_DATA(void)
         {
                 Queue *queue = queue_init();
                 queue_add_data(queue, tests[i]->test, tests[i]->data_size, tests[i]->elem_size);
-                CU_ASSERT_TRUE(match(tests[i]->test, queue->array, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
+                CU_ASSERT_TRUE(dll_array_match(queue->back, tests[i]->answer, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
 
                 void *peeked = queue_peek(queue);
                 void *should_be_front = tests[i]->test + tests[i]->elem_size * (LENGTH-LENGTH);
@@ -88,7 +87,7 @@ void testQUEUE_LOAD_DATA(void)
 }
 
 
-void testDEQUEUE(void)
+/*void testDEQUEUE(void)
 {
 
         TestCase **tests = make_tests(NUM_TESTS);
@@ -133,8 +132,8 @@ int main(void)
         }
 
         // add tests
-        if (NULL == CU_add_test(suite, "Load data into queue", testQUEUE_LOAD_DATA))
-  //          NULL == CU_add_test(suite, "Peek returns front of queue", testQUEUE_PEEK) ||
+        if (NULL == CU_add_test(suite, "Load data into queue", testQUEUE_LOAD_DATA) ||
+            NULL == CU_add_test(suite, "Peek returns front of queue", testQUEUE_PEEK))
     //        NULL == CU_add_test(suite, "Pop removes element from top", testDEQUEUE))
         {
                 CU_cleanup_registry();
