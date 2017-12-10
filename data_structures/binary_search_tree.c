@@ -87,7 +87,7 @@ void BST_insert(BinTreeNode **head,
  * less_than  :  function checks first item is less than second
  *
  * */
-bool search(BinTreeNode **head,
+bool BST_search(BinTreeNode **head,
             void *data,
             bool (*equals)(void *first, void *second),
             bool (*less_than)(void *first, void *second))
@@ -100,11 +100,11 @@ bool search(BinTreeNode **head,
                 }
                 else if (less_than(data, (*head)->data))
                 {
-                        return search(&(*head)->left, data, equals, less_than);
+                        return BST_search(&(*head)->left, data, equals, less_than);
                 }
                 else
                 {
-                        return search(&(*head)->right, data, equals, less_than);
+                        return BST_search(&(*head)->right, data, equals, less_than);
                 }
         }
 

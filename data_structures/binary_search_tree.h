@@ -20,7 +20,7 @@ void BST_load_data(BinTreeNode **head,
                    size_t elem_size,
                    bool (*less_than)(void *first, void *second));
 
-bool search(BinTreeNode **head,
+bool BST_search(BinTreeNode **head,
             void *data,
             bool (*equals)(void *first, void *second),
             bool (*less)(void *first, void *second));
