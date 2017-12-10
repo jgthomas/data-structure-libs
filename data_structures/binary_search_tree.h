@@ -29,13 +29,13 @@ void BST_visualise_tree(BinTreeNode *node,
                         int level,
                         void (*print)(void *item));
 
-void delete_tree(BinTreeNode *head);
-int total_nodes(BinTreeNode *node);
-void post_order_print(BinTreeNode *node, void (*print)(void *x));
-void pre_order_print(BinTreeNode *node, void (*print)(void *x));
-void in_order_print(BinTreeNode *node, void (*print)(void *x));
-int max_depth(BinTreeNode *node);
-void *min_value(BinTreeNode *node);
-void *max_value(BinTreeNode *node);
+void BST_delete_tree(BinTreeNode *head);
+int BST_total_nodes(BinTreeNode *node);
+void BST_post_order_print(BinTreeNode *node, void (*print)(void *x));
+void BST_pre_order_print(BinTreeNode *node, void (*print)(void *x));
+void BST_in_order_print(BinTreeNode *node, void (*print)(void *x));
+int BST_max_depth(BinTreeNode *node);
+void *BST_min_value(BinTreeNode *node);
+void *BST_max_value(BinTreeNode *node);
 
 #endif

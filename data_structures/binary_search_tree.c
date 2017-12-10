@@ -144,17 +144,17 @@ void BST_visualise_tree(BinTreeNode *node,
  * Prints all values in tree in ascending order
  *
  * */
-void in_order_print(BinTreeNode *node, void (*print)(void *x))
+void BST_in_order_print(BinTreeNode *node, void (*print)(void *x))
 {
         if (node == NULL)
         {
 	            return;
         }
 
-        in_order_print(node->left, print);
+        BST_in_order_print(node->left, print);
         print(node->data);
         printf(" ");
-        in_order_print(node->right, print);
+        BST_in_order_print(node->right, print);
 }
 
 
@@ -166,7 +166,7 @@ void in_order_print(BinTreeNode *node, void (*print)(void *x))
  * root -> left subtree -> right subtree
  *
  * */
-void pre_order_print(BinTreeNode *node, void (*print)(void *x))
+void BST_pre_order_print(BinTreeNode *node, void (*print)(void *x))
 {
         if (node == NULL)
 	    {
@@ -175,8 +175,8 @@ void pre_order_print(BinTreeNode *node, void (*print)(void *x))
 
         print(node->data);
         printf(" ");
-        pre_order_print(node->left, print);
-        pre_order_print(node->right, print);
+        BST_pre_order_print(node->left, print);
+        BST_pre_order_print(node->right, print);
 }
 
 
@@ -188,40 +188,40 @@ void pre_order_print(BinTreeNode *node, void (*print)(void *x))
  * left subtree -> right subtree -> root
  *
  * */
-void post_order_print(BinTreeNode *node, void (*print)(void *x))
+void BST_post_order_print(BinTreeNode *node, void (*print)(void *x))
 {
         if (node == NULL)
         {
                 return;
         }
 
-        post_order_print(node->left, print);
-        post_order_print(node->right, print);
+        BST_post_order_print(node->left, print);
+        BST_post_order_print(node->right, print);
         print(node->data);
         printf(" ");
 }
 
 
-int total_nodes(BinTreeNode *node)
+int BST_total_nodes(BinTreeNode *node)
 {
         if (node == NULL)
         {
                 return 0;
         }
 
-        return total_nodes(node->left) + 1 + total_nodes(node->right);
+        return BST_total_nodes(node->left) + 1 + BST_total_nodes(node->right);
 }
 
 
-int max_depth(BinTreeNode *node)
+int BST_max_depth(BinTreeNode *node)
 {
         if (node == NULL)
         {
                 return 0;
         }
 
-        int left_depth = max_depth(node->left) + 1;
-        int right_depth = max_depth(node->right) + 1;
+        int left_depth = BST_max_depth(node->left) + 1;
+        int right_depth = BST_max_depth(node->right) + 1;
 
         if (left_depth > right_depth)
         {
@@ -232,7 +232,7 @@ int max_depth(BinTreeNode *node)
 }
 
 
-void *min_value(BinTreeNode *node)
+void *BST_min_value(BinTreeNode *node)
 {
         while (node->left != NULL)
         {
@@ -243,7 +243,7 @@ void *min_value(BinTreeNode *node)
 }
 
 
-void *max_value(BinTreeNode *node)
+void *BST_max_value(BinTreeNode *node)
 {
         while (node->right != NULL)
         {
@@ -254,12 +254,12 @@ void *max_value(BinTreeNode *node)
 }
 
 
-void delete_tree(BinTreeNode *head)
+void BST_delete_tree(BinTreeNode *head)
 {
         if (head != NULL)
         {
-                delete_tree(head->left);
-                delete_tree(head->right);
+                BST_delete_tree(head->left);
+                BST_delete_tree(head->right);
                 free(head);
         }
 }
