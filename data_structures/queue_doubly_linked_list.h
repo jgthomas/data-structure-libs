@@ -8,8 +8,10 @@ Queue;
 
 Queue *queue_init(void);
 bool queue_empty(Queue *queue);
+void queue_delete(Queue *queue);
 void enqueue(Queue *queue, void *data);
 void dequeue(Queue *queue, void *data);
+void queue_print_from_head(Queue *queue, void (*print)(void *x));
 void queue_add_data(Queue *queue,
                     void *data,
                     size_t data_size,

@@ -1,6 +1,7 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "doubly_linked_list.h"
-#include "queue_linked_list.h"
+#include "queue_doubly_linked_list.h"
 
 
 Queue *queue_init(void)
@@ -17,6 +18,13 @@ Queue *queue_init(void)
         new_queue->back = NULL;
 
         return new_queue;
+}
+
+
+void queue_delete(Queue *queue)
+{
+        DL_list_delete(queue->back);
+        free(queue);
 }
 
 
@@ -41,7 +49,7 @@ void enqueue(Queue *queue, void *data)
         DllNode *new_node = DL_list_create_node();
         new_node->data = data;
 
-        if (empty_queue(queue))
+        if (queue_empty(queue))
         {
                 queue->front = new_node;
                 queue->back = new_node;
@@ -69,7 +77,7 @@ void dequeue(Queue *queue, void *data)
         }
         else
         {
-                DllNode *node_ptr = front;
+                DllNode *node_ptr = queue->front;
                 queue->front = queue->front->previous;
                 free(node_ptr);
         }
@@ -82,9 +90,15 @@ void *queue_peek(Queue *queue)
 }
 
 
+void queue_print_from_head(Queue *queue, void (*print)(void *x))
+{
+        DL_print_from_head(queue->back, print);
+}
+
+
 bool queue_empty(Queue *queue)
 {
-        if (queue->front === NULL)
+        if (queue->front == NULL)
         {
                 return true;
         }
