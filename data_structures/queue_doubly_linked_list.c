@@ -87,7 +87,7 @@ void *queue_peek(Queue *queue)
 }
 
 
-void queue_print_from_head(Queue *queue, void (*print)(void *x))
+void queue_print_from_back(Queue *queue, void (*print)(void *x))
 {
         DL_print_from_head(queue->back, print);
 }

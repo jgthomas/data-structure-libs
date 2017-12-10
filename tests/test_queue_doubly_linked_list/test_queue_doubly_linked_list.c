@@ -57,7 +57,7 @@ void testQUEUE_LOAD_DATA(void)
         {
                 Queue *queue = queue_init();
                 queue_add_data(queue, tests[i]->test, tests[i]->data_size, tests[i]->elem_size);
-                queue_print_from_head(queue, tests[i]->print);
+                queue_print_from_back(queue, tests[i]->print);
                 CU_ASSERT_TRUE(dll_array_match(queue->back, tests[i]->answer, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
 
                 queue_delete(queue);
