@@ -65,19 +65,20 @@ void enqueue(Queue *queue, void *data)
 }
 
 
-void dequeue(Queue *queue)
+void *dequeue(Queue *queue)
 {
-        if (queue_empty(queue))
-        {
-                printf("Queue is empty\n");
-                return;
-        }
-        else
+        void *front_data = NULL;
+
+        if (!queue_empty(queue))
         {
                 DllNode *node_ptr = queue->front;
+                front_data = node_ptr->data;
                 queue->front = queue->front->previous;
+                queue->front->next = NULL;
                 free(node_ptr);
         }
+
+        return front_data;
 }
 
 
