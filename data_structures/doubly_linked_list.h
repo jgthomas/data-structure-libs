@@ -1,6 +1,8 @@
 #ifndef DOUBLY_LINKED_LIST_H
 #define DOUBLY_LINKED_LIST_H 
 
+#include <stdbool.h>
+
 typedef struct new_dll_node {
     void *data;
     struct new_dll_node *next;
