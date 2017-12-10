@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include "queue_array.h"
 
 
@@ -11,6 +12,11 @@ Queue *queue_init(void)
         {
                 fprintf(stderr, "Failed to allocate memory for queue\n");
                 exit(EXIT_FAILURE);
+        }
+
+        for (int i = 0; i < QUEUE_BUFFER; i++)
+        {
+                new_queue->array[i] = NULL;
         }
 
         new_queue->front = 0;
@@ -59,6 +65,17 @@ void *queue_peek(Queue *queue)
 void queue_delete(Queue *queue)
 {
         free(queue);
+}
+
+
+bool queue_empty(Queue *queue)
+{
+        if (queue->front > queue->back)
+        {
+                return true;
+        }
+
+        return false;
 }
 
 

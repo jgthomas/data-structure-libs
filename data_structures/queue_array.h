@@ -17,6 +17,8 @@ void *queue_peek(Queue *queue);
 void queue_delete(Queue *queue);
 void queue_print(Queue *queue, void (*print)(void *x));
 
+bool queue_empty(Queue *queue);
+
 void queue_add_data(Queue *queue,
                     void *data,
                     size_t data_size,
