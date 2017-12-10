@@ -93,6 +93,12 @@ void queue_print_from_head(Queue *queue, void (*print)(void *x))
 }
 
 
+void queue_print_from_front(Queue *queue, void (*print)(void *x))
+{
+        DL_print_from_tail(queue->back, print);
+}
+
+
 bool queue_empty(Queue *queue)
 {
         if (queue->front == NULL)
