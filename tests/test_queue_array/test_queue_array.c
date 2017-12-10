@@ -98,11 +98,13 @@ void testDEQUEUE(void)
                 queue_add_data(queue, tests[i]->test, tests[i]->data_size, tests[i]->elem_size);
                 CU_ASSERT_TRUE(match(tests[i]->test, queue->array, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
 
-                dequeue(queue);
+                void *original_front = tests[i]->test + tests[i]->elem_size * (LENGTH-LENGTH);
+                void *front_data = dequeue(queue);
+                CU_ASSERT_TRUE(tests[i]->equal(front_data, original_front));
+
+                void *new_front = tests[i]->test + tests[i]->elem_size * (LENGTH-(LENGTH-1));
                 void *peeked = queue_peek(queue);
-                void *should_be_front = tests[i]->test + tests[i]->elem_size * (LENGTH-(LENGTH-1));
-                CU_ASSERT_TRUE(tests[i]->equal(peeked, should_be_front));
-                CU_ASSERT_EQUAL(queue->front, LENGTH-(LENGTH-1));
+                CU_ASSERT_TRUE(tests[i]->equal(peeked, new_front));
 
                 queue_delete(queue);
         }
