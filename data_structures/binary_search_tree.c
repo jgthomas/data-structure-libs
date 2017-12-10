@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include "queue_array.h"
 #include "binary_search_tree.h"
 
 
@@ -131,6 +132,35 @@ void BST_visualise_tree(BinTreeNode *node,
 	    printf("\n\n");
 
 	    BST_visualise_tree(node->left, level+1, print);
+}
+
+
+void BST_breadth_first_print(BinTreeNode *node, void (*print)(void *x))
+{
+        Queue *queue = queue_init();
+        enqueue(queue, node);
+        BinTreeNode *current_front = node;
+
+        while (current_front != NULL)
+        {
+                if (current_front->left != NULL)
+                {
+                        enqueue(queue, current_front->left);
+                }
+
+                if (current_front->right != NULL)
+                {
+                        enqueue(queue, current_front->right);
+                }
+
+                BinTreeNode *front = dequeue(queue);
+                print(front->data);
+                printf(" ");
+
+                current_front = queue_peek(queue);
+        }
+
+        queue_delete(queue);
 }
 
 

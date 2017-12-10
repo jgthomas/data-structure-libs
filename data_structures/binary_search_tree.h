@@ -38,4 +38,6 @@ int BST_max_depth(BinTreeNode *node);
 void *BST_min_value(BinTreeNode *node);
 void *BST_max_value(BinTreeNode *node);
 
+void BST_breadth_first_print(BinTreeNode *node, void (*print)(void *x));
+
 #endif
