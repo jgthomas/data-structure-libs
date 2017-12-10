@@ -31,7 +31,7 @@ int main()
                 {
                         char *data = "to find: ";
                         int new_int = get_int(data);
-                        bool in_list = search(&head, &new_int, equal_int, less_than_int);
+                        bool in_list = BST_search(&head, &new_int, equal_int, less_than_int);
 
                         if (in_list)
                         {
