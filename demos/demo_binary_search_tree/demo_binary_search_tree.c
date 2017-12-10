@@ -47,7 +47,7 @@ int main()
                         char *msg = "Number to insert";
                         int n = get_int(msg);
                         void *new_num = &n;
-                        insert(&head, new_num, less_than_int);
+                        BST_insert(&head, new_num, less_than_int);
                 }
                 else if (strncmp(command, "show", 4) == 0)
                 {
