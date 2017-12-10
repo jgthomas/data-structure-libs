@@ -112,23 +112,25 @@ bool BST_search(BinTreeNode **head,
 }
 
 
-void visualise_tree(BinTreeNode *node, int level, void (*print_ptr)(void *item))
+void BST_visualise_tree(BinTreeNode *node,
+                        int level,
+                        void (*print)(void *item))
 {
 	    if (node == NULL)
 	    {
                 return;
 	    }
 
-	    visualise_tree(node->right, level+1, print_ptr);
+	    BST_visualise_tree(node->right, level+1, print);
 
 	    for (int i = 0; i < level; i++)
 	    {
 	            printf("     ");
 	    }
-	    print_ptr(node->data);
+	    print(node->data);
 	    printf("\n\n");
 
-	    visualise_tree(node->left, level+1, print_ptr);
+	    BST_visualise_tree(node->left, level+1, print);
 }
 
 

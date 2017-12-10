@@ -25,7 +25,10 @@ bool BST_search(BinTreeNode **head,
             bool (*equals)(void *first, void *second),
             bool (*less)(void *first, void *second));
 
-void visualise_tree(BinTreeNode *node, int level, void (*print_ptr)(void *item));
+void BST_visualise_tree(BinTreeNode *node,
+                        int level,
+                        void (*print)(void *item));
+
 void delete_tree(BinTreeNode *head);
 int total_nodes(BinTreeNode *node);
 void post_order_print(BinTreeNode *node, void (*print)(void *x));
