@@ -45,7 +45,7 @@ void BST_load_data(BinTreeNode **head,
         for (int i = 0; i < len; i++)
         {
                 void *next = new_data + elem_size * i;
-                insert(head, next, less_than);
+                BST_insert(head, next, less_than);
         }
 }
 
@@ -59,7 +59,7 @@ void BST_load_data(BinTreeNode **head,
  * less_than  :  function checks first item is less than second
  *
  * */
-void insert(BinTreeNode **head,
+void BST_insert(BinTreeNode **head,
             void *new_data,
             bool (*less_than)(void *first, void *second))
 {
@@ -69,11 +69,11 @@ void insert(BinTreeNode **head,
         }
         else if (less_than(new_data, (*head)->data))
         {
-                insert(&(*head)->left, new_data, less_than);
+                BST_insert(&(*head)->left, new_data, less_than);
         }
         else
         {
-                insert(&(*head)->right, new_data, less_than);
+                BST_insert(&(*head)->right, new_data, less_than);
         }
 }
 

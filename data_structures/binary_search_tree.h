@@ -10,7 +10,7 @@ BinTreeNode;
 
 BinTreeNode *BST_make_node(void *new_data);
 
-void insert(BinTreeNode **head,
+void BST_insert(BinTreeNode **head,
             void *new_data,
             bool (*less)(void *first, void *second));
 
