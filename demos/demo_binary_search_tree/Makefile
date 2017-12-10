@@ -38,8 +38,8 @@ TARGET = $(BUILD_DIR)/$(BIN)
 # FILES
 PWD_HEADERS := $(wildcard *.h)
 PWD_SOURCES := $(wildcard *.c)
-HEADERS = $(PWD_HEADERS) tools/comparison.h tools/printing.h tools/get_input.h data_structures/binary_search_tree.h
-SOURCES = $(PWD_SOURCES) tools/comparison.c tools/printing.c tools/get_input.c data_structures/binary_search_tree.c
+HEADERS = $(PWD_HEADERS) tools/comparison.h tools/printing.h tools/get_input.h data_structures/binary_search_tree.h data_structures/queue_array.h
+SOURCES = $(PWD_SOURCES) tools/comparison.c tools/printing.c tools/get_input.c data_structures/binary_search_tree.c data_structures/queue_array.c
 OBJECTS := $(SOURCES:%.c=$(BUILD_DIR)/%.o)
 DEPENDS = $(OBJECTS:%.o=%.d)
 
