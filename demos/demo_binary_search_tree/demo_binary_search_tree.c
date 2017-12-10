@@ -55,22 +55,22 @@ int main()
                 }
                 else if (strncmp(command, "inorder", 7) == 0)
                 {
-                        in_order_print(head, print_int);
+                        BST_in_order_print(head, print_int);
                         printf("\n");
                 }
                 else if (strncmp(command, "preorder", 8) == 0)
                 {
-                        pre_order_print(head, print_int);
+                        BST_pre_order_print(head, print_int);
                         printf("\n");
                 }
                 else if (strncmp(command, "postorder", 9) == 0)
                 {
-                        post_order_print(head, print_int);
+                        BST_post_order_print(head, print_int);
                         printf("\n");
                 }
                 else if (strncmp(command, "quit", 4) == 0)
                 {
-                        delete_tree(head);
+                        BST_delete_tree(head);
                         break;
                 }
                 else
