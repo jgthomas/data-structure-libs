@@ -20,7 +20,7 @@ LDLIBS = -lbcunit
 
 # EXECUTABLE - the final binary file
 BUILD_DIR = ./build
-BIN = test_queue_array
+BIN = test_queue_doubly_linked_list
 TARGET = $(BUILD_DIR)/$(BIN)
 
 # FILES
