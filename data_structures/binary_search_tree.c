@@ -12,7 +12,7 @@
  * data_size  :  size of node data type
  *
  * */
-BinTreeNode *make_node(void *new_data)
+BinTreeNode *BST_make_node(void *new_data)
 {
         BinTreeNode *new_node = malloc(sizeof(*new_node));
 
@@ -65,7 +65,7 @@ void insert(BinTreeNode **head,
 {
         if ((*head) == NULL)
         {
-                (*head) = make_node(new_data);
+                (*head) = BST_make_node(new_data);
         }
         else if (less_than(new_data, (*head)->data))
         {

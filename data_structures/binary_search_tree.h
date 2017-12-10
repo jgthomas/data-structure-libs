@@ -8,7 +8,7 @@ typedef struct new_node {
 }
 BinTreeNode;
 
-BinTreeNode *make_node(void *new_data);
+BinTreeNode *BST_make_node(void *new_data);
 
 void insert(BinTreeNode **head,
             void *new_data,
