@@ -152,3 +152,26 @@ void treap_in_order_print(TreapNode *node, void (*print)(void *x))
         printf(" ");
         treap_in_order_print(node->right, print);
 }
+
+
+void treap_visualise(TreapNode *node,
+                     int level,
+                     void (*print)(void *item))
+{
+	    if (node == NULL)
+	    {
+                return;
+	    }
+
+	    treap_visualise(node->right, level+1, print);
+
+	    for (int i = 0; i < level; i++)
+	    {
+	            printf("     ");
+	    }
+	    print(node->key);
+        printf("(%d)", node->priority);
+	    printf("\n\n");
+
+	    treap_visualise(node->left, level+1, print);
+}

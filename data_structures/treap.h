@@ -37,4 +37,8 @@ void treap_load_data(TreapNode **head,
                      size_t elem_size,
                      bool (*less_than)(void *first, void *second));
 
+void treap_visualise(TreapNode *node,
+                     int level,
+                     void (*print)(void *item));
+
 #endif
