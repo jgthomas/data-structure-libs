@@ -42,6 +42,10 @@ int main()
                             printf("not found\n");
                         }
                 }
+                else if (strncmp(command, "show", 4) == 0)
+                {
+                        treap_visualise(head, 0, print_int);
+                }
                 else if (strncmp(command, "insert", 6) == 0)
                 {
                         char *msg = "Number to insert";
