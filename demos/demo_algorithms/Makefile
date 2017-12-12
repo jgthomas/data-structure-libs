@@ -41,7 +41,8 @@ EXECUTABLES = demo_linear_binary_search \
 			  demo_bubble_sort \
 			  demo_selection_sort \
 			  demo_insertion_sort \
-			  demo_counting_sort
+			  demo_counting_sort \
+			  demo_radix_sort
 
 SHARED = demo_algorithms_shared.o
 
@@ -79,6 +80,9 @@ demo_insertion_sort: demo_insertion_sort.o $(SHARED)
 
 demo_counting_sort: demo_counting_sort.o $(SHARED)
 	$(CC) $(CFLAGS) $(SHARED) demo_counting_sort.o -o demo_counting_sort
+
+demo_radix_sort: demo_radix_sort.o $(SHARED)
+	$(CC) $(CFLAGS) $(SHARED) demo_radix_sort.o -o demo_radix_sort
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@

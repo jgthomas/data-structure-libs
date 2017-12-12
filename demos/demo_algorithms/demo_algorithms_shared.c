@@ -7,6 +7,9 @@ int ARRAY[] = {71,3,5,8,12,90,33,1,5,76,32,67,12,34,3,7,45,23,12,89};
 int LEN = sizeof(ARRAY) / sizeof(ARRAY[0]);
 int operations = 0;
 
+int RADIX_ARRAY[] = {710,3100,500,89,1211,90111,331,10,5009,746,579,2345,1289};
+int RADIX_LEN = sizeof(RADIX_ARRAY) / sizeof(RADIX_ARRAY[0]);
+
 
 void print_array(int array[], int len)
 {
@@ -20,31 +23,31 @@ void print_array(int array[], int len)
 
 int to_int(char *string)
 {
-    int n;
-    sscanf(string, "%d", &n);
-    return n;
+        int n;
+        sscanf(string, "%d", &n);
+        return n;
 }
 
 
 int get_int(char *message)
 {
-    char input[100];
-    printf("%s: ", message);
-    fgets(input, sizeof(input), stdin);
+        char input[100];
+        printf("%s: ", message);
+        fgets(input, sizeof(input), stdin);
 
-    int n = to_int(input);
+        int n = to_int(input);
 
-    return n;
+        return n;
 }
 
 
 void swap(int *a, int *b)
 {
-    operations++;
+        operations++;
 
-    int t = *a;
-    *a = *b;
-    *b = t;
+        int t = *a;
+        *a = *b;
+        *b = t;
 }
 
 
@@ -78,4 +81,18 @@ int find_max_integer(int array[], int len)
         }
 
         return max;
+}
+
+
+int num_digits(int n)
+{
+        int num = 0;
+
+        while (n > 0)
+        {
+                num++;
+                n = n / 10;
+        }
+
+        return num;
 }
