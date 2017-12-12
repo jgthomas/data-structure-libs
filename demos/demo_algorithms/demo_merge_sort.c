@@ -72,6 +72,7 @@ void merge(int array[], int low, int mid, int high, int level)
 	    level_print(level);
 	    printf("MERGED: ");
 	    print_partial_array(array, low, high);
+        printf("\n");
 }
 
 
@@ -84,18 +85,21 @@ void merge_sort(int array[], int low, int high, int level)
 		level_print(level);
 		printf("ARRAY: ");
 		print_partial_array(array, low, high);
+        printf("\n");
 
 		merge_sort(array, low, mid, level+1);
 		
 		level_print(level);
 		printf("LEFT: ");
 		print_partial_array(array, low, mid);
+        printf("\n");
 		    
 		merge_sort(array, mid, high, level+1);
 		
 		level_print(level);
 		printf("RIGHT: ");
 		print_partial_array(array, mid, high);
+        printf("\n");
 
 		merge(array, low, mid, high, level);
 	}
