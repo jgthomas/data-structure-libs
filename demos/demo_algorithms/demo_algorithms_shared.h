@@ -3,6 +3,12 @@
 
 #include <stdbool.h>
 
+typedef struct new_node {
+    int n;
+    struct new_node *next;
+}
+Node;
+
 enum {BUCKETS = 10};
 
 extern int ARRAY[];
