@@ -96,3 +96,13 @@ int num_digits(int n)
 
         return num;
 }
+
+
+void print_partial_array(int array[], int low, int high)
+{
+        for (int i = low; i < high; i++)
+        {
+            printf("%d ", array[i]);
+        }
+        printf("\n");
+}
