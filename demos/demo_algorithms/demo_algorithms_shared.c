@@ -104,5 +104,4 @@ void print_partial_array(int array[], int low, int high)
         {
             printf("%d ", array[i]);
         }
-        printf("\n");
 }
