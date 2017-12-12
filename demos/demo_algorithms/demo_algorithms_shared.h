@@ -12,5 +12,6 @@ int to_int(char *string);
 int get_int(char *message);
 void swap(int *a, int *b);
 bool less_than(int a, int b);
+int find_max_integer(int array[], int len);
 
 #endif

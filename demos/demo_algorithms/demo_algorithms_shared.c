@@ -48,9 +48,6 @@ void swap(int *a, int *b)
 }
 
 
-
-
-
 bool less_than(int a, int b)
 {
         operations++;
@@ -60,4 +57,25 @@ bool less_than(int a, int b)
                 return true;
         }
         return false;
+}
+
+
+int find_max_integer(int array[], int len)
+{
+        int max = 0;
+
+        if (len >= 1)
+        {
+                max = array[0];
+
+                for (int i = 1; i < len; i++)
+                {
+                        if (array[i] > max)
+                        {
+                                max = array[i];
+                        }
+                }
+        }
+
+        return max;
 }
