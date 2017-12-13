@@ -10,7 +10,7 @@ int middle_index(int low, int high);
 int main()
 {
         int int_array[] = {27,31,15,8,12,39,33,11,14,42,23,41,
-                           25,13,16,15,16,18,2,33,5,18,45,16,9};
+                           25,13,16,15,16,18,2,33};
         
         int ARRAY_LEN = sizeof(int_array) / sizeof(int_array[0]);
 
@@ -60,8 +60,15 @@ int partition(int array[], int low, int high)
         }
 
         swap(&array[low_index], &array[low]);
+
+        if (low == low_index)
+        {
+                printf("Base Case\n");
+        }
+
         print_partial_array(array, low, low_index);
         printf("<·· %d ··> ", array[low_index]);
+
         print_partial_array(array, low_index+1, high);
         printf("\n\n");
 
