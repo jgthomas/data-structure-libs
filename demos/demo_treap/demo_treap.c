@@ -8,15 +8,19 @@
 #include "data_structures/treap.h"
 
 
-void print_commands(void);
-
-
-int main()
+void print_commands(void)
 {
-        TreapNode *head = NULL;
-        int nums[] = {10,4,23,20,6,21,67,9,2,100,1,55,12,3};
+        printf("commands: show, insert, inorder, preorder, postorder, quit\n\n");
+}
 
-        treap_load_data(&head, nums, sizeof(nums), sizeof(nums[0]), less_than_int);
+
+int main(void)
+{
+        TreapNode *root = treap_init();
+
+        int nums[] = {10,45,1,23,44,6,8,99,21,34,19,2};
+
+        treap_load_data(&root, nums, sizeof(nums), sizeof(nums[0]), less_than_int);
 
         char command[20];
 
@@ -27,40 +31,36 @@ int main()
                 printf("Enter a command: ");
                 fgets(command, sizeof(command), stdin);
 
-                if (strncmp(command, "search", 5) == 0)
+                if (strncmp(command, "show", 4) == 0)
                 {
-                        char *data = "to find: ";
-                        int new_int = get_int(data);
-                        bool in_list = treap_search(&head, &new_int, equal_int, less_than_int);
-
-                        if (in_list)
-                        {
-                            printf("found\n");
-                        }
-                        else
-                        {
-                            printf("not found\n");
-                        }
-                }
-                else if (strncmp(command, "show", 4) == 0)
-                {
-                        treap_visualise(head, 0, print_int);
+                        treap_visualise(root, 0, print_int);
                 }
                 else if (strncmp(command, "insert", 6) == 0)
                 {
-                        char *msg = "Number to insert";
-                        int n = get_int(msg);
-                        void *new_num = &n;
-                        treap_insert(&head, new_num, less_than_int);
+                        int n = get_int("Number to insert");
+                        treap_insert(&root, &n, sizeof(n), less_than_int);
                 }
                 else if (strncmp(command, "inorder", 7) == 0)
                 {
-                        treap_in_order_print(head, print_int);
-                        printf("\n");
+                        printf("\nin-order: ");
+                        treap_in_order_print(root, print_int);
+                        printf("\n\n");
+                }
+                else if (strncmp(command, "preorder", 8) == 0)
+                {
+                        printf("\npre-order: ");
+                        treap_pre_order_print(root, print_int);
+                        printf("\n\n");
+                }
+                else if (strncmp(command, "postorder", 9) == 0)
+                {
+                        printf("\npost-order: ");
+                        treap_post_order_print(root, print_int);
+                        printf("\n\n");
                 }
                 else if (strncmp(command, "quit", 4) == 0)
                 {
-                        treap_delete(head);
+                        treap_delete(root);
                         break;
                 }
                 else
@@ -69,10 +69,4 @@ int main()
                         continue;
                 }
         }
-}
-
-
-void print_commands(void)
-{
-        printf("commands: search, insert, inorder, quit\n\n");
 }
