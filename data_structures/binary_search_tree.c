@@ -182,9 +182,9 @@ void BST_in_order_print(BinTreeNode *node, void (*print)(void *x))
 void BST_pre_order_print(BinTreeNode *node, void (*print)(void *x))
 {
         if (node == NULL)
-	    {
+        {
                 return;
-	    }
+        }
 
         print(node->data);
         printf(" ");
