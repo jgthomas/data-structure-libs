@@ -8,7 +8,13 @@
 #include "data_structures/binary_search_tree.h"
 
 
-void print_commands(void);
+void print_commands(void)
+{
+        printf("\nCommands: ");
+        printf("insert, search, show, inorder, preorder, postorder, ");
+        printf("breadth, totnodes, maxdepth, maxval, minval, quit");
+        printf("\n\n");
+}
 
 
 int main(void)
@@ -50,6 +56,7 @@ int main(void)
                 }
                 else if (strncmp(command, "show", 4) == 0)
                 {
+                        printf("\n");
                         BST_visualise_tree(root, 0, print_int);
                 }
                 else if (strncmp(command, "inorder", 7) == 0)
@@ -107,10 +114,4 @@ int main(void)
                         continue;
                 }
         }
-}
-
-
-void print_commands(void)
-{
-        printf("commands: insert, search, show, inorder, preorder, postorder, breadth, totnodes, maxdepth, maxval, minval, quit\n\n");
 }
