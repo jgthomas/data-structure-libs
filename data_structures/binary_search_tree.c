@@ -1,33 +1,55 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include <string.h>
+#include <stdbool.h>
 #include "queue_array.h"
 #include "binary_search_tree.h"
 
 
-/**
- * Create new node, capable of taking any data type
- *
- * new_data   :  pointer to data to add to node
- * data_size  :  size of node data type
- *
- * */
-BinTreeNode *BST_make_node(void *new_data)
+BinTreeNode *BST_make_node(void *data, size_t data_size)
 {
         BinTreeNode *new_node = malloc(sizeof(*new_node));
 
         if (new_node == NULL)
         {
-                fprintf(stderr, "Failed to allocate memory\n");
+                fprintf(stderr, "Failed to allocate memory for node\n");
                 exit(EXIT_FAILURE);
         }
 
-        new_node->data = new_data;
+        new_node->data = malloc(sizeof(data_size));
+
+        if (new_node->data == NULL)
+        {
+                fprintf(stderr, "Failed to allocate memory for data\n");
+                exit(EXIT_FAILURE);
+        }
+
+        memcpy(new_node->data, data, data_size);
+
         new_node->left = NULL;
         new_node->right = NULL;
 
         return new_node;
+}
+
+
+void BST_insert(BinTreeNode **root,
+                void *new_data,
+                size_t data_size,
+                bool (*less_than)(void *x, void *y))
+{
+        if ((*root) == NULL)
+        {
+                (*root) = BST_make_node(new_data, data_size);
+        }
+        else if (less_than(new_data, (*root)->data))
+        {
+                BST_insert(&(*root)->left, new_data, data_size, less_than);
+        }
+        else
+        {
+                BST_insert(&(*root)->right, new_data, data_size, less_than);
+        }
 }
 
 
@@ -46,92 +68,33 @@ void BST_load_data(BinTreeNode **head,
         for (int i = 0; i < len; i++)
         {
                 void *next = new_data + elem_size * i;
-                BST_insert(head, next, less_than);
+                BST_insert(head, next, elem_size, less_than);
         }
 }
 
 
-/**
- * Insert new node into the tree
- *
- * head       :  current root of the tree
- * new_data   :  data to add to inserted node
- * data_size  :  size of node data type
- * less_than  :  function checks first item is less than second
- *
- * */
-void BST_insert(BinTreeNode **head,
-            void *new_data,
-            bool (*less_than)(void *first, void *second))
+bool BST_search(BinTreeNode **root,
+                void *data,
+                bool (*equals)(void *first, void *second),
+                bool (*less_than)(void *first, void *second))
 {
-        if ((*head) == NULL)
+        if ((*root) != NULL)
         {
-                (*head) = BST_make_node(new_data);
-        }
-        else if (less_than(new_data, (*head)->data))
-        {
-                BST_insert(&(*head)->left, new_data, less_than);
-        }
-        else
-        {
-                BST_insert(&(*head)->right, new_data, less_than);
-        }
-}
-
-
-/**
- * Search tree for value
- *
- * head       :  current root of the tree
- * data       :  value to find
- * equals     :  function checks two items are equal
- * less_than  :  function checks first item is less than second
- *
- * */
-bool BST_search(BinTreeNode **head,
-            void *data,
-            bool (*equals)(void *first, void *second),
-            bool (*less_than)(void *first, void *second))
-{
-        if ((*head) != NULL)
-        {
-                if (equals((*head)->data, data))
+                if (equals((*root)->data, data))
                 {
                         return true;
                 }
-                else if (less_than(data, (*head)->data))
+                else if (less_than(data, (*root)->data))
                 {
-                        return BST_search(&(*head)->left, data, equals, less_than);
+                        return BST_search(&(*root)->left, data, equals, less_than);
                 }
                 else
                 {
-                        return BST_search(&(*head)->right, data, equals, less_than);
+                        return BST_search(&(*root)->right, data, equals, less_than);
                 }
         }
 
         return false;
-}
-
-
-void BST_visualise_tree(BinTreeNode *node,
-                        int level,
-                        void (*print)(void *item))
-{
-	    if (node == NULL)
-	    {
-                return;
-	    }
-
-	    BST_visualise_tree(node->right, level+1, print);
-
-	    for (int i = 0; i < level; i++)
-	    {
-	            printf("     ");
-	    }
-	    print(node->data);
-	    printf("\n\n");
-
-	    BST_visualise_tree(node->left, level+1, print);
 }
 
 
@@ -161,6 +124,26 @@ void BST_breadth_first_print(BinTreeNode *node, void (*print)(void *x))
         }
 
         queue_delete(queue);
+}
+
+
+void BST_visualise_tree(BinTreeNode *node, int level, void (*print)(void *item))
+{
+	    if (node == NULL)
+	    {
+                return;
+	    }
+
+	    BST_visualise_tree(node->right, level+1, print);
+
+	    for (int i = 0; i < level; i++)
+	    {
+	            printf("     ");
+	    }
+	    print(node->data);
+	    printf("\n\n");
+
+	    BST_visualise_tree(node->left, level+1, print);
 }
 
 
@@ -232,6 +215,18 @@ void BST_post_order_print(BinTreeNode *node, void (*print)(void *x))
 }
 
 
+void BST_delete_tree(BinTreeNode *root)
+{
+        if (root != NULL)
+        {
+                BST_delete_tree(root->left);
+                BST_delete_tree(root->right);
+                free(root->data);
+                free(root);
+        }
+}
+
+
 int BST_total_nodes(BinTreeNode *node)
 {
         if (node == NULL)
@@ -281,15 +276,4 @@ void *BST_max_value(BinTreeNode *node)
         }
 
         return node->data;
-}
-
-
-void BST_delete_tree(BinTreeNode *head)
-{
-        if (head != NULL)
-        {
-                BST_delete_tree(head->left);
-                BST_delete_tree(head->right);
-                free(head);
-        }
 }
