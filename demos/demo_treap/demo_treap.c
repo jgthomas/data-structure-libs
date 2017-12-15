@@ -35,6 +35,19 @@ int main(void)
                 {
                         treap_visualise(root, 0, print_int);
                 }
+                else if (strncmp(command, "search", 6) == 0)
+                {
+                        int new_int = get_int("Number to find");
+
+                        if (treap_search(&root, &new_int, equal_int, less_than_int))
+                        {
+                                printf("found\n");
+                        }
+                        else
+                        {
+                                printf("not found\n");
+                        }
+                }
                 else if (strncmp(command, "insert", 6) == 0)
                 {
                         int n = get_int("Number to insert");
