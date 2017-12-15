@@ -54,47 +54,47 @@ int main(void)
                 }
                 else if (strncmp(command, "inorder", 7) == 0)
                 {
-                        printf("\n");
+                        printf("\nin-order: ");
                         BST_in_order_print(root, print_int);
-                        printf("\n");
+                        printf("\n\n");
                 }
                 else if (strncmp(command, "preorder", 8) == 0)
                 {
-                        printf("\n");
+                        printf("\npre-order: ");
                         BST_pre_order_print(root, print_int);
-                        printf("\n");
+                        printf("\n\n");
                 }
                 else if (strncmp(command, "postorder", 9) == 0)
                 {
-                        printf("\n");
+                        printf("\npost-order: ");
                         BST_post_order_print(root, print_int);
-                        printf("\n");
+                        printf("\n\n");
                 }
                 else if (strncmp(command, "breadth", 7) == 0)
                 {
-                        printf("\n");
+                        printf("\nbreadth-first: ");
                         BST_breadth_first_print(root, print_int);
-                        printf("\n");
+                        printf("\n\n");
                 }
                 else if (strncmp(command, "totnodes", 8) == 0)
                 {
-                        printf("\nTotal nodes: %d\n", BST_total_nodes(root));
+                        printf("\nTotal nodes: %d\n\n", BST_total_nodes(root));
                 }
                 else if (strncmp(command, "maxdepth", 8) == 0)
                 {
-                        printf("\nMax depth: %d\n", BST_max_depth(root));
+                        printf("\nMax depth: %d\n\n", BST_max_depth(root));
                 }
                 else if (strncmp(command, "maxval", 6) == 0)
                 {
-                        printf("\nMax value: ");
+                        printf("\nmax value: ");
                         print_int(BST_max_value(root));
-                        printf("\n");
+                        printf("\n\n");
                 }
                 else if (strncmp(command, "minval", 6) == 0)
                 {
-                        printf("\nMin value: ");
+                        printf("\nmin value: ");
                         print_int(BST_min_value(root));
-                        printf("\n");
+                        printf("\n\n");
                 }
                 else if (strncmp(command, "quit", 4) == 0)
                 {
