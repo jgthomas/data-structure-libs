@@ -138,6 +138,31 @@ void treap_load_data(TreapNode **head,
 }
 
 
+bool treap_search(TreapNode **root,
+                  void *data,
+                  bool (*equals)(void *first, void *second),
+                  bool (*less_than)(void *first, void *second))
+{
+        if ((*root) != NULL)
+        {
+                if (equals((*root)->key, data))
+                {
+                        return true;
+                }
+                else if (less_than(data, (*root)->key))
+                {
+                        return treap_search(&(*root)->left, data, equals, less_than);
+                }
+                else
+                {
+                        return treap_search(&(*root)->right, data, equals, less_than);
+                }
+        }
+
+        return false;
+}
+
+
 void treap_delete_node(TreapNode *node)
 {
         free(node->key);
