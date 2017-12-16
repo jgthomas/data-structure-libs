@@ -40,6 +40,7 @@ void BST_delete_tree(BinTreeNode *root);
 
 void BST_delete_value(BinTreeNode **root,
                       void *data,
+                      size_t data_size,
                       bool (*equal)(void *x, void *y),
                       bool (*less_than)(void *x, void *y));
 

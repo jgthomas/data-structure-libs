@@ -100,6 +100,7 @@ bool BST_search(BinTreeNode **root,
 
 void BST_delete_value(BinTreeNode **root,
                       void *data,
+                      size_t data_size,
                       bool (*equal)(void *x, void *y),
                       bool (*less_than)(void *x, void *y))
 {
@@ -131,7 +132,7 @@ void BST_delete_value(BinTreeNode **root,
         }
         else if (less_than(data, (*root)->data))
         {
-                BST_delete_value(&(*root)->left, data, equal, less_than);
+                BST_delete_value(&(*root)->left, data, data_size, equal, less_than);
 
                 if ((*root)->left->data == NULL)
                 {
@@ -141,7 +142,7 @@ void BST_delete_value(BinTreeNode **root,
         }
         else
         {
-                BST_delete_value(&(*root)->right, data, equal, less_than);
+                BST_delete_value(&(*root)->right, data, data_size, equal, less_than);
 
                 if ((*root)->right->data == NULL)
                 {
