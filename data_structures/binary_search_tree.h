@@ -34,8 +34,6 @@ void BST_post_order_print(BinTreeNode *node, void (*print)(void *x));
 
 int BST_total_nodes(BinTreeNode *node);
 int BST_max_depth(BinTreeNode *node);
-void *BST_min_value(BinTreeNode *node);
-void *BST_max_value(BinTreeNode *node);
 
 void BST_delete_node(BinTreeNode *node);
 void BST_delete_tree(BinTreeNode *root);
@@ -44,5 +42,8 @@ void BST_delete_value(BinTreeNode **root,
                       void *data,
                       bool (*equal)(void *x, void *y),
                       bool (*less_than)(void *x, void *y));
+
+void *BST_min_value(BinTreeNode *node, bool (*less_than)(void *x, void *y));
+void *BST_max_value(BinTreeNode *node, bool (*greater_than)(void *x, void *y));
 
 #endif

@@ -318,23 +318,37 @@ int BST_max_depth(BinTreeNode *node)
 }
 
 
-void *BST_min_value(BinTreeNode *node)
+void *BST_min_value(BinTreeNode *node, bool (*less_than)(void *x, void *y))
 {
+        void *min = node->data;
+
         while (node->left != NULL)
         {
                 node = node->left;
+
+                if (less_than(node->data, min))
+                {
+                        min = node->data;
+                }
         }
 
-        return node->data;
+        return min;
 }
 
 
-void *BST_max_value(BinTreeNode *node)
+void *BST_max_value(BinTreeNode *node, bool (*greater_than)(void *x, void *y))
 {
+        void *max = node->data;
+
         while (node->right != NULL)
         {
                 node = node->right;
+
+                if (greater_than(node->data, max))
+                {
+                        max = node->data;
+                }
         }
 
-        return node->data;
+        return max;
 }
