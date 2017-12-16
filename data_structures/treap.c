@@ -83,7 +83,7 @@ void treap_insert(TreapNode **root,
 }
 
 /**
- * Store the LEFT child as the new_parent
+ * Store the LEFT child as the new parent
  * Store the new parent's original RIGHT node
  *
  * Set the old parent as the new parent's RIGHT node
@@ -103,7 +103,7 @@ void rotate_right(TreapNode **node)
 
 
 /**
- * Store the RIGHT child as the new_parent
+ * Store the RIGHT child as the new parent
  * Store the new parent's original LEFT node
  *
  * Set the old parent as the new parent's LEFT node
