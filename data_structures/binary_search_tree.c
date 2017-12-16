@@ -113,6 +113,15 @@ void BST_delete_value(BinTreeNode **root,
                 }
                 else if ((*root)->left != NULL && (*root)->right != NULL)
                 {
+                        void *low_in_right = BST_min_value((*root)->right, less_than);
+                        memcpy((*root)->data, low_in_right, data_size);
+                        BST_delete_value(&(*root)->right, low_in_right, data_size, equal, less_than);
+
+                        if ((*root)->right->data == NULL)
+                        {
+                                BST_delete_node((*root)->right);
+                                (*root)->right = NULL;
+                        }
                 }
                 else
                 {
@@ -147,7 +156,7 @@ void BST_delete_value(BinTreeNode **root,
                 if ((*root)->right->data == NULL)
                 {
                         BST_delete_node((*root)->right);
-                        (*root)->right= NULL;
+                        (*root)->right = NULL;
                 }
         }
 
@@ -337,7 +346,7 @@ void *BST_min_value(BinTreeNode *node, bool (*less_than)(void *x, void *y))
 }
 
 
-void *BST_max_value(BinTreeNode *node, bool (*greater_than)(void *x, void *y))
+void *BST_max_value(BinTreeNode *node, bool (*less_than)(void *x, void *y))
 {
         void *max = node->data;
 
@@ -345,7 +354,7 @@ void *BST_max_value(BinTreeNode *node, bool (*greater_than)(void *x, void *y))
         {
                 node = node->right;
 
-                if (greater_than(node->data, max))
+                if (less_than(max, node->data))
                 {
                         max = node->data;
                 }
