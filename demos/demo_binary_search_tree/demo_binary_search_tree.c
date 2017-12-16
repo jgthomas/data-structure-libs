@@ -103,6 +103,11 @@ int main(void)
                         print_int(BST_min_value(root));
                         printf("\n\n");
                 }
+                else if (strncmp(command, "del", 3) == 0)
+                {
+                        int n = get_int("Value to delete");
+                        BST_delete_value(&root, &n, equal_int, less_than_int);
+                }
                 else if (strncmp(command, "quit", 4) == 0)
                 {
                         BST_delete_tree(root);
