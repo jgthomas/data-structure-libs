@@ -94,7 +94,7 @@ int main(void)
                 else if (strncmp(command, "maxval", 6) == 0)
                 {
                         printf("\nmax value: ");
-                        print_int(BST_max_value(root, more_than_int));
+                        print_int(BST_max_value(root, less_than_int));
                         printf("\n\n");
                 }
                 else if (strncmp(command, "minval", 6) == 0)
