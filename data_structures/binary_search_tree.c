@@ -98,6 +98,61 @@ bool BST_search(BinTreeNode **root,
 }
 
 
+void BST_delete_value(BinTreeNode **root,
+                      void *data,
+                      bool (*equal)(void *x, void *y),
+                      bool (*less_than)(void *x, void *y))
+{
+        if (equal(data, (*root)->data))
+        {
+                if ((*root)->left == NULL && (*root)->right == NULL)
+                {
+                        free((*root)->data);
+                        (*root)->data = NULL;
+                }
+                else if ((*root)->left != NULL && (*root)->right != NULL)
+                {
+                }
+                else
+                {
+                        if ((*root)->left != NULL)
+                        {
+                                BinTreeNode *temp = (*root);
+                                (*root) = (*root)->left;
+                                BST_delete_node(temp);
+                        }
+                        else
+                        {
+                                BinTreeNode *temp = (*root);
+                                (*root) = (*root)->right;
+                                BST_delete_node(temp);
+                        }
+                }
+        }
+        else if (less_than(data, (*root)->data))
+        {
+                BST_delete_value(&(*root)->left, data, equal, less_than);
+
+                if ((*root)->left->data == NULL)
+                {
+                        BST_delete_node((*root)->left);
+                        (*root)->left = NULL;
+                }
+        }
+        else
+        {
+                BST_delete_value(&(*root)->right, data, equal, less_than);
+
+                if ((*root)->right->data == NULL)
+                {
+                        BST_delete_node((*root)->right);
+                        (*root)->right= NULL;
+                }
+        }
+
+}
+
+
 void BST_breadth_first_print(BinTreeNode *node, void (*print)(void *x))
 {
         Queue *queue = queue_init();
@@ -215,14 +270,20 @@ void BST_post_order_print(BinTreeNode *node, void (*print)(void *x))
 }
 
 
+void BST_delete_node(BinTreeNode *node)
+{
+        free(node->data);
+        free(node);
+}
+
+
 void BST_delete_tree(BinTreeNode *root)
 {
         if (root != NULL)
         {
                 BST_delete_tree(root->left);
                 BST_delete_tree(root->right);
-                free(root->data);
-                free(root);
+                BST_delete_node(root);
         }
 }
 
