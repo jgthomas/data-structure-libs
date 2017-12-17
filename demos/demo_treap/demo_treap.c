@@ -10,7 +10,7 @@
 
 void print_commands(void)
 {
-        printf("commands: show, insert, inorder, preorder, postorder, quit\n\n");
+        printf("commands: show, insert, inorder, preorder, postorder, fill, quit\n\n");
 }
 
 
@@ -70,6 +70,13 @@ int main(void)
                         printf("\npost-order: ");
                         treap_post_order_print(root, print_int);
                         printf("\n\n");
+                }
+                else if (strncmp(command, "fill", 4) == 0)
+                {
+                        for (int i = 100; i < 200; i++)
+                        {
+                                treap_insert(&root, &i, sizeof(i), less_than_int);
+                        }
                 }
                 else if (strncmp(command, "quit", 4) == 0)
                 {
