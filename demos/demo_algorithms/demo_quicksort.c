@@ -20,9 +20,9 @@ int main()
         printf("Sorted array\n");
         print_array(int_array, ARRAY_LEN);
         
-        printf("\nQUICKSORT\n");
+        printf("\n\nQUICKSORT\n");
         printf("Time complexity (Best) : O(n log n)\n");
-        printf("Time complexity (Worst): O(n**2)\n");
+        printf("Time complexity (Worst): O(n**2)\n\n");
 }
 
 
