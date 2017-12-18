@@ -27,14 +27,14 @@ int main(void)
 
         printf("\nInitial array\n");
         print_array(array, len);
-        printf("\nArray length: %d\n", len);
+        printf("\n\nArray length: %d\n", len);
 
         bucket_sort(array, len, max);
 
         printf("\nSorted array\n");
         print_array(array, len);
         
-        printf("\nBUCKET SORT\n");
+        printf("\n\nBUCKET SORT\n");
         printf("Time complexity: O(n+k)\n");
 }
 
