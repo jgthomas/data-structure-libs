@@ -10,12 +10,14 @@ int main(void)
 {
         printf("\nInput array\n");
         print_array(ARRAY, LEN);
+        printf("\n");
         int max = find_max_integer(ARRAY, LEN) + 1;
         
         counting_sort(ARRAY, LEN, max);
         
         printf("\nSorted array\n");
         print_array(ARRAY, LEN);
+        printf("\n");
         
         printf("\nCOUNTING SORT\n");
         printf("Time complexity: O(n+k)\n");
@@ -48,6 +50,7 @@ void counting_sort(int array[], int len, int max)
         }
         
         print_array(map, max);
+        printf("\n");
 
         // WRITE k map
         for (int i = 1; i < max; i++)
@@ -67,6 +70,7 @@ void counting_sort(int array[], int len, int max)
         }
         
         print_array(map, max);
+        printf("\n");
 
         // READ n input
         // WRITE n output
