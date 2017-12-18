@@ -19,7 +19,7 @@ int main(void)
         printf("\nComparing linear and binary search\n\n");
         print_array(int_array, len);
         
-        char *msg = "\nPick a number to see how long it takes to find";
+        char *msg = "\n\nPick a number to see how long it takes to find";
         int to_find = get_int(msg);
         
         printf("\n\nBINARY search\n\n");
