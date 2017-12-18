@@ -45,7 +45,8 @@ EXECUTABLES = demo_linear_binary_search \
 			  demo_radix_sort \
 			  demo_bucket_sort \
 			  demo_merge_sort \
-			  demo_quicksort
+			  demo_quicksort \
+			  demo_heapsort
 
 SHARED = demo_algorithms_shared.o
 
@@ -95,6 +96,9 @@ demo_merge_sort: demo_merge_sort.o $(SHARED)
 
 demo_quicksort: demo_quicksort.o $(SHARED)
 	$(CC) $(CFLAGS) $(SHARED) demo_quicksort.o -o demo_quicksort
+
+demo_heapsort: demo_heapsort.o $(SHARED)
+	$(CC) $(CFLAGS) $(SHARED) demo_heapsort.o -o demo_heapsort
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
