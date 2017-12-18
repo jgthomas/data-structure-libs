@@ -12,6 +12,7 @@ int main(void)
         int int_array[] = {71,3,5,8,12,90,33,1,5,76,23,4,55,89,9,15,61};
         int ARRAY_LEN = sizeof(int_array) / sizeof(int_array[0]);
 
+        printf("\n");
         merge_sort(int_array, 0, ARRAY_LEN, 0);
         
         printf("\nMERGE SORT\n");
