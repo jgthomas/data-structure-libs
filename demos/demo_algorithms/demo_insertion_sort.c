@@ -10,11 +10,13 @@ int main(void)
 {
         printf("\nInput array\n");
         print_array(ARRAY, LEN);
+        printf("\n");
         
         insertion_sort(ARRAY, LEN);
         
         printf("\nSorted array\n");
         print_array(ARRAY, LEN);
+        printf("\n");
         
         printf("\nINSERTION SORT\n");
         printf("Run time: O(n^2)\n");
@@ -43,5 +45,6 @@ void insertion_sort(int array[], int len)
                 
                 printf("New state of array\n");
                 print_array(array, len);
+                printf("\n");
         }
 }
