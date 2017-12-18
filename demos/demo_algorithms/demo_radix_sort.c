@@ -11,6 +11,7 @@ int main(void)
 {
         printf("\nInput array\n");
         print_array(RADIX_ARRAY, RADIX_LEN);
+        printf("\n");
         int max = find_max_integer(RADIX_ARRAY, RADIX_LEN) + 1;
         int digits = num_digits(max);
         
@@ -19,14 +20,14 @@ int main(void)
         printf("\nSorted array\n");
         print_array(RADIX_ARRAY, RADIX_LEN);
         
-        printf("\nRADIX SORT\n");
+        printf("\n\nRADIX SORT\n");
         printf("Time complexity: O(d(n+b))\n");
         printf("Where 'd' is number of digits, 'n' the length of the input, and 'b' the base used\n");
         printf("Operations: digits * (5*n + 3*base)\n");
         printf("Input n: %d\n", RADIX_LEN);
         printf("Digits: %d\n", digits);
         printf("Base: %d\n", BUCKETS);
-        printf("Operations for this input: %d\n", digits * (5*RADIX_LEN + 3*BUCKETS));
+        printf("Operations for this input: %d\n\n", digits * (5*RADIX_LEN + 3*BUCKETS));
 }
 
 
@@ -56,6 +57,7 @@ void counting_sort(int array[], int len, int exp)
         }
         
         print_array(map, BUCKETS);
+        printf("\n");
         
         printf("Cumulative indicies\n");
         
@@ -66,6 +68,7 @@ void counting_sort(int array[], int len, int exp)
         }
         
         print_array(map, BUCKETS);
+        printf("\n");
 
         // READ n input
         // WRITE b map
@@ -86,5 +89,5 @@ void counting_sort(int array[], int len, int exp)
         
         printf("Sorted by %ds\n", exp);
         print_array(array, len);
-        printf("\n");
+        printf("\n\n");
 }
