@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <time.h>
-#include "tools.h"
+#include "tools/general.h"
 #include "quicksort.h"
 
 
