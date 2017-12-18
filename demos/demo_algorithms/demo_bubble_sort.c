@@ -10,11 +10,13 @@ int main(void)
 {
         printf("\nInput array\n");
         print_array(ARRAY, LEN);
+        printf("\n");
 
         bubble_sort(ARRAY, LEN);
 
         printf("\nSorted array\n");
         print_array(ARRAY, LEN);
+        printf("\n");
 
         printf("\nBUBBLE SORT\n");
         printf("Run time: O(n^2)\n");
@@ -46,6 +48,7 @@ void bubble_sort(int array[], int len)
                                        temp, i+1, array[i+1], i); 
                                 printf("Array now:\n");
                                 print_array(array, len);
+                                printf("\n");
                         }
                 }
         }
