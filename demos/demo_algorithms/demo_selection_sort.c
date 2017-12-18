@@ -11,18 +11,19 @@ int main(void)
 {
         printf("\nInput array\n");
         print_array(ARRAY, LEN);
+        printf("\n");
 
         selection_sort(ARRAY, LEN);
         
         printf("\nSorted array\n");
         print_array(ARRAY, LEN);
         
-        printf("\nSELECTION SORT\n");
+        printf("\n\nSELECTION SORT\n");
         printf("Run time: O(n^2)\n");
         printf("Average operations: (n-1) + n(n-1)/2\n");
         printf("Input n: %d\n", LEN);
         printf("Average operations for this n: %d\n", (LEN-1) + (LEN*((LEN-1)/2)));
-        printf("Actual operations for this input: %d\n", operations);
+        printf("Actual operations for this input: %d\n\n", operations);
 }
 
 
@@ -39,6 +40,7 @@ void selection_sort(int array[], int len)
                        low_index, array[start], start, array[low_index]);
                 printf("New state of array\n");
                 print_array(array, len);
+                printf("\n");
                 
                 start++;
         }
