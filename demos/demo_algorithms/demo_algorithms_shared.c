@@ -17,7 +17,6 @@ void print_array(int array[], int len)
         {
                 printf("%d ", array[i]);
         }
-        printf("\n");
 }
 
 
