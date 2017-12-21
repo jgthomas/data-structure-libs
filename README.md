@@ -8,23 +8,23 @@ Generic implementations of a range of search and sort algorithms
 
 ### applications
 
-Small programs built around 
+Small programs built around a data structure or algorithm
 
 ### data_strucutres
 
-Generic implementations of
-
+Generic implementations of a range of major data structures
 
 ### demos
 
+For algorithms, the demos output shows each step in the sort or search and how it transforms the data. For data structures, the demos are interactive, allowing an exploration of adding, deleting, searching and other operations
 
 ### reference
 
+Simple, annotated versions of each data struture and algorithm aiming to capture their essence
 
 ### tests
 
 Unit tests for the generic data structure and algorithm implementations
-
 
 ### tools
 
