@@ -1,6 +1,10 @@
 #include <stdio.h>
 
 
+/**
+ * MERGE SORT
+ *
+ * */
 void merge(int array[], int low, int mid, int high)
 {
 	    int left_len = mid - low;

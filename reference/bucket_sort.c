@@ -5,6 +5,8 @@
 
 
 /**
+ * BUCKET SORT
+ *
  * Create a number of buckets proportional to input size and range
  * Distribute each element to the relevant buckets
  * Each bucket uses a linked list to hold multiple values

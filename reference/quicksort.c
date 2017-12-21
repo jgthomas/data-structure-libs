@@ -7,6 +7,8 @@
 
 
 /**
+ * QUICKSORT
+ *
  * Recursively divide the array in half,
  * select a pivot and sort lower and higher 
  * elements to either side of the pivot
