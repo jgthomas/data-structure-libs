@@ -20,7 +20,6 @@ void print_array(int array[], int len)
 
 int find_max(int array[], int len)
 {
-
         int max = array[0];
 
         for (int i = 1; i < len; i++)
