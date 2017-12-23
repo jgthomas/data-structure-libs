@@ -61,6 +61,35 @@ void testBASIC_SORTING(void)
 }
 
 
+void testEMPTY_LIST(void)
+{
+        int test_int[] = {};
+        char test_char[] = {};
+        char *test_string[] = {};
+
+        TestCase **tests = init_tests(NUM_TESTS);
+
+        TestCase *testint = new_test(test_int, test_int, sizeof(test_int), sizeof(int), equal_int, less_than_int, print_int);
+        TestCase *testchar = new_test(test_char, test_char, sizeof(test_char), sizeof(char), equal_char, less_than_char, print_char);
+        TestCase *teststring = new_test(test_string, test_string, sizeof(test_string), sizeof(char *), equal_string, less_than_string, print_string);
+
+        tests[0] = testint;
+        tests[1] = testchar;
+        tests[2] = teststring;
+
+        for (int i = 0; i < NUM_TESTS; i++)
+        {
+                CU_ASSERT_TRUE(arrays_match(tests[i]->test, tests[i]->answer, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
+                //print_sequence(tests[i]->test, tests[i]->data_size, tests[i]->elem_size, tests[i]->print);
+                bubble_sort(tests[i]->test, tests[i]->data_size, tests[i]->elem_size, tests[i]->compare);
+                CU_ASSERT_TRUE(arrays_match(tests[i]->test, tests[i]->answer, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
+                //print_sequence(tests[i]->test, tests[i]->data_size, tests[i]->elem_size, tests[i]->print);
+        }
+
+        clean_tests(tests, NUM_TESTS);
+}
+
+
 int main(void)
 {
         // test suite
@@ -81,7 +110,8 @@ int main(void)
         }
 
         // add tests
-        if (NULL == CU_add_test(suite, "Basic sorting", testBASIC_SORTING)) 
+        if (NULL == CU_add_test(suite, "Basic sorting", testBASIC_SORTING) ||
+            NULL == CU_add_test(suite, "Empty arrays", testEMPTY_LIST)) 
         {
                 CU_cleanup_registry();
                 return CU_get_error();
