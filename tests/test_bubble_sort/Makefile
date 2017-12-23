@@ -1,9 +1,9 @@
 # PATHS - to search for the headers and source files
-HEADERS_1 = ../../
+HEADERS_1 = ../../ ../
 HEADERS_2 = 
 HEADERS_3 = 
 
-SOURCE_1 = ../../
+SOURCE_1 = ../../ ../
 SOURCE_2 = 
 SOURCE_3 = 
 
@@ -28,8 +28,8 @@ PWD_HEADERS := $(wildcard *.h)
 PWD_SOURCES := $(wildcard *.c)
 TOOLS_HEADERS := tools/printing.h tools/comparison.h tools/general.h
 TOOLS_SOURCES := tools/printing.c tools/comparison.c tools/general.c
-TEST_HEADERS := tests/shared_test.h
-TEST_SOURCES := tests/shared_test.c
+TEST_HEADERS := tests/shared_test.h tests/test_sort_defs.h
+TEST_SOURCES := tests/shared_test.c tests/test_sort_defs.c
 SORT_HEADERS := algorithms/bubble_sort.h
 SORT_SOURCES := algorithms/bubble_sort.c
 DS_HEADERS :=

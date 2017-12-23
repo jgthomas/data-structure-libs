@@ -5,10 +5,8 @@
 #include "tools/printing.h"
 #include "tools/comparison.h"
 #include "tests/shared_test.h"
+#include "tests/test_sort_defs.h"
 #include "algorithms/bubble_sort.h"
-
-
-enum {NUM_TESTS = 3};
 
 
 int test_int[] = {1,7,6,5,22,8,1,15,74};
@@ -63,19 +61,7 @@ void testBASIC_SORTING(void)
 
 void testEMPTY_LIST(void)
 {
-        int test_int[] = {};
-        char test_char[] = {};
-        char *test_string[] = {};
-
-        TestCase **tests = init_tests(NUM_TESTS);
-
-        TestCase *testint = new_test(test_int, test_int, sizeof(test_int), sizeof(int), equal_int, less_than_int, print_int);
-        TestCase *testchar = new_test(test_char, test_char, sizeof(test_char), sizeof(char), equal_char, less_than_char, print_char);
-        TestCase *teststring = new_test(test_string, test_string, sizeof(test_string), sizeof(char *), equal_string, less_than_string, print_string);
-
-        tests[0] = testint;
-        tests[1] = testchar;
-        tests[2] = teststring;
+        TestCase **tests = empty_test(NUM_TESTS);
 
         for (int i = 0; i < NUM_TESTS; i++)
         {
