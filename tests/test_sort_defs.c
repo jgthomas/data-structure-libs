@@ -56,3 +56,23 @@ TestCase **empty_test(int num_tests)
 
         return tests;
 }
+
+
+TestCase **single_element_test(int num_tests)
+{
+        int test_int[] = {8};
+        char test_char[] = {'c'};
+        char *test_string[] = {"doggy"};
+
+        TestCase **tests = init_tests(num_tests);
+
+        TestCase *testint = new_test(test_int, test_int, sizeof(test_int), sizeof(int), equal_int, less_than_int, print_int);
+        TestCase *testchar = new_test(test_char, test_char, sizeof(test_char), sizeof(char), equal_char, less_than_char, print_char);
+        TestCase *teststring = new_test(test_string, test_string, sizeof(test_string), sizeof(char *), equal_string, less_than_string, print_string);
+
+        tests[0] = testint;
+        tests[1] = testchar;
+        tests[2] = teststring;
+
+        return tests;
+}
