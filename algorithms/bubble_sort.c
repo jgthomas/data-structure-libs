@@ -12,7 +12,7 @@ void bubble_sort(void *array,
                  size_t elem_size,
                  bool (*compare)(void *x, void *y))
 {
-        size_t length = data_size/elem_size;
+        int length = data_size/elem_size;
         int unsorted = length - 1;
 
         while (unsorted > 0)
