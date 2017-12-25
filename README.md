@@ -16,11 +16,17 @@ Generic implementations of a range of major data structures
 
 ### demos
 
-For algorithms, the demo's output illustrates each step in the sort and how it transforms the data. For data structures, the demos are interactive, allowing an exploration of adding, deleting, searching and other operations
+* algorithms
+
+> demo illustrates each step in the sort and how it transforms the data. 
+
+* data structures
+
+> the demos are interactive, allowing an exploration of adding, deleting, searching and other operations
 
 ### reference
 
-Simple, annotated versions of each data struture and algorithm aiming to capture their essence
+Simple, annotated versions of each data structure and algorithm aiming to capture their essence
 
 ### tests
 
