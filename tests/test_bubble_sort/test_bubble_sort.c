@@ -5,7 +5,7 @@
 #include "tools/printing.h"
 #include "tools/comparison.h"
 #include "tests/shared_test.h"
-#include "tests/test_sort_defs.h"
+#include "tests/comparison_sort_tests.h"
 #include "algorithms/bubble_sort.h"
 
 
