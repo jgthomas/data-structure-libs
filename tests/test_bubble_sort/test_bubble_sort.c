@@ -9,9 +9,9 @@
 #include "algorithms/bubble_sort.h"
 
 
-void testBASIC_SORTING(void)
+void testODD_NO_ELEMENTS(void)
 {
-        TestCase **tests = basic_tests(NUM_TESTS);
+        TestCase **tests = odd_test(NUM_TESTS);
 
         for (int i = 0; i < NUM_TESTS; i++)
         {
@@ -97,7 +97,7 @@ int main(void)
         }
 
         // add tests
-        if (NULL == CU_add_test(suite, "Basic sorting", testBASIC_SORTING) ||
+        if (NULL == CU_add_test(suite, "Basic sorting", testODD_NO_ELEMENTS) ||
             NULL == CU_add_test(suite, "Empty arrays", testEMPTY_LIST) ||
             NULL == CU_add_test(suite, "Single element", testSINGLE_ELEMENT) ||
             NULL == CU_add_test(suite, "Repeat elements", testREPEAT_ELEMENT))
