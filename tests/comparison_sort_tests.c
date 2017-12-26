@@ -6,19 +6,19 @@
 
 
 /**
- * Basic sorting
+ * Odd number of elements
  *
  * */
-int test_int[] = {1,7,6,5,22,8,1,15,74};
-char test_char[] = {'c','d','b','f','g','a'};
-char *test_string[] = {"abacus",
+int odd_int[] = {1,7,6,5,22,8,1,15,74};
+char odd_char[] = {'c','d','b','f','g','a','w'};
+char *odd_string[] = {"abacus",
                        "zebra",
                        "doggy",
                        "thinning",
                        "soldier"};
 
 int answer_int[] = {1,1,5,6,7,8,15,22,74};
-char answer_char[] = {'a','b','c','d','f','g'};
+char answer_char[] = {'a','b','c','d','f','g','w'};
 char *answer_string[] = {"abacus",
                          "doggy",
                          "soldier",
@@ -26,13 +26,13 @@ char *answer_string[] = {"abacus",
                          "zebra"};
 
 
-TestCase **basic_tests(int num_tests)
+TestCase **odd_test(int num_tests)
 {        
         TestCase **test_array = init_tests(num_tests);
 
-        TestCase *testint = new_test(test_int, answer_int, sizeof(test_int), sizeof(int), equal_int, less_than_int, print_int);
-        TestCase *testchar = new_test(test_char, answer_char, sizeof(test_char), sizeof(char), equal_char, less_than_char, print_char);
-        TestCase *teststring = new_test(test_string, answer_string, sizeof(test_string), sizeof(char *), equal_string, less_than_string, print_string);
+        TestCase *testint = new_test(odd_int, answer_int, sizeof(odd_int), sizeof(int), equal_int, less_than_int, print_int);
+        TestCase *testchar = new_test(odd_char, answer_char, sizeof(odd_char), sizeof(char), equal_char, less_than_char, print_char);
+        TestCase *teststring = new_test(odd_string, answer_string, sizeof(odd_string), sizeof(char *), equal_string, less_than_string, print_string);
 
         test_array[0] = testint;
         test_array[1] = testchar;
