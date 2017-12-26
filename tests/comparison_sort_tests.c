@@ -183,3 +183,31 @@ TestCase **single_rep_test(int num_tests)
 
         return tests;
 }
+
+
+/**
+ * Already sorted
+ *
+ * */
+int sorted_int[] = {1,5,6,7,8,15,22,74};
+char sorted_char[] = {'a','b','c','d','f','g'};
+char *sorted_string[] = {"abacus",
+                             "doggy",
+                             "soldier",
+                             "thinning"};
+
+
+TestCase **sorted_test(int num_tests)
+{        
+        TestCase **test_array = init_tests(num_tests);
+
+        TestCase *testint = new_test(sorted_int, sorted_int, sizeof(sorted_int), sizeof(int), equal_int, less_than_int, print_int);
+        TestCase *testchar = new_test(sorted_char, sorted_char, sizeof(sorted_char), sizeof(char), equal_char, less_than_char, print_char);
+        TestCase *teststring = new_test(sorted_string, sorted_string, sizeof(sorted_string), sizeof(char *), equal_string, less_than_string, print_string);
+
+        test_array[0] = testint;
+        test_array[1] = testchar;
+        test_array[2] = teststring;
+
+        return test_array;
+}

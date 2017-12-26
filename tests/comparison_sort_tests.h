@@ -9,5 +9,6 @@ TestCase **empty_test(int num_tests);
 TestCase **single_element_test(int num_tests);
 TestCase **repeat_element_test(int num_tests);
 TestCase **single_rep_test(int num_tests);
+TestCase **sorted_test(int num_tests);
 
 #endif
