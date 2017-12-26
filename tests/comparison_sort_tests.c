@@ -17,9 +17,9 @@ char *odd_string[] = {"abacus",
                        "thinning",
                        "soldier"};
 
-int answer_int[] = {1,1,5,6,7,8,15,22,74};
-char answer_char[] = {'a','b','c','d','f','g','w'};
-char *answer_string[] = {"abacus",
+int odd_int_answer[] = {1,1,5,6,7,8,15,22,74};
+char odd_char_answer[] = {'a','b','c','d','f','g','w'};
+char *odd_string_answer[] = {"abacus",
                          "doggy",
                          "soldier",
                          "thinning",
@@ -30,9 +30,9 @@ TestCase **odd_test(int num_tests)
 {        
         TestCase **test_array = init_tests(num_tests);
 
-        TestCase *testint = new_test(odd_int, answer_int, sizeof(odd_int), sizeof(int), equal_int, less_than_int, print_int);
-        TestCase *testchar = new_test(odd_char, answer_char, sizeof(odd_char), sizeof(char), equal_char, less_than_char, print_char);
-        TestCase *teststring = new_test(odd_string, answer_string, sizeof(odd_string), sizeof(char *), equal_string, less_than_string, print_string);
+        TestCase *testint = new_test(odd_int, odd_int_answer, sizeof(odd_int), sizeof(int), equal_int, less_than_int, print_int);
+        TestCase *testchar = new_test(odd_char, odd_char_answer, sizeof(odd_char), sizeof(char), equal_char, less_than_char, print_char);
+        TestCase *teststring = new_test(odd_string, odd_string_answer, sizeof(odd_string), sizeof(char *), equal_string, less_than_string, print_string);
 
         test_array[0] = testint;
         test_array[1] = testchar;
