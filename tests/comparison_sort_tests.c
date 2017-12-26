@@ -43,6 +43,41 @@ TestCase **odd_test(int num_tests)
 
 
 /**
+ * Even number of elements
+ *
+ * */
+int even_int[] = {1,7,6,5,22,8,15,74};
+char even_char[] = {'c','d','b','f','g','a'};
+char *even_string[] = {"abacus",
+                      "doggy",
+                      "thinning",
+                      "soldier"};
+
+int even_int_answer[] = {1,5,6,7,8,15,22,74};
+char even_char_answer[] = {'a','b','c','d','f','g'};
+char *even_string_answer[] = {"abacus",
+                             "doggy",
+                             "soldier",
+                             "thinning"};
+
+
+TestCase **even_test(int num_tests)
+{        
+        TestCase **test_array = init_tests(num_tests);
+
+        TestCase *testint = new_test(even_int, even_int_answer, sizeof(even_int), sizeof(int), equal_int, less_than_int, print_int);
+        TestCase *testchar = new_test(even_char, even_char_answer, sizeof(even_char), sizeof(char), equal_char, less_than_char, print_char);
+        TestCase *teststring = new_test(even_string, even_string_answer, sizeof(even_string), sizeof(char *), equal_string, less_than_string, print_string);
+
+        test_array[0] = testint;
+        test_array[1] = testchar;
+        test_array[2] = teststring;
+
+        return test_array;
+}
+
+
+/**
  * Empty array
  *
  * */

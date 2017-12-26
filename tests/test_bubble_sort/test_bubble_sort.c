@@ -26,6 +26,23 @@ void testODD_NO_ELEMENTS(void)
 }
 
 
+void testEVEN_NO_ELEMENTS(void)
+{
+        TestCase **tests = even_test(NUM_TESTS);
+
+        for (int i = 0; i < NUM_TESTS; i++)
+        {
+                CU_ASSERT_FALSE(arrays_match(tests[i]->test, tests[i]->answer, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
+                //print_sequence(tests[i]->test, tests[i]->data_size, tests[i]->elem_size, tests[i]->print);
+                bubble_sort(tests[i]->test, tests[i]->data_size, tests[i]->elem_size, tests[i]->compare);
+                CU_ASSERT_TRUE(arrays_match(tests[i]->test, tests[i]->answer, tests[i]->data_size, tests[i]->elem_size, tests[i]->equal));
+                //print_sequence(tests[i]->test, tests[i]->data_size, tests[i]->elem_size, tests[i]->print);
+        }
+
+        clean_tests(tests, NUM_TESTS);
+}
+
+
 void testEMPTY_LIST(void)
 {
         TestCase **tests = empty_test(NUM_TESTS);
@@ -97,7 +114,8 @@ int main(void)
         }
 
         // add tests
-        if (NULL == CU_add_test(suite, "Basic sorting", testODD_NO_ELEMENTS) ||
+        if (NULL == CU_add_test(suite, "Odd number of elements", testODD_NO_ELEMENTS) ||
+            NULL == CU_add_test(suite, "Even number of elements", testEVEN_NO_ELEMENTS) ||
             NULL == CU_add_test(suite, "Empty arrays", testEMPTY_LIST) ||
             NULL == CU_add_test(suite, "Single element", testSINGLE_ELEMENT) ||
             NULL == CU_add_test(suite, "Repeat elements", testREPEAT_ELEMENT))
