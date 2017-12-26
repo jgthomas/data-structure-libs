@@ -159,3 +159,27 @@ TestCase **repeat_element_test(int num_tests)
 
         return tests;
 }
+
+
+/**
+ * Just two repeats
+ *
+ * */
+int single_rep_int[] = {8,8};
+char single_rep_char[] = {'c','c'};
+char *single_rep_string[] = {"doggy","doggy"};
+
+TestCase **single_rep_test(int num_tests)
+{
+        TestCase **tests = init_tests(num_tests);
+
+        TestCase *testint = new_test(single_rep_int, single_rep_int, sizeof(single_rep_int), sizeof(int), equal_int, less_than_int, print_int);
+        TestCase *testchar = new_test(single_rep_char, single_rep_char, sizeof(single_rep_char), sizeof(char), equal_char, less_than_char, print_char);
+        TestCase *teststring = new_test(single_rep_string, single_rep_string, sizeof(single_rep_string), sizeof(char *), equal_string, less_than_string, print_string);
+
+        tests[0] = testint;
+        tests[1] = testchar;
+        tests[2] = teststring;
+
+        return tests;
+}
