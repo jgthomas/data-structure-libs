@@ -150,7 +150,7 @@ int main(void)
         // add tests
         if (NULL == CU_add_test(suite, "Odd number of elements", testODD_NO_ELEMENTS) ||
             NULL == CU_add_test(suite, "Even number of elements", testEVEN_NO_ELEMENTS) ||
-            NULL == CU_add_test(suite, "Empty arrays", testEMPTY_LIST) ||
+            NULL == CU_add_test(suite, "Zero elements", testEMPTY_LIST) ||
             NULL == CU_add_test(suite, "Single element", testSINGLE_ELEMENT) ||
             NULL == CU_add_test(suite, "Repeat elements", testREPEAT_ELEMENT) ||
             NULL == CU_add_test(suite, "Len 2, all the same", testREPEAT_SINGLE_ELEMENT) ||
