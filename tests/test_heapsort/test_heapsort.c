@@ -17,15 +17,15 @@ void change_comparison(TestCase **tests, int num_tests)
 {
         for (int i = 0; i < num_tests; i++)
         {
-                if (i == 0)
+                if (tests[i]->elem_size == sizeof(int))
                 {
                         tests[i]->compare = more_than_int;
                 }
-                else if (i == 1)
+                else if (tests[i]->elem_size == sizeof(char))
                 {
                         tests[i]->compare = more_than_char;
                 }
-                else if (i == 2)
+                else if (tests[i]->elem_size == sizeof(char *))
                 {
                         tests[i]->compare = more_than_string;
                 }
