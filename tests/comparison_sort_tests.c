@@ -12,10 +12,10 @@
 int odd_int[] = {1,7,6,5,22,8,1,15,74};
 char odd_char[] = {'c','d','b','f','g','a','w'};
 char *odd_string[] = {"abacus",
-                       "zebra",
-                       "doggy",
-                       "thinning",
-                       "soldier"};
+                      "zebra",
+                      "doggy",
+                      "thinning",
+                      "soldier"};
 
 int odd_int_answer[] = {1,1,5,6,7,8,15,22,74};
 char odd_char_answer[] = {'a','b','c','d','f','g','w'};
