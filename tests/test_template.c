@@ -52,7 +52,8 @@ void testSAMPLE_TEST(void)
 
         for (int i = 0; i < NUM_TESTS; i++)
         {
-
+                // output initial or sorted data
+                print_sequence(tests[i]->test, tests[i]->data_size, tests[i]->elem_size, tests[i]->print);
         }
 
         clean_tests(tests, NUM_TESTS);
