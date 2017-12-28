@@ -20,10 +20,10 @@ char *odd_string[] = {"abacus",
 int odd_int_answer[] = {1,1,5,6,7,8,15,22,74};
 char odd_char_answer[] = {'a','b','c','d','f','g','w'};
 char *odd_string_answer[] = {"abacus",
-                         "doggy",
-                         "soldier",
-                         "thinning",
-                         "zebra"};
+                             "doggy",
+                             "soldier",
+                             "thinning",
+                             "zebra"};
 
 
 TestCase **odd_test(int num_tests)
@@ -49,16 +49,16 @@ TestCase **odd_test(int num_tests)
 int even_int[] = {1,7,6,5,22,8,15,74};
 char even_char[] = {'c','d','b','f','g','a'};
 char *even_string[] = {"abacus",
-                      "doggy",
-                      "thinning",
-                      "soldier"};
+                       "doggy",
+                       "thinning",
+                       "soldier"};
 
 int even_int_answer[] = {1,5,6,7,8,15,22,74};
 char even_char_answer[] = {'a','b','c','d','f','g'};
 char *even_string_answer[] = {"abacus",
-                             "doggy",
-                             "soldier",
-                             "thinning"};
+                              "doggy",
+                              "soldier",
+                              "thinning"};
 
 
 TestCase **even_test(int num_tests)
@@ -192,9 +192,9 @@ TestCase **single_rep_test(int num_tests)
 int sorted_int[] = {1,5,6,7,8,15,22,74};
 char sorted_char[] = {'a','b','c','d','f','g'};
 char *sorted_string[] = {"abacus",
-                             "doggy",
-                             "soldier",
-                             "thinning"};
+                         "doggy",
+                         "soldier",
+                         "thinning"};
 
 
 TestCase **sorted_test(int num_tests)
