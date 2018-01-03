@@ -20,10 +20,10 @@ bool load(TrieNode *root, char *text)
         // scan in words
         while (fgets(word, sizeof(word), fp))
         {
-            // strip out newline character
-            word[strcspn(word, "\n")] = '\0';
-            
-            insert(root, word);
+                // strip out newline character
+                word[strcspn(word, "\n")] = '\0';
+
+                insert(root, word);
         }
 
         fclose(fp);
