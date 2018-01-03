@@ -33,106 +33,107 @@ bool load(TrieNode *root, char *text)
 
 TrieNode *make_node(void)
 {
-    TrieNode *new_node = malloc(sizeof(*new_node));
+        TrieNode *new_node = malloc(sizeof(*new_node));
  
-    if (new_node == NULL)
-    {
-        printf("failed to allocate memory\n");
-        exit(1);
-    }
+        if (new_node == NULL)
+        {
+                printf("failed to allocate memory\n");
+                exit(1);
+        }
  
-    new_node->end_of_word = false;
+        new_node->end_of_word = false;
  
-    for (int i = 0; i < ALPHABET_SIZE; i++)
-    {
-        new_node->children[i] = NULL;
-    }
+        for (int i = 0; i < ALPHABET_SIZE; i++)
+        {
+                new_node->children[i] = NULL;
+        }
  
-    return new_node;
+        return new_node;
 }
 
 
 void insert(TrieNode *root, char *key)
 {
-    int length = strlen(key);
+        int length = strlen(key);
  
-    TrieNode *p_crawl = root;
+        TrieNode *p_crawl = root;
  
-    for (int level = 0; level < length; level++)
-    {
-        int index = key[level] - CHAR_BASE;
-
-        if (p_crawl->children[index] == NULL)
+        for (int level = 0; level < length; level++)
         {
-            p_crawl->children[index] = make_node();
-        }
+                int index = key[level] - CHAR_BASE;
+
+                if (p_crawl->children[index] == NULL)
+                {
+                        p_crawl->children[index] = make_node();
+                }
  
-        p_crawl = p_crawl->children[index];
-    }
-    p_crawl->end_of_word = true;
+                p_crawl = p_crawl->children[index];
+        }
+        p_crawl->end_of_word = true;
 }
 
 
 bool search(TrieNode *root, char *key)
 {
-    int length = strlen(key);
-    TrieNode *p_crawl = root;
+        int length = strlen(key);
+        TrieNode *p_crawl = root;
  
-    for (int level = 0; level < length; level++)
-    {
-        int index = key[level] - CHAR_BASE;
- 
-        if (p_crawl->children[index] == NULL)
+        for (int level = 0; level < length; level++)
         {
-            return false;
+                int index = key[level] - CHAR_BASE;
+
+                if (p_crawl->children[index] == NULL)
+                {
+                        return false;
+                }
+
+                p_crawl = p_crawl->children[index];
         }
- 
-        p_crawl = p_crawl->children[index];
-    }
- 
-    return (p_crawl != NULL && p_crawl->end_of_word);
+
+        return (p_crawl != NULL && p_crawl->end_of_word);
 }
 
 
 bool has_no_children(TrieNode *node)
 {
-    for (int index = 0; index < ALPHABET_SIZE; index++)
-    {
-        if (node->children[index] != NULL)
+        for (int index = 0; index < ALPHABET_SIZE; index++)
         {
-            return false;
+                if (node->children[index] != NULL)
+                {
+                        return false;
+                }
         }
-    }
-    
-    return true;
+
+        return true;
 }
 
 
 void unmark_as_end(TrieNode *node)
 {
-    node->end_of_word = false;
+        node->end_of_word = false;
 }
 
 
 bool not_end_of_word(TrieNode *node)
 {
-    return (!node->end_of_word);
+        return (!node->end_of_word);
 }
 
 
 void delete_key(TrieNode *root, char *key)
 {
-    if (root == NULL || key == NULL)
-    {
-        printf("NULL key or empty trie error\n");
-        return;
-    }
-    
-    int length = strlen(key);
-    int level = 0;
-    
-    delete_helper(root, key, length, level);
+        if (root == NULL || key == NULL)
+        {
+                printf("NULL key or empty trie error\n");
+                return;
+        }
+
+        int length = strlen(key);
+        int level = 0;
+
+        delete_helper(root, key, length, level);
 }
+
 
 /**
  * Algorithm
@@ -147,40 +148,40 @@ void delete_key(TrieNode *root, char *key)
  * */
 bool delete_helper(TrieNode *root, char *key, int length, int level)
 {
-    TrieNode *p_crawl = root;
-    
-    if (p_crawl == NULL)
-    {
-        printf("'%s' not found in tree\n", key);
-    }
-    
-    // base case
-    if (level == length)
-    {
-        unmark_as_end(p_crawl);
+        TrieNode *p_crawl = root;
         
-        if (has_no_children(p_crawl))
+        if (p_crawl == NULL)
         {
-            return true;
+                printf("'%s' not found in tree\n", key);
         }
         
-        return false;
-    }
-    // recursive case
-    else
-    {
-        int index = key[level] - CHAR_BASE;
-        p_crawl = p_crawl->children[index];
-        bool delete_child = delete_helper(p_crawl, key, length, level+1);
-        
-        if (delete_child)
+        // base case
+        if (level == length)
         {
-            free(p_crawl->children[index]);
-            p_crawl->children[index] = NULL;
+                unmark_as_end(p_crawl);
+
+                if (has_no_children(p_crawl))
+                {
+                        return true;
+                }
+
+                return false;
         }
-        
-        return (not_end_of_word(p_crawl) && has_no_children(p_crawl));
-    }
+        // recursive case
+        else
+        {
+                int index = key[level] - CHAR_BASE;
+                p_crawl = p_crawl->children[index];
+                bool delete_child = delete_helper(p_crawl, key, length, level+1);
+
+                if (delete_child)
+                {
+                        free(p_crawl->children[index]);
+                        p_crawl->children[index] = NULL;
+                }
+
+                return (not_end_of_word(p_crawl) && has_no_children(p_crawl));
+        }
 }
 
 
