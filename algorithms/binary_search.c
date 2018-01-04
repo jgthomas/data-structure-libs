@@ -12,6 +12,8 @@ int binary_search(void *array,
         int low = 0;
         int high = (data_size/elem_size) - 1;
 
+        int not_found = -1;
+
         while (high >= low)
         {
                 int mid = (high + low) / 2;
@@ -31,5 +33,5 @@ int binary_search(void *array,
                 }
         }
 
-        return -1;
+        return not_found;
 }
