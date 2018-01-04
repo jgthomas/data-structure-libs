@@ -22,7 +22,6 @@ bool load(TrieNode *root, char *text)
         {
                 // strip out newline character
                 word[strcspn(word, "\n")] = '\0';
-
                 insert(root, word);
         }
 
