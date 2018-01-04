@@ -99,13 +99,19 @@ void treap_sink_down(TreapNode **root)
 
                 if (right_priority >= 0 && right_priority > left_priority)
                 {
-                        rotate_left(root);
-                        treap_sink_down(&(*root)->left);
+                        if (right_priority > (*root)->priority)
+                        {
+                                rotate_left(root);
+                                treap_sink_down(&(*root)->left);
+                        }
                 }
                 else if (left_priority >= 0)
                 {
-                        rotate_right(root);
-                        treap_sink_down(&(*root)->right);
+                        if (left_priority > (*root)->priority)
+                        {
+                                rotate_right(root);
+                                treap_sink_down(&(*root)->right);
+                        }
                 }
         }
 }
