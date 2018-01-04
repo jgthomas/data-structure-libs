@@ -98,6 +98,15 @@ bool BST_search(BinTreeNode **root,
 }
 
 
+/**
+ * LEAF node, set parent's pointer to NULL then just delete leaf node
+ * With ONE CHILD point the parent node to that child and delete node
+ * With TWO CHILDREN
+ *   >> select the lowest value in the right subtree (which will be a leaf node)
+ *   >> copy data over the to-be-deleted node
+ *   >> then delete the lowest right subtree node as a leaf
+ *
+ * */
 void BST_delete_value(BinTreeNode **root,
                       void *data,
                       size_t data_size,
