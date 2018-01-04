@@ -82,28 +82,30 @@ void treap_delete_value(TreapNode **root,
 
 void treap_sink_down(TreapNode **root)
 {
-        if ((*root)->right != NULL)
+        if ((*root) != NULL)
         {
-                if ((*root)->right->priority > (*root)->left->priority)
+                int right_priority = -1;
+                int left_priority = -1;
+
+                if ((*root)->right != NULL)
                 {
-                        if ((*root)->right->priority > (*root)->priority)
-                        {
-                                rotate_left(root);
-                        }
+                        right_priority = (*root)->right->priority;
                 }
-                else
+
+                if ((*root)->left != NULL)
                 {
-                        if ((*root)->left->priority > (*root)->priority)
-                        {
-                                rotate_right(root);
-                        }
+                        left_priority = (*root)->left->priority;
                 }
-        }
-        else
-        {
-                if ((*root)->left->priority > (*root)->priority)
+
+                if (right_priority >= 0 && right_priority > left_priority)
+                {
+                        rotate_left(root);
+                        treap_sink_down(&(*root)->left);
+                }
+                else if (left_priority >= 0)
                 {
                         rotate_right(root);
+                        treap_sink_down(&(*root)->right);
                 }
         }
 }
