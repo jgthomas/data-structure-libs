@@ -78,7 +78,7 @@ int main(void)
                 }
                 else if (strncmp(command, "fill", 4) == 0)
                 {
-                        for (int i = 100; i < 200; i++)
+                        for (int i = 100; i < 110; i++)
                         {
                                 treap_insert(&root, &i, sizeof(i), less_than_int);
                         }
