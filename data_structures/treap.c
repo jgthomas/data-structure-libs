@@ -6,6 +6,145 @@
 #include "treap.h"
 
 
+void treap_delete_value(TreapNode **root,
+                        void *data,
+                        size_t data_size,
+                        bool (*equal)(void *x, void *y),
+                        bool (*less_than)(void *x, void *y))
+{
+        if (equal(data, (*root)->key))
+        {
+                if ((*root)->left == NULL && (*root)->right == NULL)
+                {
+                        free((*root)->key);
+                        (*root)->key = NULL;
+                }
+                else if ((*root)->left != NULL && (*root)->right != NULL)
+                {
+                        TreapNode *low_in_right = treap_min((*root)->right, less_than);
+
+                        memcpy((*root)->key, low_in_right->key, data_size);
+                        (*root)->priority = low_in_right->priority;
+
+                        treap_delete_value(&(*root)->right,
+                                           low_in_right->key,
+                                           data_size,
+                                           equal,
+                                           less_than);
+
+                        if ((*root)->right->key == NULL)
+                        {
+                                treap_delete_node((*root)->right);
+                                (*root)->right = NULL;
+                        }
+
+                        treap_sink_down(root);
+                }
+                else
+                {
+                        if ((*root)->left != NULL)
+                        {
+                                TreapNode *temp = (*root);
+                                (*root) = (*root)->left;
+                                treap_delete_node(temp);
+                        }
+                        else
+                        {
+                                TreapNode *temp = (*root);
+                                (*root) = (*root)->right;
+                                treap_delete_node(temp);
+                        }
+                }
+        }
+        else if (less_than(data, (*root)->key))
+        {
+                treap_delete_value(&(*root)->left, data, data_size, equal, less_than);
+
+                if ((*root)->left->key == NULL)
+                {
+                        treap_delete_node((*root)->left);
+                        (*root)->left = NULL;
+                }
+        }
+        else
+        {
+                treap_delete_value(&(*root)->right, data, data_size, equal, less_than);
+
+                if ((*root)->right->key == NULL)
+                {
+                        treap_delete_node((*root)->right);
+                        (*root)->right = NULL;
+                }
+        }
+
+}
+
+
+void treap_sink_down(TreapNode **root)
+{
+        if ((*root)->right != NULL)
+        {
+                if ((*root)->right->priority > (*root)->left->priority)
+                {
+                        if ((*root)->right->priority > (*root)->priority)
+                        {
+                                rotate_left(root);
+                        }
+                }
+                else
+                {
+                        if ((*root)->left->priority > (*root)->priority)
+                        {
+                                rotate_right(root);
+                        }
+                }
+        }
+        else
+        {
+                if ((*root)->left->priority > (*root)->priority)
+                {
+                        rotate_right(root);
+                }
+        }
+}
+
+
+TreapNode *treap_min(TreapNode *node, bool (*less_than)(void *x, void *y))
+{
+        TreapNode *lowest = node;
+
+        while (node->left != NULL)
+        {
+                node = node->left;
+
+                if (less_than(node->key, lowest->key))
+                {
+                        lowest = node;
+                }
+        }
+
+        return lowest;
+}
+
+
+TreapNode *treap_max(TreapNode *node, bool (*less_than)(void *x, void *y))
+{
+        TreapNode *highest = node;
+
+        while (node->right != NULL)
+        {
+                node = node->right;
+
+                if (less_than(highest->key, node->key))
+                {
+                        highest = node;
+                }
+        }
+
+        return highest;
+}
+
+
 TreapNode *treap_init(void)
 {
         time_t t;

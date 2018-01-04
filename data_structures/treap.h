@@ -46,4 +46,14 @@ void treap_visualise(TreapNode *node,
                      int level,
                      void (*print)(void *item));
 
+TreapNode *treap_min(TreapNode *node, bool (*less_than)(void *x, void *y));
+TreapNode *treap_max(TreapNode *node, bool (*less_than)(void *x, void *y));
+void treap_sink_down(TreapNode **root);
+
+void treap_delete_value(TreapNode **root,
+                        void *data,
+                        size_t data_size,
+                        bool (*equal)(void *x, void *y),
+                        bool (*less_than)(void *x, void *y));
+
 #endif
