@@ -28,7 +28,7 @@ void treap_delete_value(TreapNode **root,
                 if ((*root)->left == NULL && (*root)->right == NULL)
                 {
                         free((*root)->key);
-                        (*root)->key = NULL;
+                        (*root)->key = NULL; // indicates node should be deleted
                 }
                 else if ((*root)->left != NULL && (*root)->right != NULL)
                 {
