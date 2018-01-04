@@ -6,6 +6,17 @@
 #include "treap.h"
 
 
+/**
+ * LEAF node, set parent's pointer to NULL then just delete leaf node
+ * With ONE CHILD point the parent node to that child and delete node
+ * With TWO CHILDREN
+ *   >> select the lowest value in the right subtree (which will be a leaf node)
+ *   >> copy data and priority over the to-be-deleted node
+ *   >> delete the lowest right subtree node as a leaf
+ *   >> if any children have higher priority, then sink node down
+ *      to restore the heap property
+ *
+ * */
 void treap_delete_value(TreapNode **root,
                         void *data,
                         size_t data_size,
@@ -80,6 +91,11 @@ void treap_delete_value(TreapNode **root,
 }
 
 
+/**
+ * If priority of either child node is greater rotate appropriately
+ * until heap property is restored
+ *
+ * */
 void treap_sink_down(TreapNode **root)
 {
         if ((*root) != NULL)
@@ -117,6 +133,10 @@ void treap_sink_down(TreapNode **root)
 }
 
 
+/**
+ * Return node with the minimum key
+ *
+ * */
 TreapNode *treap_min(TreapNode *node, bool (*less_than)(void *x, void *y))
 {
         TreapNode *lowest = node;
@@ -135,6 +155,10 @@ TreapNode *treap_min(TreapNode *node, bool (*less_than)(void *x, void *y))
 }
 
 
+/**
+ * Return node with the maximum key
+ *
+ * */
 TreapNode *treap_max(TreapNode *node, bool (*less_than)(void *x, void *y))
 {
         TreapNode *highest = node;
