@@ -18,7 +18,7 @@ int main(void)
 {
         TreapNode *root = treap_init();
 
-        int nums[] = {10,45,1,23,44,6,8,99,21,34,19,2};
+        int nums[] = {11,12,5,67,4,44,6,8,99,21,34,19,2};
 
         treap_load_data(&root, nums, sizeof(nums), sizeof(nums[0]), less_than_int);
 
