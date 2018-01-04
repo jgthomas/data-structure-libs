@@ -356,7 +356,7 @@ void treap_visualise(TreapNode *node,
                      int level,
                      void (*print)(void *item))
 {
-	    if (node == NULL)
+        if (node == NULL)
 	    {
                 return;
 	    }
@@ -367,9 +367,10 @@ void treap_visualise(TreapNode *node,
 	    {
 	            printf("       ");
 	    }
-	    print(node->key);
-            printf("(%d)", node->priority);
-	    printf("\n\n");
+
+        print(node->key);
+        printf("(%d)", node->priority);
+        printf("\n\n");
 
 	    treap_visualise(node->left, level+1, print);
 }
