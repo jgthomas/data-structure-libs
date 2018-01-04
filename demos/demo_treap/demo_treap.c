@@ -10,7 +10,7 @@
 
 void print_commands(void)
 {
-        printf("commands: show, insert, inorder, preorder, postorder, fill, quit\n\n");
+        printf("commands: show, insert, del, inorder, preorder, postorder, fill, quit\n\n");
 }
 
 
@@ -52,6 +52,11 @@ int main(void)
                 {
                         int n = get_int("Number to insert");
                         treap_insert(&root, &n, sizeof(n), less_than_int);
+                }
+                else if (strncmp(command, "del", 3) == 0)
+                {
+                        int n = get_int("Number to delete");
+                        treap_delete_value(&root, &n, sizeof(n), equal_int, less_than_int);
                 }
                 else if (strncmp(command, "inorder", 7) == 0)
                 {
