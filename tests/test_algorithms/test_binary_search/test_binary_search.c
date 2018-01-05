@@ -53,8 +53,8 @@ int odd_num_elem_answers[8][5] = {{2,NOT_FOUND,NOT_FOUND,NOT_FOUND},
 
 void testBASIC_SEARCH(void)
 {
+        /* integers */
         int test_int[] = {1,4,4,6,7,7,12,12,12,15,19,23,24,29,63,66,77,77,80};
-        char test_char[] = {'a','b','c','d','e','f','g','h'};
 
         int int_present = 19;
         int int_present_index = binary_search(test_int, &int_present, sizeof(test_int), sizeof(int), more_than_int);
@@ -64,6 +64,10 @@ void testBASIC_SEARCH(void)
         int int_not_present_index = binary_search(test_int, &int_not_present, sizeof(test_int), sizeof(int), more_than_int);
         CU_ASSERT_TRUE(int_not_present_index == NOT_FOUND);
 
+
+        /* chars */
+        char test_char[] = {'a','b','c','d','e','f','g','h'};
+
         char char_present = 'h';
         int char_present_index = binary_search(test_char, &char_present, sizeof(test_char), sizeof(char), more_than_char);
         CU_ASSERT_TRUE(char_present_index == 7);
@@ -71,6 +75,18 @@ void testBASIC_SEARCH(void)
         char char_not_present = 'z';
         int char_not_present_index = binary_search(test_char, &char_not_present, sizeof(test_char), sizeof(char), more_than_char);
         CU_ASSERT_TRUE(char_not_present_index == NOT_FOUND);
+
+
+        /* strings */
+        char *test_string[] = {"abacus", "dolly", "fanciful", "monster", "whale", "zebra"};
+
+        char *string_present = "dolly";
+        int string_present_index = binary_search(test_string, &string_present, sizeof(test_string), sizeof(char *), more_than_string);
+        CU_ASSERT_TRUE(string_present_index == 1);
+
+        char *string_not_present = "ape";
+        int string_not_present_index = binary_search(test_string, &string_not_present, sizeof(test_string), sizeof(char *), more_than_string);
+        CU_ASSERT_TRUE(string_not_present_index == NOT_FOUND);
 }
 
 
