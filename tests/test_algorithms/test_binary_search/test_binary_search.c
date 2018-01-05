@@ -9,7 +9,8 @@
 
 
 enum {NOT_FOUND = -1,
-      FOUR_ELEMENT_MAX = 8};
+      NUM_ARRAYS = 8,
+      ELEMENT_MAX = 8};
 
 int even_num_elem[8][4] = {{1,1,1,1},
                            {1,1,1,3},
@@ -20,7 +21,6 @@ int even_num_elem[8][4] = {{1,1,1,1},
                            {1,3,5,5},
                            {1,3,5,7}};
 
-
 int even_num_elem_answers[8][4] = {{1,NOT_FOUND,NOT_FOUND,NOT_FOUND},
                                    {1,3,NOT_FOUND,NOT_FOUND},
                                    {1,2,NOT_FOUND,NOT_FOUND},
@@ -29,6 +29,26 @@ int even_num_elem_answers[8][4] = {{1,NOT_FOUND,NOT_FOUND,NOT_FOUND},
                                    {0,1,3,NOT_FOUND},
                                    {0,1,2,NOT_FOUND},
                                    {0,1,2,3}};
+
+
+int odd_num_elem[8][5] = {{1,1,1,1,1},
+                          {1,1,1,3,3},
+                          {1,3,3,3,3},
+                          {1,3,3,3,5},
+                          {1,3,3,3,3},
+                          {1,3,3,5,7},
+                          {1,3,5,5,7},
+                          {1,3,5,7,5}};
+
+int odd_num_elem_answers[8][5] = {{2,NOT_FOUND,NOT_FOUND,NOT_FOUND},
+                                  {2,3,NOT_FOUND,NOT_FOUND},
+                                  {0,2,NOT_FOUND,NOT_FOUND},
+                                  {0,2,4,NOT_FOUND},
+                                  {0,2,NOT_FOUND,NOT_FOUND},
+                                  {0,2,3,4},
+                                  {0,1,2,4},
+                                  {0,1,2,3}};
+
 
 
 void testBASIC_SEARCH(void)
@@ -58,11 +78,11 @@ void testFOUR_ELEMENT_EXHAUSTIVE(void)
 {
         int answer_key;
 
-        for (int i = 0; i < FOUR_ELEMENT_MAX; i++)
+        for (int i = 0; i < NUM_ARRAYS; i++)
         {
                 answer_key = 0;
 
-                for (int j = 0; j <= FOUR_ELEMENT_MAX; j++)
+                for (int j = 0; j <= ELEMENT_MAX; j++)
                 {
                        int result = binary_search(even_num_elem[i],
                                                   &j,
@@ -81,6 +101,37 @@ void testFOUR_ELEMENT_EXHAUSTIVE(void)
                        }
                 }
         }
+}
+
+
+void testFIVE_ELEMENT_EXHAUSTIVE(void)
+{
+        int answer_key;
+
+        for (int i = 0; i < NUM_ARRAYS; i++)
+        {
+                answer_key = 0;
+
+                for (int j = 0; j <= ELEMENT_MAX; j++)
+                {
+                       int result = binary_search(odd_num_elem[i],
+                                                  &j,
+                                                  sizeof(odd_num_elem[i]),
+                                                  sizeof(int),
+                                                  more_than_int);
+
+                       if (j == 0 || j % 2 == 0)
+                       {
+                               CU_ASSERT_TRUE(result == NOT_FOUND);
+                       }
+                       else
+                       {
+                               CU_ASSERT_TRUE(result == odd_num_elem_answers[i][answer_key]);
+                               answer_key++;
+                       }
+                }
+        }
+
 }
 
 
@@ -105,7 +156,8 @@ int main(void)
 
         // add tests
         if (NULL == CU_add_test(suite, "Basic searching for integers, chars and strings", testBASIC_SEARCH) ||
-            NULL == CU_add_test(suite, "Exhaustive test of even number of elements", testFOUR_ELEMENT_EXHAUSTIVE))
+            NULL == CU_add_test(suite, "Exhaustive test of even number of elements", testFOUR_ELEMENT_EXHAUSTIVE) ||
+            NULL == CU_add_test(suite, "Exhaustive test of odd number of elements", testFIVE_ELEMENT_EXHAUSTIVE))
         {
                 CU_cleanup_registry();
                 return CU_get_error();
