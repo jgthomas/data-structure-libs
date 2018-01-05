@@ -64,7 +64,6 @@ void testFOUR_ELEMENT_EXHAUSTIVE(void)
 
                 for (int j = 0; j <= FOUR_ELEMENT_MAX; j++)
                 {
-
                        int result = binary_search(even_num_elem[i],
                                                   &j,
                                                   sizeof(even_num_elem[i]),
