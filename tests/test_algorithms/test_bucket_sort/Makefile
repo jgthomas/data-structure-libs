@@ -1,9 +1,9 @@
 # PATHS - to search for the headers and source files
-HEADERS_1 = ../../
+HEADERS_1 = ../../../
 HEADERS_2 = 
 HEADERS_3 = 
 
-SOURCE_1 = ../../
+SOURCE_1 = ../../../
 SOURCE_2 = 
 SOURCE_3 = 
 
