@@ -173,6 +173,34 @@ void testSINGLE_ELEMENT_ARRAY(void)
 }
 
 
+void testTWO_ELEMENT_ARRAY(void)
+{
+        int two[2] = {5,6};
+
+        for (int i = 0; i < 7; i++)
+        {
+                int result = binary_search(two,
+                                           &i,
+                                           sizeof(two),
+                                           sizeof(int),
+                                           more_than_int);
+
+                if (i == 5)
+                {
+                        CU_ASSERT_TRUE(result == 0);
+                }
+                else if (i == 6)
+                {
+                        CU_ASSERT_TRUE(result == 1);
+                }
+                else
+                {
+                        CU_ASSERT_TRUE(result == NOT_FOUND);
+                }
+        }
+}
+
+
 int main(void)
 {
         // test suite
@@ -197,7 +225,8 @@ int main(void)
             NULL == CU_add_test(suite, "Exhaustive test of even number of elements", testFOUR_ELEMENT_EXHAUSTIVE) ||
             NULL == CU_add_test(suite, "Exhaustive test of odd number of elements", testFIVE_ELEMENT_EXHAUSTIVE) ||
             NULL == CU_add_test(suite, "Empty array", testEMPTY_ARRAY) ||
-            NULL == CU_add_test(suite, "Single element array", testSINGLE_ELEMENT_ARRAY))
+            NULL == CU_add_test(suite, "Single element array", testSINGLE_ELEMENT_ARRAY) ||
+            NULL == CU_add_test(suite, "Two element array", testTWO_ELEMENT_ARRAY))
         {
                 CU_cleanup_registry();
                 return CU_get_error();
