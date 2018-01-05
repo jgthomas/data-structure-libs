@@ -149,6 +149,30 @@ void testEMPTY_ARRAY(void)
 }
 
 
+void testSINGLE_ELEMENT_ARRAY(void)
+{
+        int single[1] = {5};
+        int to_find = 5;
+        int to_not_find = 6;
+
+        int result_1 = binary_search(single,
+                                     &to_find,
+                                     sizeof(single),
+                                     sizeof(int),
+                                     more_than_int);
+
+        CU_ASSERT_TRUE(result_1 == 0);
+
+        int result_2 = binary_search(single,
+                                     &to_not_find,
+                                     sizeof(single),
+                                     sizeof(int),
+                                     more_than_int);
+
+        CU_ASSERT_TRUE(result_2 == NOT_FOUND);
+}
+
+
 int main(void)
 {
         // test suite
@@ -172,7 +196,8 @@ int main(void)
         if (NULL == CU_add_test(suite, "Basic searching for integers, chars and strings", testBASIC_SEARCH) ||
             NULL == CU_add_test(suite, "Exhaustive test of even number of elements", testFOUR_ELEMENT_EXHAUSTIVE) ||
             NULL == CU_add_test(suite, "Exhaustive test of odd number of elements", testFIVE_ELEMENT_EXHAUSTIVE) ||
-            NULL == CU_add_test(suite, "Empty array", testEMPTY_ARRAY))
+            NULL == CU_add_test(suite, "Empty array", testEMPTY_ARRAY) ||
+            NULL == CU_add_test(suite, "Single element array", testSINGLE_ELEMENT_ARRAY))
         {
                 CU_cleanup_registry();
                 return CU_get_error();
