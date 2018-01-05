@@ -135,6 +135,20 @@ void testFIVE_ELEMENT_EXHAUSTIVE(void)
 }
 
 
+void testEMPTY_ARRAY(void)
+{
+        int empty[] = {};
+        int to_find = 8;
+        int result = binary_search(empty,
+                                   &to_find,
+                                   sizeof(empty),
+                                   sizeof(int),
+                                   more_than_int);
+
+        CU_ASSERT_TRUE(result == NOT_FOUND);
+}
+
+
 int main(void)
 {
         // test suite
@@ -157,7 +171,8 @@ int main(void)
         // add tests
         if (NULL == CU_add_test(suite, "Basic searching for integers, chars and strings", testBASIC_SEARCH) ||
             NULL == CU_add_test(suite, "Exhaustive test of even number of elements", testFOUR_ELEMENT_EXHAUSTIVE) ||
-            NULL == CU_add_test(suite, "Exhaustive test of odd number of elements", testFIVE_ELEMENT_EXHAUSTIVE))
+            NULL == CU_add_test(suite, "Exhaustive test of odd number of elements", testFIVE_ELEMENT_EXHAUSTIVE) ||
+            NULL == CU_add_test(suite, "Empty array", testEMPTY_ARRAY))
         {
                 CU_cleanup_registry();
                 return CU_get_error();
