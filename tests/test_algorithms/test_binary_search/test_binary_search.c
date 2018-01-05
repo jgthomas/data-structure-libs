@@ -8,6 +8,29 @@
 #include "algorithms/binary_search.h"
 
 
+enum {NOT_FOUND = -1,
+      FOUR_ELEMENT_MAX = 8};
+
+int even_num_elem[8][4] = {{1,1,1,1},
+                           {1,1,1,3},
+                           {1,1,3,3},
+                           {1,1,3,5},
+                           {1,3,3,3},
+                           {1,3,3,5},
+                           {1,3,5,5},
+                           {1,3,5,7}};
+
+
+int even_num_elem_answers[8][4] = {{1,NOT_FOUND,NOT_FOUND,NOT_FOUND},
+                                   {1,3,NOT_FOUND,NOT_FOUND},
+                                   {1,2,NOT_FOUND,NOT_FOUND},
+                                   {1,2,3,NOT_FOUND},
+                                   {0,1,NOT_FOUND,NOT_FOUND},
+                                   {0,1,3,NOT_FOUND},
+                                   {0,1,2,NOT_FOUND},
+                                   {0,1,2,3}};
+
+
 void testBASIC_SEARCH(void)
 {
         int test_int[] = {1,4,4,6,7,7,12,12,12,15,19,23,24,29,63,66,77,77,80};
@@ -19,7 +42,7 @@ void testBASIC_SEARCH(void)
 
         int int_not_present = 5;
         int int_not_present_index = binary_search(test_int, &int_not_present, sizeof(test_int), sizeof(int), more_than_int);
-        CU_ASSERT_TRUE(int_not_present_index == -1);
+        CU_ASSERT_TRUE(int_not_present_index == NOT_FOUND);
 
         char char_present = 'h';
         int char_present_index = binary_search(test_char, &char_present, sizeof(test_char), sizeof(char), more_than_char);
@@ -27,7 +50,38 @@ void testBASIC_SEARCH(void)
 
         char char_not_present = 'z';
         int char_not_present_index = binary_search(test_char, &char_not_present, sizeof(test_char), sizeof(char), more_than_char);
-        CU_ASSERT_TRUE(char_not_present_index == -1);
+        CU_ASSERT_TRUE(char_not_present_index == NOT_FOUND);
+}
+
+
+void testFOUR_ELEMENT_EXHAUSTIVE(void)
+{
+        int answer_key;
+
+        for (int i = 0; i < FOUR_ELEMENT_MAX; i++)
+        {
+                answer_key = 0;
+
+                for (int j = 0; j <= FOUR_ELEMENT_MAX; j++)
+                {
+
+                       int result = binary_search(even_num_elem[i],
+                                                  &j,
+                                                  sizeof(even_num_elem[i]),
+                                                  sizeof(int),
+                                                  more_than_int);
+
+                       if (j == 0 || j % 2 == 0)
+                       {
+                               CU_ASSERT_TRUE(result == NOT_FOUND);
+                       }
+                       else
+                       {
+                               CU_ASSERT_TRUE(result == even_num_elem_answers[i][answer_key]);
+                               answer_key++;
+                       }
+                }
+        }
 }
 
 
@@ -51,7 +105,8 @@ int main(void)
         }
 
         // add tests
-        if (NULL == CU_add_test(suite, "Elements present and not present", testBASIC_SEARCH))
+        if (NULL == CU_add_test(suite, "Basic searching for integers, chars and strings", testBASIC_SEARCH) ||
+            NULL == CU_add_test(suite, "Exhaustive test of even number of elements", testFOUR_ELEMENT_EXHAUSTIVE))
         {
                 CU_cleanup_registry();
                 return CU_get_error();
