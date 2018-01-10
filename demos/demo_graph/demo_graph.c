@@ -29,11 +29,15 @@ int main(void)
 
                         if (strncmp(command, "vertex", 6) == 0)
                         {
+                                printf("\n");
                                 list_vertices();
+                                printf("\n");
                         }
                         else if (strncmp(command, "edges", 5) == 0)
                         {
+                                printf("\n");
                                 list_edges();
+                                printf("\n");
                         }
                         else if (strncmp(command, "quit", 4) == 0)
                         {
