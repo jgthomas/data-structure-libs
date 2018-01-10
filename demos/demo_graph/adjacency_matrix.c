@@ -27,7 +27,7 @@ int adjacency[VERTICES][VERTICES] = {{0,1,1,0,0},
                                      {1,0,1,1,0},
                                      {1,1,0,1,1},
                                      {0,1,1,0,1},
-                                     {0,0,1,1,1}};
+                                     {0,0,1,1,0}};
                                      
                        
 bool is_connected(int vertex_1, int vertex_2)

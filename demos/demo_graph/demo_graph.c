@@ -5,6 +5,14 @@
 #include "adjacency_matrix.h"
 
 
+void print_commands(void)
+{
+        printf("\nCommands: ");
+        printf("vertices, edges, display, quit");
+        printf("\n\n");
+}
+
+
 int main(void)
 {
         int choice = 0;
@@ -19,6 +27,7 @@ int main(void)
         if (choice == 1)
         {
                 printf("\nAdjacency Matrix\n\n");
+                print_commands();
 
                 char command[20];
 
@@ -27,7 +36,7 @@ int main(void)
                         printf("Enter a command: ");
                         fgets(command, sizeof(command), stdin);
 
-                        if (strncmp(command, "vertex", 6) == 0)
+                        if (strncmp(command, "vertices", 6) == 0)
                         {
                                 printf("\n");
                                 list_vertices();
@@ -46,6 +55,10 @@ int main(void)
                         else if (strncmp(command, "quit", 4) == 0)
                         {
                                 break;
+                        }
+                        else
+                        {
+                                print_commands();
                         }
                 }
         }
