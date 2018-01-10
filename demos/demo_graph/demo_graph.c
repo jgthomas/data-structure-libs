@@ -39,6 +39,10 @@ int main(void)
                                 list_edges();
                                 printf("\n");
                         }
+                        else if (strncmp(command, "display", 7) == 0)
+                        {
+                                print_matrix();
+                        }
                         else if (strncmp(command, "quit", 4) == 0)
                         {
                                 break;

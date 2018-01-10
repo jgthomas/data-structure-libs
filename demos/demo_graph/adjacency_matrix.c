@@ -109,3 +109,16 @@ void list_edges(void)
         
         printf("}\n");
 }
+
+
+void print_matrix(void)
+{
+        for (int i = 0; i < VERTICES; i++)
+        {
+                for (int j = 0; j < VERTICES; j++)
+                {
+                        printf(" %d ", adjacency[i][j]);
+                }
+                printf("\n");
+        }
+}
