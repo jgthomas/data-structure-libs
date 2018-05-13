@@ -1,50 +1,65 @@
 #include <stdio.h>
+#include <string.h>
+#include "tools/get_input.h"
+#include "graph.h"
+#include "adjacency_matrix.h"
 
 
-enum {VERTICES = 5, NODE_BASE 65};
-
-
-typedef struct node {
-        int id;
-        struct node *next;
+void print_commands(void)
+{
+        printf("\nCommands: ");
+        printf("vertices, edges, display, quit");
+        printf("\n\n");
 }
-VertexNode;
 
 
-typedef struct vertex {
-        int id;
-        struct vertex *connections[VERTICES];
+int main(void)
+{
+        int choice = 0;
+
+        printf("\nPick an Implementation\n\n");
+
+        while (choice < 1 || choice > 2)
+        {
+                choice = get_int("(1) Adjacency Matrix or (2) Edge list");
+        }
+
+        if (choice == 1)
+        {
+                printf("\nAdjacency Matrix\n\n");
+                print_commands();
+
+                char command[20];
+
+                while (1)
+                {
+                        printf("Enter a command: ");
+                        fgets(command, sizeof(command), stdin);
+
+                        if (strncmp(command, "vertices", 6) == 0)
+                        {
+                                printf("\n");
+                                list_vertices();
+                                printf("\n");
+                        }
+                        else if (strncmp(command, "edges", 5) == 0)
+                        {
+                                printf("\n");
+                                list_edges();
+                                printf("\n");
+                        }
+                        else if (strncmp(command, "display", 7) == 0)
+                        {
+                                print_matrix();
+                        }
+                        else if (strncmp(command, "quit", 4) == 0)
+                        {
+                                break;
+                        }
+                        else
+                        {
+                                print_commands();
+                        }
+                }
+        }
 }
-Vertex;
-
-
-/**
- * Graph represented as an ADJACENCY MATRIX
- *
- *
- * Space complexity: O(n**2)
- *
- *
- * Time complexity by question
- *
- * 1. Is A connected to B: O(1)
- *
- * 2. List all vertices connected to A: O(V)
- *
- * 3. List all vertices: ???
- *
- * 4. List all edges: ???
- *
- * */
-int adjacency[5][5] = {{0,1,1,0,0},
-                       {1,0,1,1,0},
-                       {1,1,0,1,1},
-                       {0,1,1,0,1},
-                       {0,0,1,1,0}}
-
-
-/**
- * Graph represented as an EDGE LIST
- *
- * */
-VertexNode *connections[VERTICES];
