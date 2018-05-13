@@ -1,6 +1,6 @@
 # data-structures-and-algorithms
 
-Exploring data structures, algorithms and C
+Exploring data structures, algorithms, and C
 
 ### algorithms
 
